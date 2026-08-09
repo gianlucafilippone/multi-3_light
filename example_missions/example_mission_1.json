@@ -1,0 +1,104 @@
+{
+    "mission": "m1",
+    "priority": 1,
+    "fragments": [
+        {
+            "id": "f1",
+            "wait": [],
+            "tasks": [
+                {
+                    "name": "pick",
+                    "params": {
+                        "x": 2,
+                        "y": 3
+                    }
+                }
+            ],
+            "sequence": "s1"
+        },
+        {
+            "id": "f2",
+            "wait": ["m1/s1/pick"],
+            "tasks": [
+                {
+                    "name": "scan",
+                    "params": {
+                        "x": 2,
+                        "y": 3
+                    }
+                }
+            ],
+            "sequence": "s1"
+        },
+        {
+            "id": "f3",
+            "wait": ["m1/s1/scan"],
+            "tasks": [
+                {
+                    "name": "transport",
+                    "params": {
+                        "x": 2,
+                        "y": 3
+                    }
+                }
+            ],
+            "sequence": "s1"
+        },
+         {
+            "id": "f4",
+            "wait": [],
+            "tasks": [
+                {
+                    "name": "pick",
+                    "params": {
+                        "x": 2,
+                        "y": 3
+                    }
+                }
+            ],
+            "sequence": "s2"
+        },
+        {
+            "id": "f5",
+            "wait": ["m1/s2/pick"],
+            "tasks": [
+                {
+                    "name": "scan",
+                    "params": {
+                        "x": 2,
+                        "y": 3
+                    }
+                }
+            ],
+            "sequence": "s2"
+        },
+        {
+            "id": "f6",
+            "wait": ["m1/s2/scan"],
+            "tasks": [
+                {
+                    "name": "transport",
+                    "params": {
+                        "x": 2,
+                        "y": 3
+                    }
+                }
+            ],
+            "sequence": "s2"
+        },
+        {
+            "id": "f7",
+            "wait": ["m1/s1/transport", "m1/s2/transport"],
+            "tasks": [
+                {
+                    "name": "pack",
+                    "params": {
+                        "x": 2,
+                        "y": 3
+                    }
+                }
+            ],
+            "sequence": ""
+        }
+    ]
+}
