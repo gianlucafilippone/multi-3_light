@@ -1,7 +1,8 @@
 import json
 import time
 import rclpy
-from std_msgs.msg import String, Empty
+from std_msgs.msg import String
+from std_srvs.srv import Trigger
 from rclpy.node import Node
 
 class CoordinatorNode(Node):
@@ -16,17 +17,15 @@ class CoordinatorNode(Node):
         }
 
         # Internal data structures
-        self.robot_inventory = {} # Element structure: 'robot_name': {name: 'name', 'state': 'idle/assigned/working/offline', 'current_assigned_fragment': fragment_id, 'capabilities': [cap1, cap2, ...], 'last_heartbeat': timestamp}
+        self.robot_inventory = {} # Element structure: 'robot_name': {name: 'name', 'state': 'idle/working/offline/selected', 'current_assigned_fragment': fragment_id, 'capabilities': [cap1, cap2, ...], 'last_heartbeat': timestamp}
         self.fragments_pool = {} # Element structure: 'fragment_id': {id: 'id', 'mission': 'mission_name','state': 'waiting/executable/assigned/completed', 'wait': [task1, ..., taskn], 'tasks': [task1, ..., taskn], 'arrive_timestamp': 1231231, 'priority': 1, 'segment': 'segment_id'}
 
         self.received_coordination_messages = set() # Each element of this set is a string that has the following structure: "mission/segment/task"
 
         # Subscribers (only handled by the coordinator)
         self.new_robot_subscription_callback = self.create_subscription(String, '/coordination/new_robot', self.new_robot_subscription_callback, 10)
-        self.receive_mission_subscription = self.create_subscription(String, '/coordination/receive_mission', self.receive_mission_callback, 10)
+        self.receive_mission_subscription = self.create_subscription(String, '/coordination/new_missions', self.receive_mission_callback, 10)
         self.robot_state_update_subscription = self.create_subscription(String, '/coordination/robot_state_update', self.robot_state_update_callback, 10)
-        self.execution_start_subscription = self.create_subscription(Empty, '/coordination/execution_start', self.execution_start_callback, 10)
-        self.execution_stop_subscription = self.create_subscription(Empty, '/coordination/execution_stop', self.execution_stop_callback, 10)
 
         # Subscribers (broadcasted to all robots+coordinator)
         self.coordination_messages_subscription = self.create_subscription(String, '/coordination_messages', self.receive_coordination_messages_callback, 10)
@@ -36,22 +35,46 @@ class CoordinatorNode(Node):
         self.fragment_assignment_publisher = self.create_publisher(String, '/fragment_assignment', 10)
         self.coordination_messages_publisher = self.create_publisher(String, '/coordination_messages_batch_updater', 10)
 
+        # Services for control
+        self.execution_start_subscription = self.create_service(Trigger, '/control/execution_start', self.execution_start_callback)
+        self.execution_stop_subscription = self.create_service(Trigger, '/control/execution_stop', self.execution_stop_callback)
+
+        # Services for getting status info
+        self.get_robot_inventory_service = self.create_service(Trigger, '/info/robot_inventory', self.get_robot_inventory_callback)
+        self.get_fragments_pool_service = self.create_service(Trigger, '/info/fragment_pool', self.get_fragments_pool_callback)
+
         # Timers
         self.coordination_messages_updater_timer = self.create_timer(2.0, self.publish_all_coordination_messages)
         self.fragment_assignment_timer = self.create_timer(1.0, self.assign_fragments)
         self.fragment_assignment_timer.cancel()
-        self.robot_status_monitor_timer = self.create_timer(5.0, self.monitor_robot_status)
+        self.robot_status_monitor_timer = self.create_timer(3.0, self.monitor_robot_status)
 
         self.get_logger().info('Coordinator node started.')
 
-    def execution_start_callback(self, msg: Empty):
+    def execution_start_callback(self, request, response):
         self.get_logger().info('Execution start signal received. Starting fragment assignment.')
         self.update_fragments_executability()
         self.fragment_assignment_timer.reset()
+        response.success = True
+        response.message = "Execution started!"
+        return response
 
-    def execution_stop_callback(self, msg: Empty):
+    def execution_stop_callback(self, request, response):
         self.get_logger().info('Execution stop signal received. Stopping fragment assignment.')
         self.fragment_assignment_timer.cancel()
+        response.success = True
+        response.message = "Fragment assignment stopped."
+        return response
+
+    def get_robot_inventory_callback(self, request, response):
+        response.success = True
+        response.message = json.dumps(self.robot_inventory)
+        return response
+
+    def get_fragments_pool_callback(self, resquest, response):
+        response.success = True
+        response.message = json.dumps(self.fragments_pool)
+        return response
 
     def new_robot_subscription_callback(self, msg: String):
         try:
@@ -62,6 +85,7 @@ class CoordinatorNode(Node):
         robot_name = robot_info.get("name")
         if robot_name:
             self.robot_inventory[robot_name] = robot_info
+            self.robot_inventory[robot_name]["last_heartbeat"] = int(time.time())
 
         self.get_logger().info(f'Received new robot info: {robot_info}')
 
@@ -117,6 +141,8 @@ class CoordinatorNode(Node):
         if "completed_task" in coordination_message:
             self.received_coordination_messages.add(coordination_message["completed_task"])
             self.update_fragments_executability()
+        if "completed_fragment" in coordination_message:
+            self.fragments_pool[coordination_message["completed_fragment"]]["state"] = "completed"
         self.get_logger().info(f'Received coordination message: {coordination_message}')
 
     def heartbeat_callback(self, msg: String):
@@ -126,9 +152,13 @@ class CoordinatorNode(Node):
             self.get_logger().error(f'Invalid JSON received on /coordination/heartbeat: {exc}')
             return
         robot_name = heartbeat_info.get("robot_name")
+        robot_state = heartbeat_info.get("robot_state")
         if robot_name and robot_name in self.robot_inventory:
             self.robot_inventory[robot_name]["last_heartbeat"] = int(time.time())
-            self.get_logger().info(f'Received heartbeat from {robot_name}.')
+            if self.robot_inventory[robot_name]["state"] == "offline":
+                self.get_logger().info(f'Received heartbeat from {robot_name}. Updating robot state.')
+            if self.robot_inventory[robot_name]["state"] != "selected" and robot_state == "idle": # Avoiding changing state if the robot is currently selected for the fragment assignment
+                self.robot_inventory[robot_name]["state"] = robot_state
         else:
             self.get_logger().warning(f"Received heartbeat from unknown robot: {robot_name}")
 
@@ -152,7 +182,7 @@ class CoordinatorNode(Node):
             selected_robot = min(eligible_robots,key=lambda robot_name: len(self.robot_inventory[robot_name].get("capabilities", [])))
 
             fragment["state"] = "assigned"
-            self.robot_inventory[selected_robot]["state"] = "assigned"
+            self.robot_inventory[selected_robot]["state"] = "selected"
             self.robot_inventory[selected_robot]["current_assigned_fragment"] = fragment.get("id")
 
             assignment_message = {
@@ -166,7 +196,7 @@ class CoordinatorNode(Node):
         current_time = int(time.time())
         for robot_name, robot_info in self.robot_inventory.items():
             last_heartbeat = robot_info.get("last_heartbeat", 0)
-            if current_time - last_heartbeat > 10:  # Assuming a heartbeat timeout of 10 seconds (more than 3 missed heartbeats)
+            if (current_time - last_heartbeat > 10) and (robot_info["state"] != "offline"):  # Assuming a heartbeat timeout of 10 seconds (more than 3 missed heartbeats)
                 self.get_logger().warning(f"Robot {robot_name} has not sent a heartbeat for {current_time - last_heartbeat} seconds. Marking as offline.")
                 robot_info["state"] = "offline"
                 # Handle reassigning fragments or recovery actions here.

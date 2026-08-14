@@ -9,6 +9,9 @@ COPY ./example_missions ./example_missions
 COPY run_multi3.sh .
 COPY send_mission.sh .
 COPY start_mission.sh .
+COPY stop_mission.sh .
+COPY get_fragments.sh .
+COPY get_robots.sh .
 
 RUN apt update && apt install -y \
     python3-pip \
@@ -24,5 +27,10 @@ RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build"
 RUN chmod +x run_multi3.sh
 RUN chmod +x send_mission.sh
 RUN chmod +x start_mission.sh
+RUN chmod +x stop_mission.sh
+RUN chmod +x get_fragments.sh
+RUN chmod +x get_robots.sh
+
+ENV RCUTILS_COLORIZED_OUTPUT=0
 
 ENTRYPOINT ["/bin/bash"]

@@ -38,4 +38,4 @@ source /opt/ros/humble/setup.bash
 source /root/ros2_ws/install/setup.bash
 set -u
 
-ros2 topic pub --once /coordination/receive_mission std_msgs/msg/String "$(jq -Rs '{data: .}' "$mission_file")"
+ros2 topic pub --once /coordination/new_missions std_msgs/msg/String "$(jq -Rs '{data: .}' "$mission_file")"

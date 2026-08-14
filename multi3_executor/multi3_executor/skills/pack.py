@@ -7,7 +7,7 @@ class PackSkill():
         self.node.get_logger().info(f"Setting up skill: {self.__class__.__name__}")
         self.exec_event = Event()
     
-    def exec(self, robot_state, params):
+    def exec(self, params):
         self.node.get_logger().info(f"Simulating pack skill...")
 
         time_to_goal = random.uniform(4, 10)

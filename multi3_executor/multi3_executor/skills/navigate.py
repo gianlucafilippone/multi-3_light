@@ -5,19 +5,29 @@ from threading import Event
 class NavigateSkill():
     def __init__(self, node) -> None:
         self.node = node
+        self.virtual_state = node.virtual_state
         self.node.get_logger().info(f"Setting up skill: {self.__class__.__name__}")
         self.exec_event = Event()
 
+    # Not in use for now
     def _estimate_mov_time(pos_a, pos_b, velocity):
         dist = math.sqrt((pos_a[0] - pos_b[0])**2 + (pos_a[0] - pos_b[1])**2)
         t = dist / velocity
         return t
     
-    def exec(self, robot_state, params):
-        self.node.get_logger().info(f"Simulating navigate skill...")
+    def exec(self, params):
+        target_x = params["x"]
+        target_y = params["y"]
+        self.node.get_logger().info(f"Simulating navigate skill to position {target_x}, {target_y}...")
 
         time_to_goal = random.uniform(3, 8)
         self.exec_event.wait(time_to_goal)
         self.exec_event.clear()
+
+        self.virtual_state["position"] = {
+                "x": target_x,
+                "y": target_y,
+                "z": .0
+            }
 
         self.node.get_logger().info(f"Navigation completed!")

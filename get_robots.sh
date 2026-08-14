@@ -3,7 +3,7 @@ set -euo pipefail
 
 usage() {
   echo "Usage: $0"
-  echo "  This script invokes the /control/execution_start service"
+  echo "  This script invokes the /info/robot_inventory service"
   exit 1
 }
 
@@ -17,4 +17,4 @@ source /opt/ros/humble/setup.bash
 source /root/ros2_ws/install/setup.bash
 set -u
 
-ros2 service call /control/execution_start std_srvs/srv/Trigger '{}'
+ros2 service call /info/robot_inventory std_srvs/srv/Trigger '{}'
