@@ -2,32 +2,17 @@
 set -euo pipefail
 
 usage() {
-  echo "Usage: $0 --mission_name NAME"
-  echo "  --mission_name NAME   Mission JSON file name without .json extension"
+  echo "Usage: $0 NAME"
+  echo "NAME:  Mission JSON file name without .json extension"
   exit 1
 }
 
-mission_name=""
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --mission_name)
-      shift
-      mission_name="${1:-}"
-      ;;
-    *)
-      echo "Unknown argument: $1" >&2
-      usage
-      ;;
-  esac
-  shift
-done
-
-if [[ -z "$mission_name" ]]; then
-  echo "Error: --mission_name is required." >&2
+if [[ $# -lt 1 ]]; then
+  echo "Error: mission name is required." >&2
   usage
 fi
 
-mission_file="$(pwd)/example_missions/${mission_name}.json"
+mission_file="$(pwd)/example_missions/$1.json"
 if [[ ! -f "$mission_file" ]]; then
   echo "Error: mission file not found: $mission_file" >&2
   exit 1

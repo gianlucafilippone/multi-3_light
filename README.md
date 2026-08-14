@@ -23,8 +23,10 @@ docker exec -it multi3 bash
 ```
 
 ```
-./send_mission.sh --mission_name example_mission_1
+./send_mission.sh <mission_name>
 ```
+
+`mission_name` is the name of the `.json` file inside the folder `example_mission` (without extension)
 
 Start mission
 ```

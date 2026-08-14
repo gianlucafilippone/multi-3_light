@@ -53,7 +53,6 @@ class CoordinatorNode(Node):
 
     def execution_start_callback(self, request, response):
         self.get_logger().info('Execution start signal received. Starting fragment assignment.')
-        self.update_fragments_executability()
         self.fragment_assignment_timer.reset()
         response.success = True
         response.message = "Execution started!"
@@ -115,6 +114,7 @@ class CoordinatorNode(Node):
             }
 
         self.get_logger().info(f'Received mission: {mission}')
+        self.update_fragments_executability()
 
     def robot_state_update_callback(self, msg: String):
         try:

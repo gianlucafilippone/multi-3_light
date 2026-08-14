@@ -57,11 +57,11 @@ trap cleanup SIGINT SIGTERM EXIT
 
 launch_process "ros2 run multi3_coordinator coordinator"
 
-sleep 2
+sleep 3
 
 for i in $(seq 1 "$robot_count"); do
   launch_process "ros2 run multi3_executor executor --ros-args -p robot_name:=robot${i}"
-  sleep 0.2
+  sleep 1
 done
 
 wait

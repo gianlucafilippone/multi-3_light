@@ -3,7 +3,7 @@
     "priority": 1,
     "fragments": [
         {
-            "id": "f1",
+            "id": "f1-1",
             "wait": [],
             "tasks": [
                 {
@@ -17,7 +17,7 @@
             "segment": "s1"
         },
         {
-            "id": "f2",
+            "id": "f1-2",
             "wait": ["m1/s1/pick"],
             "tasks": [
                 {
@@ -31,7 +31,7 @@
             "segment": "s1"
         },
         {
-            "id": "f3",
+            "id": "f1-3",
             "wait": ["m1/s1/scan"],
             "tasks": [
                 {
@@ -44,51 +44,9 @@
             ],
             "segment": "s1"
         },
-         {
-            "id": "f4",
-            "wait": [],
-            "tasks": [
-                {
-                    "name": "pick",
-                    "params": {
-                        "x": 2,
-                        "y": 3
-                    }
-                }
-            ],
-            "segment": "s2"
-        },
         {
-            "id": "f5",
-            "wait": ["m1/s2/pick"],
-            "tasks": [
-                {
-                    "name": "scan",
-                    "params": {
-                        "x": 2,
-                        "y": 3
-                    }
-                }
-            ],
-            "segment": "s2"
-        },
-        {
-            "id": "f6",
-            "wait": ["m1/s2/scan"],
-            "tasks": [
-                {
-                    "name": "transport",
-                    "params": {
-                        "x": 2,
-                        "y": 3
-                    }
-                }
-            ],
-            "segment": "s2"
-        },
-        {
-            "id": "f7",
-            "wait": ["m1/s1/transport", "m1/s2/transport"],
+            "id": "f1-4",
+            "wait": ["m1/s1/transport"],
             "tasks": [
                 {
                     "name": "pack",
