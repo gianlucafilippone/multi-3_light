@@ -35,7 +35,8 @@ class ExecutorNode(Node):
                 "z": .0
             },
             "docked": True,
-            "battery": 100.0
+            "battery": 100.0,
+            "conditions": []
         }
 
         self.skills_map = {
@@ -68,8 +69,9 @@ class ExecutorNode(Node):
     def subscribe_robot(self):
         robot_info = {
             "name": self.robot_name,
-            "state": "idle",
-            "capabilities": self.robot_capabilities
+            "operational_state": "idle",
+            "capabilities": self.robot_capabilities,
+            "state": self.virtual_state
         }
         self.robot_subscription_publisher.publish(String(data=json.dumps(robot_info)))
         self.get_logger().info(f"Published robot registration: {robot_info}")
@@ -78,8 +80,10 @@ class ExecutorNode(Node):
         update_message = {
             "robot_name": self.robot_name,
             "robot_state": {
-                "state": "working" if self.busy else "idle",
-                "current_assigned_fragment": self.current_fragment.get("id") if self.current_fragment else None
+                "operational_state": "working" if self.busy else "idle",
+                "current_assigned_fragment": self.current_fragment.get("id") if self.current_fragment else None,
+                "conditions": self.virtual_state["conditions"],
+                "state": self.virtual_state
             }
         }
         self.robot_state_update_publisher.publish(String(data=json.dumps(update_message)))
@@ -95,7 +99,8 @@ class ExecutorNode(Node):
     def send_fragment_completion_message(self, fragment_id):
         coordination_message = {
             "robot_name": self.robot_name,
-            "completed_fragment": fragment_id
+            "completed_fragment": fragment_id,
+            "state": self.virtual_state
         }
         self.coordination_messages_publisher.publish(String(data=json.dumps(coordination_message)))
         self.get_logger().debug(f'Sent coordination message (completion of fragment): fragment {coordination_message} completed')
@@ -143,7 +148,8 @@ class ExecutorNode(Node):
     def send_heartbeat(self):
         message = {
             "robot_name": self.robot_name,
-            "robot_state": "working" if self.busy else "idle"
+            "robot_state": "working" if self.busy else "idle",
+            "conditions": self.virtual_state["conditions"]
         }
         self.robot_heartbeat_publisher.publish(String(data=json.dumps(message)))
 
@@ -158,14 +164,21 @@ class ExecutorNode(Node):
             )
 
     def exec(self, fragment):
-        # {id: 'id', 'mission': 'mission_name','state': 'waiting/executable/assigned/completed', 'wait': [task1, ..., taskn], 'tasks': [task1, ..., taskn], 'arrive_timestamp': 1231231, 'priority': 1, 'segment': 'segment_id'}
+        # {id: 'id', 'mission': 'mission_name','state': 'waiting/executable/assigned/completed', 'wait': [task1, ..., taskn], 'tasks': [task1, ..., taskn], 'arrive_timestamp': 1231231, 'priority': 1, 'segment': 'segment_id', 'preconditions': [precondition1,...,preconditionn], postconditions: [postcondition1,...,postconditionn]}
         fragment_id = fragment.get("id")
         mission_name = fragment.get("mission")
         segment_name = fragment.get("segment")
         wait_list = fragment.get("wait")
         task_list = fragment.get("tasks") # A task has the following structure: {"name": "name", "params": {params...}}
+        preconditions = fragment.get("preconditions")
+        postconditions = fragment.get("postconditions")
 
-        # 1- Check if the wait list is already complete (it is a double check)
+        # 1- Check if the robot has the precondition
+        while preconditions and not all(precondition in self.virtual_state["conditions"] for precondition in preconditions):
+            self.get_logger().info(f"Waiting for preconditions {preconditions} before executing fragment {fragment_id} (current state: {self.virtual_state['conditions']})")
+            time.sleep(2)
+
+        # 2- Check if the wait list is already complete (it is a double check)
         while wait_list and not all(task in self.received_coordination_messages for task in wait_list):
             self.get_logger().info(f"Waiting for coordination messages before executing fragment {fragment_id}: {wait_list}")
             time.sleep(2)
@@ -176,14 +189,14 @@ class ExecutorNode(Node):
             self.get_logger().info(f"Executing task {task['name']}. Params: {task.get('params')}, Virtual state: {self.virtual_state}")
 
             if self.virtual_state["docked"]:
-                self.get_logger().info(f"EventType: Control, Activity: undock, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, Start: {time.perf_counter()}")
+                self.get_logger().info(f"EventType: Control (Task: {task['name']}), Activity: undock, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, Start: {time.perf_counter()}")
                 self.skills_map["undock"].exec({})
-                self.get_logger().info(f"EventType: Control, Activity: undock, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.perf_counter()}")
+                self.get_logger().info(f"EventType: Control (Task: {task['name']}), Activity: undock, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.perf_counter()}")
 
             if not self._in_position(task.get("params")):
-                self.get_logger().info(f"EventType: Control, Activity: navigate, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, Start: {time.perf_counter()}")
+                self.get_logger().info(f"EventType: Control (Task: {task['name']}), Activity: navigate, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, Start: {time.perf_counter()}")
                 self.skills_map["navigate"].exec(task.get("params"))
-                self.get_logger().info(f"EventType: Control, Activity: navigate, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.perf_counter()}")
+                self.get_logger().info(f"EventType: Control (Task: {task['name']}), Activity: navigate, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.perf_counter()}")
 
             task_name = task.get("name")
 
@@ -192,6 +205,11 @@ class ExecutorNode(Node):
             self.get_logger().info(f"EventType: Task, Activity: {task_name}, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.perf_counter()}")
 
             self.send_coordination_message(task_name, mission_name, segment_name)
+
+        if postconditions:
+            for postcondition in postconditions:
+                if postcondition is not None:
+                    self.virtual_state['conditions'].append(postcondition)
 
         self.send_fragment_completion_message(fragment_id)
 
@@ -219,4 +237,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-    

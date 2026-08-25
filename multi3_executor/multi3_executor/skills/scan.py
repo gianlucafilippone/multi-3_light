@@ -1,4 +1,3 @@
-import random
 from threading import Event
 
 class ScanSkill():
@@ -10,7 +9,8 @@ class ScanSkill():
     def exec(self, params):
         self.node.get_logger().info(f"Simulating scan skill...")
 
-        time_to_goal = random.uniform(1, 2)
+        time_to_goal = 3
+
         self.exec_event.wait(time_to_goal)
         self.exec_event.clear()
 

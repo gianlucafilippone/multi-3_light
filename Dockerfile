@@ -12,6 +12,8 @@ COPY start_mission.sh .
 COPY stop_mission.sh .
 COPY get_fragments.sh .
 COPY get_robots.sh .
+COPY ./tests ./tests
+COPY test_specs.txt .
 
 RUN apt update && apt install -y \
     python3-pip \
@@ -30,7 +32,8 @@ RUN chmod +x start_mission.sh
 RUN chmod +x stop_mission.sh
 RUN chmod +x get_fragments.sh
 RUN chmod +x get_robots.sh
+RUN chmod +x tests/run_tests.py || true
 
 ENV RCUTILS_COLORIZED_OUTPUT=0
 
-ENTRYPOINT ["/bin/bash"]
+CMD ["/bin/bash"]

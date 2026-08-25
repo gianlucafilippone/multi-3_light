@@ -10,7 +10,7 @@ class NavigateSkill():
         self.exec_event = Event()
 
     # Not in use for now
-    def _estimate_mov_time(pos_a, pos_b, velocity):
+    def _estimate_mov_time(self, pos_a, pos_b, velocity):
         dist = math.sqrt((pos_a[0] - pos_b[0])**2 + (pos_a[0] - pos_b[1])**2)
         t = dist / velocity
         return t
@@ -18,9 +18,14 @@ class NavigateSkill():
     def exec(self, params):
         target_x = params["x"]
         target_y = params["y"]
-        self.node.get_logger().info(f"Simulating navigate skill to position {target_x}, {target_y}...")
 
-        time_to_goal = random.uniform(3, 8)
+        initial_x = self.virtual_state["position"]["x"]
+        initial_y = self.virtual_state["position"]["y"]
+
+        time_to_goal = self._estimate_mov_time((initial_x, initial_y), (target_x, target_y), 0.5)
+
+        self.node.get_logger().info(f"Simulating navigate skill from position ({initial_x}, {initial_y}) to ({target_x}, {target_y}) ({time_to_goal} seconds)...")
+
         self.exec_event.wait(time_to_goal)
         self.exec_event.clear()
 

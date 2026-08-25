@@ -1,4 +1,3 @@
-import random
 from threading import Event
 
 class PackSkill():
@@ -10,7 +9,8 @@ class PackSkill():
     def exec(self, params):
         self.node.get_logger().info(f"Simulating pack skill...")
 
-        time_to_goal = random.uniform(4, 10)
+        items = params["items"]
+        time_to_goal = items * 6
         self.exec_event.wait(time_to_goal)
         self.exec_event.clear()
 

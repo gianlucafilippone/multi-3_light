@@ -1,4 +1,3 @@
-import random
 from threading import Event
 
 class PickSkill():
@@ -10,7 +9,10 @@ class PickSkill():
     def exec(self, params):
         self.node.get_logger().info(f"Simulating pick skill...")
 
-        time_to_goal = random.uniform(1, 4)
+        item_weight = params["weight"]
+
+        time_to_goal = item_weight
+
         self.exec_event.wait(time_to_goal)
         self.exec_event.clear()
 

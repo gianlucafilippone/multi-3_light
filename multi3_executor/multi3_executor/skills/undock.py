@@ -1,4 +1,3 @@
-import random
 from threading import Event
 
 class UndockSkill():
@@ -11,7 +10,8 @@ class UndockSkill():
     def exec(self, params):
         self.node.get_logger().info(f"Simulating undock skill...")
 
-        time_to_goal = random.uniform(1, 4)
+        time_to_goal = 4
+
         self.exec_event.wait(time_to_goal)
         self.exec_event.clear()
 

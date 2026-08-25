@@ -1,6 +1,7 @@
 import json
 import time
 import rclpy
+import random
 from std_msgs.msg import String
 from std_srvs.srv import Trigger
 from rclpy.node import Node
@@ -8,6 +9,14 @@ from rclpy.node import Node
 class CoordinatorNode(Node):
     def __init__(self):
         super().__init__("multi3_coordinator_node")
+
+        self.declare_parameter('assignment_strategy', 'baseline') # baseline, random, greedy
+        try:
+            self.assignment_strategy = self.get_parameter('assignment_strategy').get_parameter_value().string_value
+            self.get_logger().info(f"Assignment strategy parameter: {self.assignment_strategy}")
+        except Exception:
+            self.assignment_strategy = 'baseline'
+        self.get_logger().info(f"Using assignment strategy: {self.assignment_strategy}")
 
         self.capability_map = { # task -> [required capability]
             "pick": ["pick"],
@@ -17,10 +26,12 @@ class CoordinatorNode(Node):
         }
 
         # Internal data structures
-        self.robot_inventory = {} # Element structure: 'robot_name': {name: 'name', 'state': 'idle/working/offline/selected', 'current_assigned_fragment': fragment_id, 'capabilities': [cap1, cap2, ...], 'last_heartbeat': timestamp}
+        self.robot_inventory = {} # Element structure: 'robot_name': {name: 'name', 'operational_state': 'idle/working/offline/selected', 'current_assigned_fragment': fragment_id, 'capabilities': [cap1, cap2, ...], 'last_heartbeat': timestamp, 'state': {}}
         self.fragments_pool = {} # Element structure: 'fragment_id': {id: 'id', 'mission': 'mission_name','state': 'waiting/executable/assigned/completed', 'wait': [task1, ..., taskn], 'tasks': [task1, ..., taskn], 'arrive_timestamp': 1231231, 'priority': 1, 'segment': 'segment_id'}
 
         self.received_coordination_messages = set() # Each element of this set is a string that has the following structure: "mission/segment/task"
+
+        self.misligned_inventory = False
 
         # Subscribers (only handled by the coordinator)
         self.new_robot_subscription_callback = self.create_subscription(String, '/coordination/new_robot', self.new_robot_subscription_callback, 10)
@@ -42,6 +53,7 @@ class CoordinatorNode(Node):
         # Services for getting status info
         self.get_robot_inventory_service = self.create_service(Trigger, '/info/robot_inventory', self.get_robot_inventory_callback)
         self.get_fragments_pool_service = self.create_service(Trigger, '/info/fragment_pool', self.get_fragments_pool_callback)
+        self.get_inventory_misalignment = self.create_service(Trigger, '/info/inventory_check', self.get_inventory_misalignment_callback)
 
         # Timers
         self.coordination_messages_updater_timer = self.create_timer(2.0, self.publish_all_coordination_messages)
@@ -73,6 +85,11 @@ class CoordinatorNode(Node):
     def get_fragments_pool_callback(self, resquest, response):
         response.success = True
         response.message = json.dumps(self.fragments_pool)
+        return response
+
+    def get_inventory_misalignment_callback(self, request, response):
+        response.success = True
+        response.message = "Misaligned" if self.misligned_inventory else "Ok"
         return response
 
     def new_robot_subscription_callback(self, msg: String):
@@ -110,7 +127,9 @@ class CoordinatorNode(Node):
                 "tasks": fragment.get("tasks", []),
                 "arrive_timestamp": int(time.time()),
                 "priority": mission.get("priority", 0),
-                "segment": fragment.get("segment")
+                "segment": fragment.get("segment"),
+                "preconditions": fragment.get("preconditions", []),
+                "postconditions": fragment.get("postconditions", [])
             }
 
         self.get_logger().info(f'Received mission: {mission}')
@@ -129,6 +148,7 @@ class CoordinatorNode(Node):
             self.robot_inventory[robot_name].update(robot_state)
         else:
             self.get_logger().warning(f"Received state update for unknown robot: {robot_name}")
+            self.misligned_inventory = True
 
         self.get_logger().info(f'Received robot state update: {robot_state}')
 
@@ -143,6 +163,12 @@ class CoordinatorNode(Node):
             self.update_fragments_executability()
         if "completed_fragment" in coordination_message:
             self.fragments_pool[coordination_message["completed_fragment"]]["state"] = "completed"
+        if "postconditions" in coordination_message:
+            robot_name = coordination_message["robot_name"]
+            self.robot_inventory[robot_name]["conditions"] = coordination_message["postconditions"]
+        if "state" in coordination_message:
+            robot_name = coordination_message["robot_name"]
+            self.robot_inventory[robot_name]["state"] = coordination_message["state"]
         self.get_logger().info(f'Received coordination message: {coordination_message}')
 
     def heartbeat_callback(self, msg: String):
@@ -153,14 +179,17 @@ class CoordinatorNode(Node):
             return
         robot_name = heartbeat_info.get("robot_name")
         robot_state = heartbeat_info.get("robot_state")
+        robot_conditions = heartbeat_info.get("conditions")
         if robot_name and robot_name in self.robot_inventory:
             self.robot_inventory[robot_name]["last_heartbeat"] = int(time.time())
-            if self.robot_inventory[robot_name]["state"] == "offline":
+            if self.robot_inventory[robot_name]["operational_state"] == "offline":
                 self.get_logger().info(f'Received heartbeat from {robot_name}. Updating robot state.')
-            if self.robot_inventory[robot_name]["state"] != "selected" and robot_state == "idle": # Avoiding changing state if the robot is currently selected for the fragment assignment
-                self.robot_inventory[robot_name]["state"] = robot_state
+            if self.robot_inventory[robot_name]["operational_state"] != "selected" and robot_state == "idle": # Avoiding changing state if the robot is currently selected for the fragment assignment
+                self.robot_inventory[robot_name]["operational_state"] = robot_state
+            self.robot_inventory[robot_name]["conditions"] = robot_conditions
         else:
             self.get_logger().warning(f"Received heartbeat from unknown robot: {robot_name}")
+            self.misligned_inventory = True
 
     def publish_all_coordination_messages(self):
         if self.received_coordination_messages:
@@ -179,10 +208,18 @@ class CoordinatorNode(Node):
             if not eligible_robots:
                 continue
 
-            selected_robot = min(eligible_robots,key=lambda robot_name: len(self.robot_inventory[robot_name].get("capabilities", [])))
+            if self.assignment_strategy == "closest":
+                # Greedy assignment (the closest)
+                selected_robot = self.get_closest(eligible_robots, fragment)
+            elif self.assignment_strategy == "capability-preserving":
+                # Greedy assignment (capability preserving)
+                selected_robot = min(eligible_robots,key=lambda robot_name: len(self.robot_inventory[robot_name].get("capabilities", [])))
+            else:
+                # Random assignemnt (baseline)
+                selected_robot = random.choice(eligible_robots)
 
             fragment["state"] = "assigned"
-            self.robot_inventory[selected_robot]["state"] = "selected"
+            self.robot_inventory[selected_robot]["operational_state"] = "selected"
             self.robot_inventory[selected_robot]["current_assigned_fragment"] = fragment.get("id")
 
             assignment_message = {
@@ -192,13 +229,39 @@ class CoordinatorNode(Node):
             self.fragment_assignment_publisher.publish(String(data=json.dumps(assignment_message)))
             self.get_logger().info(f"Assigned fragment {fragment.get('id')} to robot {selected_robot}.")
 
+    def get_closest(self, robots, fragment):
+        if not robots:
+            return None
+
+        tasks = fragment.get("tasks") or []
+        if not tasks:
+            return robots[0]
+
+        target_position = tasks[0].get("params", {})
+        target_x = target_position.get("x", 0.0)
+        target_y = target_position.get("y", 0.0)
+        target_z = target_position.get("z", 0.0)
+
+        def distance_to_target(robot_name):
+            robot_info = self.robot_inventory.get(robot_name, {})
+            robot_state = robot_info.get("state", {})
+            position = robot_state.get("position", {})
+            robot_x = position.get("x", 0.0)
+            robot_y = position.get("y", 0.0)
+            robot_z = position.get("z", 0.0)
+            return ((robot_x - target_x) ** 2 +
+                    (robot_y - target_y) ** 2 +
+                    (robot_z - target_z) ** 2) ** 0.5
+
+        return min(robots, key=distance_to_target)
+
     def monitor_robot_status(self):
         current_time = int(time.time())
         for robot_name, robot_info in self.robot_inventory.items():
             last_heartbeat = robot_info.get("last_heartbeat", 0)
-            if (current_time - last_heartbeat > 10) and (robot_info["state"] != "offline"):  # Assuming a heartbeat timeout of 10 seconds (more than 3 missed heartbeats)
+            if (current_time - last_heartbeat > 10) and (robot_info["operational_state"] != "offline"):  # Assuming a heartbeat timeout of 10 seconds (more than 3 missed heartbeats)
                 self.get_logger().warning(f"Robot {robot_name} has not sent a heartbeat for {current_time - last_heartbeat} seconds. Marking as offline.")
-                robot_info["state"] = "offline"
+                robot_info["operational_state"] = "offline"
                 # Handle reassigning fragments or recovery actions here.
 
     def update_fragments_executability(self):
@@ -220,10 +283,8 @@ class CoordinatorNode(Node):
         fragment_required_capabilities = fragment.get("capabilities", [])
         eligible_robots = []
         for robot_name, robot_info in self.robot_inventory.items():
-            if robot_info.get("state") == "idle":
-                robot_capabilities = robot_info.get("capabilities", [])
-                if all(cap in robot_capabilities for cap in fragment_required_capabilities):
-                    eligible_robots.append(robot_name)
+            if robot_info.get("operational_state") == "idle" and all(cap in robot_info.get("capabilities", []) for cap in fragment_required_capabilities) and all(precondition in robot_info.get("conditions") for precondition in fragment.get("preconditions", [])):
+                eligible_robots.append(robot_name)
         return eligible_robots
 
 def main(args=None):
