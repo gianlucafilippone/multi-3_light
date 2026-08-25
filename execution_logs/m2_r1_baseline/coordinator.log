@@ -1,0 +1,77 @@
+[INFO] [1787678420.791861654] [multi3_coordinator_node]: Assignment strategy parameter: baseline
+[INFO] [1787678420.792805882] [multi3_coordinator_node]: Using assignment strategy: baseline
+[INFO] [1787678420.800484271] [multi3_coordinator_node]: Coordinator node started.
+[INFO] [1787678423.700821032] [multi3_coordinator_node]: Received new robot info: {'name': 'robot1', 'operational_state': 'idle', 'capabilities': ['pick', 'scan', 'transport', 'pack'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True, 'battery': 100.0, 'conditions': []}, 'last_heartbeat': 1787678423}
+[INFO] [1787678425.614597165] [multi3_coordinator_node]: Received mission: {'mission': 'm2', 'priority': 1, 'fragments': [{'id': 'f2-1', 'wait': [], 'tasks': [{'name': 'pick', 'params': {'weight': 5, 'x': 2, 'y': 3}}], 'postconditions': ['picked-o1-2'], 'segment': 's1'}, {'id': 'f2-2', 'wait': ['m2/s1/pick'], 'tasks': [{'name': 'scan', 'params': {'x': 2, 'y': 3}}], 'segment': 's1'}, {'id': 'f2-3', 'wait': ['m2/s1/scan'], 'tasks': [{'name': 'transport', 'params': {'x': 11, 'y': 6}}], 'segment': 's1'}, {'id': 'f2-4', 'wait': [], 'tasks': [{'name': 'pick', 'params': {'weight': 7, 'x': 9, 'y': 5}}], 'postconditions': ['picked-o2-2'], 'segment': 's2'}, {'id': 'f2-5', 'wait': ['m2/s2/pick'], 'tasks': [{'name': 'scan', 'params': {'x': 9, 'y': 5}}], 'segment': 's2'}, {'id': 'f2-6', 'wait': ['m2/s2/scan'], 'tasks': [{'name': 'transport', 'params': {'x': 11, 'y': 6}}], 'preconditions': ['picked-o2-2'], 'segment': 's2'}, {'id': 'f2-7', 'wait': ['m2/s1/transport', 'm2/s2/transport'], 'tasks': [{'name': 'pack', 'params': {'x': 11, 'y': 6, 'items': 2}}], 'segment': ''}]}
+[INFO] [1787678425.616318766] [multi3_coordinator_node]: Fragment f2-1 is now executable because all signal messages were received.
+[INFO] [1787678425.618066104] [multi3_coordinator_node]: Fragment f2-4 is now executable because all signal messages were received.
+[INFO] [1787678425.925569658] [multi3_coordinator_node]: Execution start signal received. Starting fragment assignment.
+[INFO] [1787678426.930602794] [multi3_coordinator_node]: Assigned fragment f2-1 to robot robot1.
+[INFO] [1787678426.944388256] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'working', 'current_assigned_fragment': 'f2-1', 'conditions': [], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True, 'battery': 100.0, 'conditions': []}}
+[INFO] [1787678443.188330050] [multi3_coordinator_node]: Fragment f2-2 is now executable because all signal messages were received.
+[INFO] [1787678443.190372451] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'm2/s1/pick'}
+[INFO] [1787678443.192914984] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'idle', 'current_assigned_fragment': None, 'conditions': ['picked-o1-2'], 'state': {'position': {'x': 2, 'y': 3, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2']}}
+[INFO] [1787678443.194599400] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'f2-1', 'state': {'position': {'x': 2, 'y': 3, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2']}}
+[INFO] [1787678443.930558433] [multi3_coordinator_node]: Assigned fragment f2-2 to robot robot1.
+[INFO] [1787678443.946791700] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'working', 'current_assigned_fragment': 'f2-2', 'conditions': ['picked-o1-2'], 'state': {'position': {'x': 2, 'y': 3, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2']}}
+[INFO] [1787678448.968678922] [multi3_coordinator_node]: Fragment f2-3 is now executable because all signal messages were received.
+[INFO] [1787678448.970330507] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'm2/s1/scan'}
+[INFO] [1787678448.972840508] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'idle', 'current_assigned_fragment': None, 'conditions': ['picked-o1-2'], 'state': {'position': {'x': 2, 'y': 3, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2']}}
+[INFO] [1787678448.974876855] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'f2-2', 'state': {'position': {'x': 2, 'y': 3, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2']}}
+[INFO] [1787678449.931836387] [multi3_coordinator_node]: Assigned fragment f2-3 to robot robot1.
+[INFO] [1787678449.960220461] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'working', 'current_assigned_fragment': 'f2-3', 'conditions': ['picked-o1-2'], 'state': {'position': {'x': 2, 'y': 3, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2']}}
+[INFO] [1787678481.692672926] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'm2/s1/transport'}
+[INFO] [1787678481.695748042] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'idle', 'current_assigned_fragment': None, 'conditions': ['picked-o1-2'], 'state': {'position': {'x': 11, 'y': 6, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2']}}
+[INFO] [1787678481.697430443] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'f2-3', 'state': {'position': {'x': 11, 'y': 6, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2']}}
+[INFO] [1787678481.931514847] [multi3_coordinator_node]: Assigned fragment f2-4 to robot robot1.
+[INFO] [1787678481.952644384] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'working', 'current_assigned_fragment': 'f2-4', 'conditions': ['picked-o1-2'], 'state': {'position': {'x': 11, 'y': 6, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2']}}
+[INFO] [1787678501.625095398] [multi3_coordinator_node]: Fragment f2-5 is now executable because all signal messages were received.
+[INFO] [1787678501.627384523] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'm2/s2/pick'}
+[INFO] [1787678501.629619217] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'idle', 'current_assigned_fragment': None, 'conditions': ['picked-o1-2', 'picked-o2-2'], 'state': {'position': {'x': 9, 'y': 5, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2', 'picked-o2-2']}}
+[INFO] [1787678501.631220474] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'f2-4', 'state': {'position': {'x': 9, 'y': 5, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2', 'picked-o2-2']}}
+[INFO] [1787678501.930542231] [multi3_coordinator_node]: Assigned fragment f2-5 to robot robot1.
+[INFO] [1787678501.940905376] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'working', 'current_assigned_fragment': 'f2-5', 'conditions': ['picked-o1-2', 'picked-o2-2'], 'state': {'position': {'x': 9, 'y': 5, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2', 'picked-o2-2']}}
+[INFO] [1787678506.961106769] [multi3_coordinator_node]: Fragment f2-6 is now executable because all signal messages were received.
+[INFO] [1787678506.962700724] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'm2/s2/scan'}
+[INFO] [1787678506.965131686] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'idle', 'current_assigned_fragment': None, 'conditions': ['picked-o1-2', 'picked-o2-2'], 'state': {'position': {'x': 9, 'y': 5, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2', 'picked-o2-2']}}
+[INFO] [1787678506.966917467] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'f2-5', 'state': {'position': {'x': 9, 'y': 5, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2', 'picked-o2-2']}}
+[INFO] [1787678507.930461189] [multi3_coordinator_node]: Assigned fragment f2-6 to robot robot1.
+[INFO] [1787678507.941010165] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'working', 'current_assigned_fragment': 'f2-6', 'conditions': ['picked-o1-2', 'picked-o2-2'], 'state': {'position': {'x': 9, 'y': 5, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2', 'picked-o2-2']}}
+[INFO] [1787678527.184485408] [multi3_coordinator_node]: Fragment f2-7 is now executable because all signal messages were received.
+[INFO] [1787678527.186638772] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'm2/s2/transport'}
+[INFO] [1787678527.188975234] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'idle', 'current_assigned_fragment': None, 'conditions': ['picked-o1-2', 'picked-o2-2'], 'state': {'position': {'x': 11, 'y': 6, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2', 'picked-o2-2']}}
+[INFO] [1787678527.190544534] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'f2-6', 'state': {'position': {'x': 11, 'y': 6, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2', 'picked-o2-2']}}
+[INFO] [1787678527.931206645] [multi3_coordinator_node]: Assigned fragment f2-7 to robot robot1.
+[INFO] [1787678527.980431498] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'working', 'current_assigned_fragment': 'f2-7', 'conditions': ['picked-o1-2', 'picked-o2-2'], 'state': {'position': {'x': 11, 'y': 6, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2', 'picked-o2-2']}}
+[INFO] [1787678541.995508506] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'm2//pack'}
+[INFO] [1787678541.997143690] [multi3_coordinator_node]: Received robot state update: {'operational_state': 'idle', 'current_assigned_fragment': None, 'conditions': ['picked-o1-2', 'picked-o2-2'], 'state': {'position': {'x': 11, 'y': 6, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2', 'picked-o2-2']}}
+[INFO] [1787678541.998066576] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'f2-7', 'state': {'position': {'x': 11, 'y': 6, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o1-2', 'picked-o2-2']}}
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_coordinator/lib/python3.10/site-packages/nodes/coordinator.py", line 294, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_coordinator/lib/multi3_coordinator/coordinator", line 33, in <module>
+    sys.exit(load_entry_point('multi3-coordinator==0.0.0', 'console_scripts', 'coordinator')())
+  File "/root/ros2_ws/install/multi3_coordinator/lib/python3.10/site-packages/nodes/coordinator.py", line 299, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241

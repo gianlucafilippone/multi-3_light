@@ -184,7 +184,7 @@ def combine_logs(output_path: Path, perproc_dir: Path, header: str):
                 out.write(f.read())
 
 
-def run_test(ros_setup: str, ws_setup: str, robots: int, missions: List[int], strategy: str, mission_dir: Path, log_root: Path, timeout: int) -> int:
+def run_test(ros_setup: str, ws_setup: str, robots: int, missions: List[int], strategy: str, mission_dir: Path, log_root: Path, timeout: int, test_number: int, test_total: int) -> int:
     max_attempts = 10
     for attempt in range(1, max_attempts + 1):
         test_name = f"m{format_missions_for_name(missions)}_r{robots}_{strategy}"
@@ -245,11 +245,11 @@ def run_test(ros_setup: str, ws_setup: str, robots: int, missions: List[int], st
                 # poll for completion
                 start = time.time()
                 while True:
-                    pool = get_fragment_pool(node, timeout=2.0)
+                    pool = get_fragment_pool(node, timeout=timeout)
                     if pool is not None:
                         completed, assigned_or_running, remaining = summarize_fragment_pool(pool)
                         print(
-                            f'[poll] completed={completed}, assigned/running={assigned_or_running}, remaining={remaining}, total={completed + assigned_or_running + remaining}'
+                            f'[poll] [test {test_number} of {test_total}] completed={completed}, assigned/running={assigned_or_running}, remaining={remaining}, total={completed + assigned_or_running + remaining}'
                         )
                         if all_completed(pool):
                             print('All fragments completed for', test_name)
@@ -285,6 +285,12 @@ def run_test(ros_setup: str, ws_setup: str, robots: int, missions: List[int], st
                 f.write(f"{test_name} | robots={robots}, missions={missions}, strategy={strategy}\n")
             return 6
 
+        if result_code != 0:
+            error_file = log_root / 'failed_runs.txt'
+            error_file.parent.mkdir(parents=True, exist_ok=True)
+            with error_file.open('a', encoding='utf-8') as f:
+                f.write(f"{test_name} | robots={robots}, missions={missions}, strategy={strategy} | code={result_code}\n")
+
         # Create combined log file
         combined_name = f'run_{format_missions_for_name(missions)}_r{robots}_{strategy}.log'
         combined_path = log_root / combined_name
@@ -303,7 +309,7 @@ def main():
     p.add_argument('--ws_setup', default='/root/ros2_ws/install/setup.bash')
     p.add_argument('--mission_dir', default='example_missions')
     p.add_argument('--log_root', default='logs')
-    p.add_argument('--timeout', type=int, default=300)
+    p.add_argument('--timeout', type=int, default=1200)
     args = p.parse_args()
 
     spec_path = Path(args.spec_file)
@@ -327,7 +333,7 @@ def main():
             continue
 
         print(f'Running test {idx}: robots={robots}, missions={missions}, strategy={strategy}')
-        rc = run_test(args.ros_setup, args.ws_setup, robots, missions, strategy, mission_dir, log_root, args.timeout)
+        rc = run_test(args.ros_setup, args.ws_setup, robots, missions, strategy, mission_dir, log_root, args.timeout, idx, len(lines))
         if rc != 0:
             print('Test', idx, 'failed with code', rc)
             overall_ok = False

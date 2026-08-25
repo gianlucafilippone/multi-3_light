@@ -1,0 +1,99 @@
+[INFO] [1787690642.453073065] [robot2.fragment_exec_node]: Setting up skill: PickSkill
+[INFO] [1787690642.453931455] [robot2.fragment_exec_node]: Setting up skill: ScanSkill
+[INFO] [1787690642.454592069] [robot2.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787690642.455136747] [robot2.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787690642.455680559] [robot2.fragment_exec_node]: Setting up skill: DockSkill
+[INFO] [1787690642.456271427] [robot2.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787690642.456862906] [robot2.fragment_exec_node]: Setting up skill: PackSkill
+[INFO] [1787690642.463175319] [robot2.fragment_exec_node]: Published robot registration: {'name': 'robot2', 'operational_state': 'idle', 'capabilities': ['pick', 'scan', 'transport', 'pack'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True, 'battery': 100.0, 'conditions': []}}
+[INFO] [1787690650.238867547] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot4', 'fragment': {'id': 'f1-1', 'mission': 'm1', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'params': {'x': 5, 'y': 8, 'weight': 8}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's1', 'preconditions': [], 'postconditions': ['picked-o1-1']}}
+[INFO] [1787690650.246058408] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot2', 'fragment': {'id': 'f4-7', 'mission': 'm4', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'params': {'weight': 2, 'x': 9, 'y': 1}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's3', 'preconditions': [], 'postconditions': ['picked-o3-4']}}
+[INFO] [1787690650.247095307] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot3', 'fragment': {'id': 'f4-4', 'mission': 'm4', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'params': {'weight': 7, 'x': 10, 'y': 4}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's2', 'preconditions': [], 'postconditions': ['picked-o2-4']}}
+[INFO] [1787690650.248966077] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot1', 'fragment': {'id': 'f4-1', 'mission': 'm4', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'params': {'weight': 5, 'x': 2, 'y': 8}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's1', 'preconditions': [], 'postconditions': ['picked-o1-4']}}
+[INFO] [1787690650.251182238] [robot2.fragment_exec_node]: Received fragment assignment: f4-7. Starting execution.
+[INFO] [1787690650.252679220] [robot2.fragment_exec_node]: Executing task pick. Params: {'weight': 2, 'x': 9, 'y': 1}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True, 'battery': 100.0, 'conditions': []}
+[INFO] [1787690650.253736835] [robot2.fragment_exec_node]: EventType: Control (Task: pick), Activity: undock, Robot: robot2, Mission: m4, Segment: s3, Start: 16667.133710087
+[INFO] [1787690650.255642709] [robot2.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787690654.257382514] [robot2.fragment_exec_node]: Undock completed!
+[INFO] [1787690654.258269956] [robot2.fragment_exec_node]: EventType: Control (Task: pick), Activity: undock, Robot: robot2, Mission: m4, Segment: s3, End: 16671.138518323
+[INFO] [1787690654.259110860] [robot2.fragment_exec_node]: EventType: Control (Task: pick), Activity: navigate, Robot: robot2, Mission: m4, Segment: s3, Start: 16671.139353041
+[INFO] [1787690654.260592561] [robot2.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (9, 1) (18.110770276274835 seconds)...
+[INFO] [1787690672.374336371] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787690672.376794473] [robot2.fragment_exec_node]: EventType: Control (Task: pick), Activity: navigate, Robot: robot2, Mission: m4, Segment: s3, End: 16689.255995721
+[INFO] [1787690672.378354323] [robot2.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot2, Mission: m4, Segment: s3, Start: 16689.25795053
+[INFO] [1787690672.379520675] [robot2.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787690674.381858411] [robot2.fragment_exec_node]: Pick completed!
+[INFO] [1787690674.383275624] [robot2.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot2, Mission: m4, Segment: s3, End: 16691.263211947
+[INFO] [1787690674.384627235] [robot2.fragment_exec_node]: Execution of fragment f4-7 completed!
+[INFO] [1787690675.239157447] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot2', 'fragment': {'id': 'f4-8', 'mission': 'm4', 'state': 'assigned', 'wait': ['m4/s3/pick'], 'tasks': [{'name': 'scan', 'params': {'x': 9, 'y': 1}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's3', 'preconditions': [], 'postconditions': []}}
+[INFO] [1787690675.239921816] [robot2.fragment_exec_node]: Received fragment assignment: f4-8. Starting execution.
+[INFO] [1787690675.241113023] [robot2.fragment_exec_node]: Executing task scan. Params: {'x': 9, 'y': 1}, Virtual state: {'position': {'x': 9, 'y': 1, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o3-4']}
+[INFO] [1787690675.241927778] [robot2.fragment_exec_node]: EventType: Task, Activity: scan, Robot: robot2, Mission: m4, Segment: s3, Start: 16692.122001883
+[INFO] [1787690675.242619388] [robot2.fragment_exec_node]: Simulating scan skill...
+[INFO] [1787690676.220316348] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot1', 'fragment': {'id': 'f4-2', 'mission': 'm4', 'state': 'assigned', 'wait': ['m4/s1/pick'], 'tasks': [{'name': 'scan', 'params': {'x': 2, 'y': 8}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's1', 'preconditions': [], 'postconditions': []}}
+[INFO] [1787690678.244650066] [robot2.fragment_exec_node]: Scan completed!
+[INFO] [1787690678.246015371] [robot2.fragment_exec_node]: EventType: Task, Activity: scan, Robot: robot2, Mission: m4, Segment: s3, End: 16695.125806662
+[INFO] [1787690678.247285058] [robot2.fragment_exec_node]: Execution of fragment f4-8 completed!
+[INFO] [1787690679.220773888] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot2', 'fragment': {'id': 'f4-9', 'mission': 'm4', 'state': 'assigned', 'wait': ['m4/s3/scan'], 'tasks': [{'name': 'transport', 'params': {'x': 11, 'y': 6}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's3', 'preconditions': ['picked-o3-4'], 'postconditions': []}}
+[INFO] [1787690679.221342478] [robot2.fragment_exec_node]: Received fragment assignment: f4-9. Starting execution.
+[INFO] [1787690679.222122661] [robot2.fragment_exec_node]: Executing task transport. Params: {'x': 11, 'y': 6}, Virtual state: {'position': {'x': 9, 'y': 1, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o3-4']}
+[INFO] [1787690679.222698350] [robot2.fragment_exec_node]: EventType: Control (Task: transport), Activity: navigate, Robot: robot2, Mission: m4, Segment: s3, Start: 16696.102834024
+[INFO] [1787690679.223216894] [robot2.fragment_exec_node]: Simulating navigate skill from position (9, 1) to (11, 6) (7.211102550927978 seconds)...
+[INFO] [1787690681.221536560] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot4', 'fragment': {'id': 'f1-2', 'mission': 'm1', 'state': 'assigned', 'wait': ['m1/s1/pick'], 'tasks': [{'name': 'scan', 'params': {'x': 5, 'y': 8}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's1', 'preconditions': [], 'postconditions': []}}
+[INFO] [1787690682.230431185] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot1', 'fragment': {'id': 'f4-3', 'mission': 'm4', 'state': 'assigned', 'wait': ['m4/s1/scan'], 'tasks': [{'name': 'transport', 'params': {'x': 11, 'y': 6}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's1', 'preconditions': ['picked-o1-4'], 'postconditions': []}}
+[INFO] [1787690683.253222636] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot3', 'fragment': {'id': 'f4-5', 'mission': 'm4', 'state': 'assigned', 'wait': ['m4/s2/pick'], 'tasks': [{'name': 'scan', 'params': {'x': 10, 'y': 4}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's2', 'preconditions': [], 'postconditions': []}}
+[INFO] [1787690686.437827716] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787690686.441821884] [robot2.fragment_exec_node]: EventType: Control (Task: transport), Activity: navigate, Robot: robot2, Mission: m4, Segment: s3, End: 16703.320408787
+[INFO] [1787690686.444286976] [robot2.fragment_exec_node]: EventType: Task, Activity: transport, Robot: robot2, Mission: m4, Segment: s3, Start: 16703.323212458
+[INFO] [1787690686.446013197] [robot2.fragment_exec_node]: Simulating navigate skill from position (11, 6) to (11, 6) (10.0 seconds)...
+[INFO] [1787690687.243886526] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot4', 'fragment': {'id': 'f1-3', 'mission': 'm1', 'state': 'assigned', 'wait': ['m1/s1/scan'], 'tasks': [{'name': 'transport', 'params': {'x': 11, 'y': 6}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's1', 'preconditions': ['picked-o1-1'], 'postconditions': []}}
+[INFO] [1787690687.245494255] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot3', 'fragment': {'id': 'f4-6', 'mission': 'm4', 'state': 'assigned', 'wait': ['m4/s2/scan'], 'tasks': [{'name': 'transport', 'params': {'x': 11, 'y': 6}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's2', 'preconditions': ['picked-o2-4'], 'postconditions': []}}
+[INFO] [1787690696.450330518] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787690696.452545199] [robot2.fragment_exec_node]: EventType: Task, Activity: transport, Robot: robot2, Mission: m4, Segment: s3, End: 16713.331912027
+[INFO] [1787690696.454834560] [robot2.fragment_exec_node]: Execution of fragment f4-9 completed!
+[INFO] [1787690697.233004216] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot2', 'fragment': {'id': "f4-10'", 'mission': 'm4', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'params': {'weight': 1, 'x': 2, 'y': 4}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's4', 'preconditions': [], 'postconditions': ['picked-o4-4']}}
+[INFO] [1787690697.235079071] [robot2.fragment_exec_node]: Received fragment assignment: f4-10'. Starting execution.
+[INFO] [1787690697.237040279] [robot2.fragment_exec_node]: Executing task pick. Params: {'weight': 1, 'x': 2, 'y': 4}, Virtual state: {'position': {'x': 11, 'y': 6, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o3-4']}
+[INFO] [1787690697.238751678] [robot2.fragment_exec_node]: EventType: Control (Task: pick), Activity: navigate, Robot: robot2, Mission: m4, Segment: s4, Start: 16714.117943756
+[INFO] [1787690697.240305531] [robot2.fragment_exec_node]: Simulating navigate skill from position (11, 6) to (2, 4) (22.80350850198276 seconds)...
+[INFO] [1787690710.239044645] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot4', 'fragment': {'id': 'f1-4', 'mission': 'm1', 'state': 'assigned', 'wait': ['m1/s1/transport'], 'tasks': [{'name': 'pack', 'params': {'x': 11, 'y': 6, 'items': 1}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': '', 'preconditions': [], 'postconditions': []}}
+[INFO] [1787690720.046189901] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787690720.048757656] [robot2.fragment_exec_node]: EventType: Control (Task: pick), Activity: navigate, Robot: robot2, Mission: m4, Segment: s4, End: 16736.928540889
+[INFO] [1787690720.051194846] [robot2.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot2, Mission: m4, Segment: s4, Start: 16736.931005059
+[INFO] [1787690720.053563816] [robot2.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787690721.057106737] [robot2.fragment_exec_node]: Pick completed!
+[INFO] [1787690721.059633969] [robot2.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot2, Mission: m4, Segment: s4, End: 16737.939493479
+[INFO] [1787690721.063231865] [robot2.fragment_exec_node]: Execution of fragment f4-10' completed!
+[INFO] [1787690721.229263200] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot3', 'fragment': {'id': 'f4-11', 'mission': 'm4', 'state': 'assigned', 'wait': ['m4/s4/pick'], 'tasks': [{'name': 'scan', 'params': {'x': 2, 'y': 4}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's4', 'preconditions': [], 'postconditions': []}}
+[INFO] [1787690747.240789542] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot2', 'fragment': {'id': 'f4-12', 'mission': 'm4', 'state': 'assigned', 'wait': ['m4/s4/scan'], 'tasks': [{'name': 'transport', 'params': {'x': 11, 'y': 6}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': 's4', 'preconditions': ['picked-o4-4'], 'postconditions': []}}
+[INFO] [1787690747.242269416] [robot2.fragment_exec_node]: Received fragment assignment: f4-12. Starting execution.
+[INFO] [1787690747.243644088] [robot2.fragment_exec_node]: Executing task transport. Params: {'x': 11, 'y': 6}, Virtual state: {'position': {'x': 2, 'y': 4, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o3-4', 'picked-o4-4']}
+[INFO] [1787690747.245195117] [robot2.fragment_exec_node]: EventType: Control (Task: transport), Activity: navigate, Robot: robot2, Mission: m4, Segment: s4, Start: 16764.124215522
+[INFO] [1787690747.246177265] [robot2.fragment_exec_node]: Simulating navigate skill from position (2, 4) to (11, 6) (19.697715603592208 seconds)...
+[INFO] [1787690766.946062166] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787690766.946808281] [robot2.fragment_exec_node]: EventType: Control (Task: transport), Activity: navigate, Robot: robot2, Mission: m4, Segment: s4, End: 16783.826786108
+[INFO] [1787690766.947429708] [robot2.fragment_exec_node]: EventType: Task, Activity: transport, Robot: robot2, Mission: m4, Segment: s4, Start: 16783.82747467
+[INFO] [1787690766.948008489] [robot2.fragment_exec_node]: Simulating navigate skill from position (11, 6) to (11, 6) (10.0 seconds)...
+[INFO] [1787690776.951671751] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787690776.954607558] [robot2.fragment_exec_node]: EventType: Task, Activity: transport, Robot: robot2, Mission: m4, Segment: s4, End: 16793.833524928
+[INFO] [1787690776.957148962] [robot2.fragment_exec_node]: Execution of fragment f4-12 completed!
+[INFO] [1787690777.236541560] [robot2.fragment_exec_node]: Received fragment: {'robot': 'robot2', 'fragment': {'id': 'f4-13', 'mission': 'm4', 'state': 'assigned', 'wait': ['m4/s1/transport', 'm4/s2/transport', 'm4/s3/transport', 'm4/s4/transport'], 'tasks': [{'name': 'pack', 'params': {'x': 11, 'y': 6, 'items': 4}}], 'arrive_timestamp': 1787690648, 'priority': 1, 'segment': '', 'preconditions': [], 'postconditions': []}}
+[INFO] [1787690777.238066954] [robot2.fragment_exec_node]: Received fragment assignment: f4-13. Starting execution.
+[INFO] [1787690777.239943299] [robot2.fragment_exec_node]: Executing task pack. Params: {'x': 11, 'y': 6, 'items': 4}, Virtual state: {'position': {'x': 11, 'y': 6, 'z': 0.0}, 'docked': False, 'battery': 100.0, 'conditions': ['picked-o3-4', 'picked-o4-4']}
+[INFO] [1787690777.241331086] [robot2.fragment_exec_node]: EventType: Task, Activity: pack, Robot: robot2, Mission: m4, Segment: , Start: 16794.120948215
+[INFO] [1787690777.242267367] [robot2.fragment_exec_node]: Simulating pack skill...
+[INFO] [1787690801.245553270] [robot2.fragment_exec_node]: Packing completed!
+[INFO] [1787690801.247462983] [robot2.fragment_exec_node]: EventType: Task, Activity: pack, Robot: robot2, Mission: m4, Segment: , End: 16818.127108126
+[INFO] [1787690801.250064423] [robot2.fragment_exec_node]: Execution of fragment f4-13 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 236, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241

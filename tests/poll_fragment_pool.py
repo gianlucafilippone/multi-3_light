@@ -14,7 +14,7 @@ from rclpy.node import Node
 from std_srvs.srv import Trigger
 
 
-def get_fragment_pool(node: Node, timeout: float = 5.0) -> Optional[Dict[str, Any]]:
+def get_fragment_pool(node: Node, timeout: float = 10.0) -> Optional[Dict[str, Any]]:
     client = node.create_client(Trigger, '/info/fragment_pool')
     if not client.wait_for_service(timeout_sec=timeout):
         return None
