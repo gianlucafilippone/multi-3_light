@@ -1,344 +1,369 @@
-[INFO] [1787838582.584252796] [robot1.fragment_exec_node]: Setting up skill: DockSkill
-[INFO] [1787838582.585548550] [robot1.fragment_exec_node]: Setting up skill: UndockSkill
-[INFO] [1787838582.586462794] [robot1.fragment_exec_node]: Setting up skill: PickSkill
-[INFO] [1787838582.587367583] [robot1.fragment_exec_node]: Setting up skill: ScanSkill
-[INFO] [1787838582.588198488] [robot1.fragment_exec_node]: Setting up skill: NavigateSkill
-[INFO] [1787838582.589159563] [robot1.fragment_exec_node]: Setting up skill: PlaceSkill
-[INFO] [1787838582.589954487] [robot1.fragment_exec_node]: Setting up skill: PackSkill
-[INFO] [1787838582.590909484] [robot1.fragment_exec_node]: Setting up skill: LocalizeSkill
-[INFO] [1787838582.591766527] [robot1.fragment_exec_node]: Setting up skill: LoadPackSkill
-[INFO] [1787838582.592783086] [robot1.fragment_exec_node]: Setting up skill: UnloadPackSkill
-[INFO] [1787838582.600895534] [robot1.fragment_exec_node]: Published robot registration: {'name': 'robot1', 'operational_state': 'idle', 'capabilities': ['pick', 'move_to', 'place'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
-[INFO] [1787838600.367813153] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm1-4', 'mission': 'm1', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o2-1,shelf)', 'params': {'x': 2, 'y': 3, 'weight': 2}}, {'name': 'move_to', 'label': 'move_to(o2-1,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o2-1,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 2}}], 'arrive_timestamp': 1787838596, 'priority': 1, 'segment': 's2'}}
-[INFO] [1787838600.369287609] [robot1.fragment_exec_node]: Starting execution of fragment fm1-4...
-[INFO] [1787838600.371251159] [robot1.fragment_exec_node]: Executing task pick(o2-1,shelf). Params: {'x': 2, 'y': 3, 'weight': 2}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
-[INFO] [1787838600.373377011] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: undock, Robot: robot1, Mission: m1, Segment: s2, Start: 1787838600.372526
-[INFO] [1787838600.374329518] [robot1.fragment_exec_node]: Simulating undock skill...
-[INFO] [1787838604.379412569] [robot1.fragment_exec_node]: Undock completed!
-[INFO] [1787838604.381844519] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: undock, Robot: robot1, Mission: m1, Segment: s2, End: 1787838604.3801186
-[INFO] [1787838604.384291954] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m1, Segment: s2, Start: 1787838604.3830807
-[INFO] [1787838604.385828380] [robot1.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (2, 3) (7.211102550927978 seconds)...
-[INFO] [1787838611.601197707] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838611.604221076] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m1, Segment: s2, End: 1787838611.602321
-[INFO] [1787838611.605960253] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m1, Segment: s2, Start: 1787838611.6048546
-[INFO] [1787838611.607812195] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838616.609517198] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838616.610270062] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m1, Segment: s2, End: 1787838616.6098728
-[INFO] [1787838616.610989587] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m1, Segment: s2, Start: 1787838616.6105025
-[INFO] [1787838616.611715100] [robot1.fragment_exec_node]: Simulating pick skill...
-[INFO] [1787838618.613502255] [robot1.fragment_exec_node]: Pick completed!
-[INFO] [1787838618.614850907] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m1, Segment: s2, End: 1787838618.6140375
-[INFO] [1787838618.615855913] [robot1.fragment_exec_node]: Executing task move_to(o2-1,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 2, 'y': 3, 'z': 0.0}, 'docked': False}
-[INFO] [1787838618.617001959] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m1, Segment: s2, Start: 1787838618.616557
-[INFO] [1787838618.617601445] [robot1.fragment_exec_node]: Simulating navigate skill from position (2, 3) to (5, 5) (8.48528137423857 seconds)...
-[INFO] [1787838627.105408574] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838627.107351653] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m1, Segment: s2, End: 1787838627.1061647
-[INFO] [1787838627.109898814] [robot1.fragment_exec_node]: Executing task place(o2-1,scan_area). Params: {'x': 5, 'y': 5, 'weight': 2}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838627.111486414] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m1, Segment: s2, Start: 1787838627.1106117
-[INFO] [1787838627.112871600] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838632.115469447] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838632.117353401] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m1, Segment: s2, End: 1787838632.1162224
-[INFO] [1787838632.119158802] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m1, Segment: s2, Start: 1787838632.1179798
-[INFO] [1787838632.121209903] [robot1.fragment_exec_node]: Simulating place skill...
-[INFO] [1787838634.125281534] [robot1.fragment_exec_node]: Place completed!
-[INFO] [1787838634.129601995] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m1, Segment: s2, End: 1787838634.128574
-[INFO] [1787838634.131672995] [robot1.fragment_exec_node]: Execution of fragment fm1-4 completed!
-[INFO] [1787838634.362637654] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm3-7', 'mission': 'm3', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o3-3,shelf)', 'params': {'x': 2, 'y': 8, 'weight': 5}}, {'name': 'move_to', 'label': 'move_to(o3-3,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o3-3,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 5}}], 'arrive_timestamp': 1787838597, 'priority': 1, 'segment': 's3'}}
-[INFO] [1787838634.370136345] [robot1.fragment_exec_node]: Starting execution of fragment fm3-7...
-[INFO] [1787838634.371650885] [robot1.fragment_exec_node]: Executing task pick(o3-3,shelf). Params: {'x': 2, 'y': 8, 'weight': 5}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838634.372566737] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838634.372044
-[INFO] [1787838634.373439193] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (2, 8) (8.48528137423857 seconds)...
-[INFO] [1787838642.862951048] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838642.864844071] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m3, Segment: s3, End: 1787838642.863685
-[INFO] [1787838642.866625536] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838642.8654711
-[INFO] [1787838642.868352017] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838647.871530097] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838647.874555517] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m3, Segment: s3, End: 1787838647.8726084
-[INFO] [1787838647.877118773] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838647.8754666
-[INFO] [1787838647.880602879] [robot1.fragment_exec_node]: Simulating pick skill...
-[INFO] [1787838652.884684326] [robot1.fragment_exec_node]: Pick completed!
-[INFO] [1787838652.886690806] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m3, Segment: s3, End: 1787838652.8853147
-[INFO] [1787838652.888499785] [robot1.fragment_exec_node]: Executing task move_to(o3-3,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}
-[INFO] [1787838652.889829920] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838652.8889933
-[INFO] [1787838652.890865570] [robot1.fragment_exec_node]: Simulating navigate skill from position (2, 8) to (5, 5) (8.48528137423857 seconds)...
-[INFO] [1787838661.379795034] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838661.384188966] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m3, Segment: s3, End: 1787838661.3820715
-[INFO] [1787838661.386727869] [robot1.fragment_exec_node]: Executing task place(o3-3,scan_area). Params: {'x': 5, 'y': 5, 'weight': 5}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838661.388250385] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838661.3873599
-[INFO] [1787838661.390029982] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838666.394300760] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838666.396901900] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m3, Segment: s3, End: 1787838666.395626
-[INFO] [1787838666.398737097] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838666.3976393
-[INFO] [1787838666.400644497] [robot1.fragment_exec_node]: Simulating place skill...
-[INFO] [1787838671.404862193] [robot1.fragment_exec_node]: Place completed!
-[INFO] [1787838671.407350360] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m3, Segment: s3, End: 1787838671.406291
-[INFO] [1787838671.409529901] [robot1.fragment_exec_node]: Execution of fragment fm3-7 completed!
-[INFO] [1787838672.374347962] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm3-3', 'mission': 'm3', 'state': 'assigned', 'wait': ['scan(o1-3)'], 'tasks': [{'name': 'pick', 'label': 'pick(o1-3,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 4}}, {'name': 'move_to', 'label': 'move_to(o1-3,pack_area)', 'params': {'x': 8, 'y': 8}}, {'name': 'place', 'label': 'place(o1-3,pack_area)', 'params': {'x': 8, 'y': 8, 'weight': 4}}], 'arrive_timestamp': 1787838597, 'priority': 1, 'segment': 's1'}}
-[INFO] [1787838672.375262950] [robot1.fragment_exec_node]: Starting execution of fragment fm3-3...
-[INFO] [1787838672.376415414] [robot1.fragment_exec_node]: Executing task pick(o1-3,scan_area). Params: {'x': 5, 'y': 5, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838672.377208066] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m3, Segment: s1, Start: 1787838672.3767688
-[INFO] [1787838672.378022220] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838677.380585617] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838677.382343210] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m3, Segment: s1, End: 1787838677.3812103
-[INFO] [1787838677.383898771] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m3, Segment: s1, Start: 1787838677.3829885
-[INFO] [1787838677.385284144] [robot1.fragment_exec_node]: Simulating pick skill...
-[INFO] [1787838681.389339881] [robot1.fragment_exec_node]: Pick completed!
-[INFO] [1787838681.393553544] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m3, Segment: s1, End: 1787838681.391683
-[INFO] [1787838681.395704585] [robot1.fragment_exec_node]: Executing task move_to(o1-3,pack_area). Params: {'x': 8, 'y': 8}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838681.397385336] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m3, Segment: s1, Start: 1787838681.3963623
-[INFO] [1787838681.399103683] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (8, 8) (8.48528137423857 seconds)...
-[INFO] [1787838689.888305486] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838689.890220016] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m3, Segment: s1, End: 1787838689.889037
-[INFO] [1787838689.894168100] [robot1.fragment_exec_node]: Executing task place(o1-3,pack_area). Params: {'x': 8, 'y': 8, 'weight': 4}, Virtual state: {'position': {'x': 8, 'y': 8, 'z': 0.0}, 'docked': False}
-[INFO] [1787838689.895961768] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m3, Segment: s1, Start: 1787838689.8950455
-[INFO] [1787838689.897390648] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838694.901284903] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838694.904670825] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m3, Segment: s1, End: 1787838694.9030483
-[INFO] [1787838694.907122931] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m3, Segment: s1, Start: 1787838694.9055893
-[INFO] [1787838694.908658915] [robot1.fragment_exec_node]: Simulating place skill...
-[INFO] [1787838698.913359703] [robot1.fragment_exec_node]: Place completed!
-[INFO] [1787838698.916307090] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m3, Segment: s1, End: 1787838698.914437
-[INFO] [1787838698.918676804] [robot1.fragment_exec_node]: Execution of fragment fm3-3 completed!
-[INFO] [1787838699.368351229] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm3-9', 'mission': 'm3', 'state': 'assigned', 'wait': ['scan(o3-3)'], 'tasks': [{'name': 'pick', 'label': 'pick(o3-3,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 5}}, {'name': 'move_to', 'label': 'move_to(o3-3,pack_area)', 'params': {'x': 8, 'y': 8}}, {'name': 'place', 'label': 'place(o3-3,pack_area)', 'params': {'x': 8, 'y': 8, 'weight': 5}}], 'arrive_timestamp': 1787838597, 'priority': 1, 'segment': 's3'}}
-[INFO] [1787838699.372508413] [robot1.fragment_exec_node]: Starting execution of fragment fm3-9...
-[INFO] [1787838699.373615342] [robot1.fragment_exec_node]: Executing task pick(o3-3,scan_area). Params: {'x': 5, 'y': 5, 'weight': 5}, Virtual state: {'position': {'x': 8, 'y': 8, 'z': 0.0}, 'docked': False}
-[INFO] [1787838699.374507140] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838699.3739936
-[INFO] [1787838699.375370540] [robot1.fragment_exec_node]: Simulating navigate skill from position (8, 8) to (5, 5) (8.48528137423857 seconds)...
-[INFO] [1787838707.865142991] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838707.868639098] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m3, Segment: s3, End: 1787838707.8668797
-[INFO] [1787838707.870599951] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838707.8692899
-[INFO] [1787838707.872190883] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838712.875392521] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838712.885955992] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m3, Segment: s3, End: 1787838712.8847399
-[INFO] [1787838712.887378508] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838712.886769
-[INFO] [1787838712.888454547] [robot1.fragment_exec_node]: Simulating pick skill...
-[INFO] [1787838717.893414557] [robot1.fragment_exec_node]: Pick completed!
-[INFO] [1787838717.896155034] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m3, Segment: s3, End: 1787838717.8945134
-[INFO] [1787838717.898373668] [robot1.fragment_exec_node]: Executing task move_to(o3-3,pack_area). Params: {'x': 8, 'y': 8}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838717.900135936] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838717.8990252
-[INFO] [1787838717.901501540] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (8, 8) (8.48528137423857 seconds)...
-[INFO] [1787838726.388907130] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838726.390083531] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m3, Segment: s3, End: 1787838726.3894548
-[INFO] [1787838726.391323533] [robot1.fragment_exec_node]: Executing task place(o3-3,pack_area). Params: {'x': 8, 'y': 8, 'weight': 5}, Virtual state: {'position': {'x': 8, 'y': 8, 'z': 0.0}, 'docked': False}
-[INFO] [1787838726.392407749] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838726.3915727
-[INFO] [1787838726.393140168] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838731.397428378] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838731.399920716] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m3, Segment: s3, End: 1787838731.3985157
-[INFO] [1787838731.401581682] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m3, Segment: s3, Start: 1787838731.4006665
-[INFO] [1787838731.403533450] [robot1.fragment_exec_node]: Simulating place skill...
-[INFO] [1787838736.407053661] [robot1.fragment_exec_node]: Place completed!
-[INFO] [1787838736.408489079] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m3, Segment: s3, End: 1787838736.4077458
-[INFO] [1787838736.410305808] [robot1.fragment_exec_node]: Execution of fragment fm3-9 completed!
-[INFO] [1787838737.352261627] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm7-1', 'mission': 'm7', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o1-7,shelf)', 'params': {'x': 6, 'y': 3, 'weight': 5}}, {'name': 'move_to', 'label': 'move_to(o1-7,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o1-7,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 5}}], 'arrive_timestamp': 1787838690, 'priority': 1, 'segment': 's1'}}
-[INFO] [1787838737.354435047] [robot1.fragment_exec_node]: Starting execution of fragment fm7-1...
-[INFO] [1787838737.355637012] [robot1.fragment_exec_node]: Executing task pick(o1-7,shelf). Params: {'x': 6, 'y': 3, 'weight': 5}, Virtual state: {'position': {'x': 8, 'y': 8, 'z': 0.0}, 'docked': False}
-[INFO] [1787838737.356585443] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838737.355899
-[INFO] [1787838737.357286746] [robot1.fragment_exec_node]: Simulating navigate skill from position (8, 8) to (6, 3) (10.770329614269007 seconds)...
-[INFO] [1787838748.130113654] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838748.132145699] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m7, Segment: s1, End: 1787838748.1309621
-[INFO] [1787838748.133391041] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838748.1326842
-[INFO] [1787838748.135144055] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838753.139277883] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838753.142343526] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m7, Segment: s1, End: 1787838753.1404603
-[INFO] [1787838753.144719631] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838753.1433
-[INFO] [1787838753.146530276] [robot1.fragment_exec_node]: Simulating pick skill...
-[INFO] [1787838758.145861286] [robot1.fragment_exec_node]: Pick completed!
-[INFO] [1787838758.148248751] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m7, Segment: s1, End: 1787838758.1467123
-[INFO] [1787838758.150786720] [robot1.fragment_exec_node]: Executing task move_to(o1-7,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 6, 'y': 3, 'z': 0.0}, 'docked': False}
-[INFO] [1787838758.152197084] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838758.151281
-[INFO] [1787838758.153585652] [robot1.fragment_exec_node]: Simulating navigate skill from position (6, 3) to (5, 5) (2.8284271247461903 seconds)...
-[INFO] [1787838760.985607909] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838760.988323426] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m7, Segment: s1, End: 1787838760.98671
-[INFO] [1787838760.991500275] [robot1.fragment_exec_node]: Executing task place(o1-7,scan_area). Params: {'x': 5, 'y': 5, 'weight': 5}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838760.993351864] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838760.9921632
-[INFO] [1787838760.994858089] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838765.998750129] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838766.001415373] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m7, Segment: s1, End: 1787838765.999845
-[INFO] [1787838766.002970886] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838766.0020456
-[INFO] [1787838766.004658840] [robot1.fragment_exec_node]: Simulating place skill...
-[INFO] [1787838771.007619100] [robot1.fragment_exec_node]: Place completed!
-[INFO] [1787838771.009589057] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m7, Segment: s1, End: 1787838771.008419
-[INFO] [1787838771.011639925] [robot1.fragment_exec_node]: Execution of fragment fm7-1 completed!
-[INFO] [1787838771.355311123] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm5-12', 'mission': 'm5', 'state': 'assigned', 'wait': ['scan(o4-5)'], 'tasks': [{'name': 'pick', 'label': 'pick(o4-5,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 4}}, {'name': 'move_to', 'label': 'move_to(o4-5,pack_area)', 'params': {'x': 8, 'y': 8}}, {'name': 'place', 'label': 'place(o4-5,pack_area)', 'params': {'x': 8, 'y': 8, 'weight': 4}}], 'arrive_timestamp': 1787838598, 'priority': 1, 'segment': 's4'}}
-[INFO] [1787838771.430808561] [robot1.fragment_exec_node]: Starting execution of fragment fm5-12...
-[INFO] [1787838771.431521696] [robot1.fragment_exec_node]: Executing task pick(o4-5,scan_area). Params: {'x': 5, 'y': 5, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838771.431984614] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m5, Segment: s4, Start: 1787838771.431706
-[INFO] [1787838771.432435815] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838776.434424200] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838776.436270187] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m5, Segment: s4, End: 1787838776.4351473
-[INFO] [1787838776.437676601] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m5, Segment: s4, Start: 1787838776.4367504
-[INFO] [1787838776.438894740] [robot1.fragment_exec_node]: Simulating pick skill...
-[INFO] [1787838780.442766056] [robot1.fragment_exec_node]: Pick completed!
-[INFO] [1787838780.445270805] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m5, Segment: s4, End: 1787838780.4438217
-[INFO] [1787838780.447477475] [robot1.fragment_exec_node]: Executing task move_to(o4-5,pack_area). Params: {'x': 8, 'y': 8}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838780.449016942] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m5, Segment: s4, Start: 1787838780.4481044
-[INFO] [1787838780.450844795] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (8, 8) (8.48528137423857 seconds)...
-[INFO] [1787838788.920640579] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838788.923654850] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m5, Segment: s4, End: 1787838788.921678
-[INFO] [1787838788.926529735] [robot1.fragment_exec_node]: Executing task place(o4-5,pack_area). Params: {'x': 8, 'y': 8, 'weight': 4}, Virtual state: {'position': {'x': 8, 'y': 8, 'z': 0.0}, 'docked': False}
-[INFO] [1787838788.928122679] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m5, Segment: s4, Start: 1787838788.9270985
-[INFO] [1787838788.929789895] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838793.934821178] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838793.937100572] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m5, Segment: s4, End: 1787838793.9358501
-[INFO] [1787838793.938810501] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m5, Segment: s4, Start: 1787838793.9376972
-[INFO] [1787838793.940311887] [robot1.fragment_exec_node]: Simulating place skill...
-[INFO] [1787838797.944885630] [robot1.fragment_exec_node]: Place completed!
-[INFO] [1787838797.947138680] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m5, Segment: s4, End: 1787838797.9458818
-[INFO] [1787838797.950234556] [robot1.fragment_exec_node]: Execution of fragment fm5-12 completed!
-[INFO] [1787838798.366147539] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm7-3', 'mission': 'm7', 'state': 'assigned', 'wait': ['scan(o1-7)'], 'tasks': [{'name': 'pick', 'label': 'pick(o1-7,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 10}}, {'name': 'move_to', 'label': 'move_to(o1-7,pack_area)', 'params': {'x': 8, 'y': 8}}, {'name': 'place', 'label': 'place(o1-7,pack_area)', 'params': {'x': 8, 'y': 8, 'weight': 10}}], 'arrive_timestamp': 1787838690, 'priority': 1, 'segment': 's1'}}
-[INFO] [1787838798.368102858] [robot1.fragment_exec_node]: Starting execution of fragment fm7-3...
-[INFO] [1787838798.369756390] [robot1.fragment_exec_node]: Executing task pick(o1-7,scan_area). Params: {'x': 5, 'y': 5, 'weight': 10}, Virtual state: {'position': {'x': 8, 'y': 8, 'z': 0.0}, 'docked': False}
-[INFO] [1787838798.370730166] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838798.370157
-[INFO] [1787838798.371826864] [robot1.fragment_exec_node]: Simulating navigate skill from position (8, 8) to (5, 5) (8.48528137423857 seconds)...
-[INFO] [1787838806.860818296] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838806.865785361] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m7, Segment: s1, End: 1787838806.8638456
-[INFO] [1787838806.868893476] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838806.8677392
-[INFO] [1787838806.870672319] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838811.874175390] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838811.876097933] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m7, Segment: s1, End: 1787838811.8749628
-[INFO] [1787838811.877833817] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838811.8767202
-[INFO] [1787838811.879669952] [robot1.fragment_exec_node]: Simulating pick skill...
-[INFO] [1787838821.882497148] [robot1.fragment_exec_node]: Pick completed!
-[INFO] [1787838821.885765340] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m7, Segment: s1, End: 1787838821.8845325
-[INFO] [1787838821.887730400] [robot1.fragment_exec_node]: Executing task move_to(o1-7,pack_area). Params: {'x': 8, 'y': 8}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838821.889144209] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838821.8882551
-[INFO] [1787838821.890634975] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (8, 8) (8.48528137423857 seconds)...
-[INFO] [1787838830.380456586] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838830.383346826] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m7, Segment: s1, End: 1787838830.382085
-[INFO] [1787838830.385499665] [robot1.fragment_exec_node]: Executing task place(o1-7,pack_area). Params: {'x': 8, 'y': 8, 'weight': 10}, Virtual state: {'position': {'x': 8, 'y': 8, 'z': 0.0}, 'docked': False}
-[INFO] [1787838830.387179624] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838830.3861408
-[INFO] [1787838830.389542862] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838835.391599234] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838835.392354485] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m7, Segment: s1, End: 1787838835.391973
-[INFO] [1787838835.393078785] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m7, Segment: s1, Start: 1787838835.3926165
-[INFO] [1787838835.393677643] [robot1.fragment_exec_node]: Simulating place skill...
-[INFO] [1787838845.396523795] [robot1.fragment_exec_node]: Place completed!
-[INFO] [1787838845.398463903] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m7, Segment: s1, End: 1787838845.3973496
-[INFO] [1787838845.400466127] [robot1.fragment_exec_node]: Execution of fragment fm7-3 completed!
-[INFO] [1787838846.365663155] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm4-1', 'mission': 'm4', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o1-4,shelf)', 'params': {'x': 2, 'y': 5, 'weight': 4}}, {'name': 'move_to', 'label': 'move_to(o1-4,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o1-4,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 4}}], 'arrive_timestamp': 1787838779, 'priority': 1, 'segment': 's1'}}
-[INFO] [1787838846.366626531] [robot1.fragment_exec_node]: Starting execution of fragment fm4-1...
-[INFO] [1787838846.367620812] [robot1.fragment_exec_node]: Executing task pick(o1-4,shelf). Params: {'x': 2, 'y': 5, 'weight': 4}, Virtual state: {'position': {'x': 8, 'y': 8, 'z': 0.0}, 'docked': False}
-[INFO] [1787838846.368444677] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m4, Segment: s1, Start: 1787838846.3679457
-[INFO] [1787838846.369366557] [robot1.fragment_exec_node]: Simulating navigate skill from position (8, 8) to (2, 5) (13.416407864998739 seconds)...
-[INFO] [1787838859.789473148] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838859.791150920] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m4, Segment: s1, End: 1787838859.790425
-[INFO] [1787838859.792856867] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m4, Segment: s1, Start: 1787838859.7919617
-[INFO] [1787838859.794153700] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838864.798107446] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838864.800021769] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m4, Segment: s1, End: 1787838864.7988446
-[INFO] [1787838864.801724452] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m4, Segment: s1, Start: 1787838864.8006132
-[INFO] [1787838864.803199797] [robot1.fragment_exec_node]: Simulating pick skill...
-[INFO] [1787838868.806673171] [robot1.fragment_exec_node]: Pick completed!
-[INFO] [1787838868.809388680] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m4, Segment: s1, End: 1787838868.8074791
-[INFO] [1787838868.811468810] [robot1.fragment_exec_node]: Executing task move_to(o1-4,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 2, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838868.813071459] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m4, Segment: s1, Start: 1787838868.811974
-[INFO] [1787838868.814379247] [robot1.fragment_exec_node]: Simulating navigate skill from position (2, 5) to (5, 5) (8.48528137423857 seconds)...
-[INFO] [1787838877.302982690] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838877.305003056] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m4, Segment: s1, End: 1787838877.3038428
-[INFO] [1787838877.307124185] [robot1.fragment_exec_node]: Executing task place(o1-4,scan_area). Params: {'x': 5, 'y': 5, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838877.308273070] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m4, Segment: s1, Start: 1787838877.3075666
-[INFO] [1787838877.309350012] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838882.313843606] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838882.316821372] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m4, Segment: s1, End: 1787838882.314932
-[INFO] [1787838882.319511120] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m4, Segment: s1, Start: 1787838882.3177488
-[INFO] [1787838882.321186901] [robot1.fragment_exec_node]: Simulating place skill...
-[INFO] [1787838886.324885617] [robot1.fragment_exec_node]: Place completed!
-[INFO] [1787838886.327667689] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m4, Segment: s1, End: 1787838886.3260145
-[INFO] [1787838886.329980869] [robot1.fragment_exec_node]: Execution of fragment fm4-1 completed!
-[INFO] [1787838886.357900834] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm6-4', 'mission': 'm6', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o2-6,shelf)', 'params': {'x': 1, 'y': 3, 'weight': 3}}, {'name': 'move_to', 'label': 'move_to(o2-6,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o2-6,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 3}}], 'arrive_timestamp': 1787838780, 'priority': 1, 'segment': 's2'}}
-[INFO] [1787838886.360402789] [robot1.fragment_exec_node]: Starting execution of fragment fm6-4...
-[INFO] [1787838886.362538408] [robot1.fragment_exec_node]: Executing task pick(o2-6,shelf). Params: {'x': 1, 'y': 3, 'weight': 3}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838886.363919724] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m6, Segment: s2, Start: 1787838886.3630004
-[INFO] [1787838886.365111077] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (1, 3) (8.94427190999916 seconds)...
-[INFO] [1787838895.312808783] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838895.314848764] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m6, Segment: s2, End: 1787838895.3136823
-[INFO] [1787838895.316897667] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s2, Start: 1787838895.3154852
-[INFO] [1787838895.318857341] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838900.320879658] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838900.321632764] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s2, End: 1787838900.321218
-[INFO] [1787838900.322342151] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s2, Start: 1787838900.3218954
-[INFO] [1787838900.323097743] [robot1.fragment_exec_node]: Simulating pick skill...
-[INFO] [1787838903.326070327] [robot1.fragment_exec_node]: Pick completed!
-[INFO] [1787838903.328106376] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s2, End: 1787838903.326935
-[INFO] [1787838903.330889102] [robot1.fragment_exec_node]: Executing task move_to(o2-6,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 1, 'y': 3, 'z': 0.0}, 'docked': False}
-[INFO] [1787838903.332060325] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s2, Start: 1787838903.331365
-[INFO] [1787838903.334111458] [robot1.fragment_exec_node]: Simulating navigate skill from position (1, 3) to (5, 5) (11.313708498984761 seconds)...
-[INFO] [1787838914.652684868] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838914.655691233] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s2, End: 1787838914.6539361
-[INFO] [1787838914.658488655] [robot1.fragment_exec_node]: Executing task place(o2-6,scan_area). Params: {'x': 5, 'y': 5, 'weight': 3}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838914.660122516] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s2, Start: 1787838914.6591222
-[INFO] [1787838914.661814581] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838919.664600025] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838919.665921703] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s2, End: 1787838919.6651988
-[INFO] [1787838919.667491243] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s2, Start: 1787838919.666568
-[INFO] [1787838919.669375144] [robot1.fragment_exec_node]: Simulating place skill...
-[INFO] [1787838922.671023832] [robot1.fragment_exec_node]: Place completed!
-[INFO] [1787838922.672569581] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s2, End: 1787838922.6717224
-[INFO] [1787838922.673846709] [robot1.fragment_exec_node]: Execution of fragment fm6-4 completed!
-[INFO] [1787838923.363359824] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm6-7', 'mission': 'm6', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o3-6,shelf)', 'params': {'x': 2, 'y': 4, 'weight': 5}}, {'name': 'move_to', 'label': 'move_to(o3-6,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o3-6,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 5}}], 'arrive_timestamp': 1787838780, 'priority': 1, 'segment': 's3'}}
-[INFO] [1787838923.365060693] [robot1.fragment_exec_node]: Starting execution of fragment fm6-7...
-[INFO] [1787838923.366618342] [robot1.fragment_exec_node]: Executing task pick(o3-6,shelf). Params: {'x': 2, 'y': 4, 'weight': 5}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838923.367749801] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m6, Segment: s3, Start: 1787838923.3670497
-[INFO] [1787838923.368801895] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (2, 4) (6.324555320336759 seconds)...
-[INFO] [1787838929.696606388] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838929.698589956] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m6, Segment: s3, End: 1787838929.697469
-[INFO] [1787838929.700128827] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s3, Start: 1787838929.6992207
-[INFO] [1787838929.701828932] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838934.704862796] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838934.706142605] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s3, End: 1787838934.705483
-[INFO] [1787838934.707310597] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s3, Start: 1787838934.7065692
-[INFO] [1787838934.708380154] [robot1.fragment_exec_node]: Simulating pick skill...
-[INFO] [1787838939.713662880] [robot1.fragment_exec_node]: Pick completed!
-[INFO] [1787838939.716166072] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s3, End: 1787838939.7146065
-[INFO] [1787838939.718885028] [robot1.fragment_exec_node]: Executing task move_to(o3-6,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 2, 'y': 4, 'z': 0.0}, 'docked': False}
-[INFO] [1787838939.720724954] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s3, Start: 1787838939.7195895
-[INFO] [1787838939.723409066] [robot1.fragment_exec_node]: Simulating navigate skill from position (2, 4) to (5, 5) (8.48528137423857 seconds)...
-[INFO] [1787838948.211514731] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838948.213402746] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s3, End: 1787838948.2123036
-[INFO] [1787838948.215918643] [robot1.fragment_exec_node]: Executing task place(o3-6,scan_area). Params: {'x': 5, 'y': 5, 'weight': 5}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838948.217769701] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s3, Start: 1787838948.2166982
-[INFO] [1787838948.219108597] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838953.222224761] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838953.225326522] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s3, End: 1787838953.2233584
-[INFO] [1787838953.228143454] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s3, Start: 1787838953.2262897
-[INFO] [1787838953.230692763] [robot1.fragment_exec_node]: Simulating place skill...
-[INFO] [1787838958.235951932] [robot1.fragment_exec_node]: Place completed!
-[INFO] [1787838958.237865675] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s3, End: 1787838958.2366822
-[INFO] [1787838958.241287306] [robot1.fragment_exec_node]: Execution of fragment fm6-7 completed!
-[INFO] [1787838958.361053053] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm6-10', 'mission': 'm6', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o4-6,shelf)', 'params': {'x': 1, 'y': 1, 'weight': 4}}, {'name': 'move_to', 'label': 'move_to(o4-6,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o4-6,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 4}}], 'arrive_timestamp': 1787838780, 'priority': 1, 'segment': 's4'}}
-[INFO] [1787838958.362845665] [robot1.fragment_exec_node]: Starting execution of fragment fm6-10...
-[INFO] [1787838958.364389381] [robot1.fragment_exec_node]: Executing task pick(o4-6,shelf). Params: {'x': 1, 'y': 1, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838958.366499264] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m6, Segment: s4, Start: 1787838958.3658302
-[INFO] [1787838958.367608579] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (1, 1) (11.313708498984761 seconds)...
-[INFO] [1787838969.686017509] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838969.688706754] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m6, Segment: s4, End: 1787838969.6873066
-[INFO] [1787838969.691199518] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, Start: 1787838969.6896951
-[INFO] [1787838969.693058634] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838974.696993136] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838974.699928607] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, End: 1787838974.6980524
-[INFO] [1787838974.701480257] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s4, Start: 1787838974.7005625
-[INFO] [1787838974.703173894] [robot1.fragment_exec_node]: Simulating pick skill...
-[INFO] [1787838978.707014145] [robot1.fragment_exec_node]: Pick completed!
-[INFO] [1787838978.709938687] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s4, End: 1787838978.7081118
-[INFO] [1787838978.712005245] [robot1.fragment_exec_node]: Executing task move_to(o4-6,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 1, 'y': 1, 'z': 0.0}, 'docked': False}
-[INFO] [1787838978.713638749] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s4, Start: 1787838978.7125478
-[INFO] [1787838978.715368861] [robot1.fragment_exec_node]: Simulating navigate skill from position (1, 1) to (5, 5) (11.313708498984761 seconds)...
-[INFO] [1787838990.032850328] [robot1.fragment_exec_node]: Navigation completed!
-[INFO] [1787838990.035174511] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s4, End: 1787838990.0336158
-[INFO] [1787838990.037582522] [robot1.fragment_exec_node]: Executing task place(o4-6,scan_area). Params: {'x': 5, 'y': 5, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
-[INFO] [1787838990.039158287] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, Start: 1787838990.0382502
-[INFO] [1787838990.040446412] [robot1.fragment_exec_node]: Simulating localize skill...
-[INFO] [1787838995.043854873] [robot1.fragment_exec_node]: Localize completed!
-[INFO] [1787838995.045767461] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, End: 1787838995.04464
-[INFO] [1787838995.048005514] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s4, Start: 1787838995.0469759
-[INFO] [1787838995.049475320] [robot1.fragment_exec_node]: Simulating place skill...
-[INFO] [1787838999.052967750] [robot1.fragment_exec_node]: Place completed!
-[INFO] [1787838999.054369215] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s4, End: 1787838999.0535727
-[INFO] [1787838999.056223799] [robot1.fragment_exec_node]: Execution of fragment fm6-10 completed!
+[INFO] [1787862126.809139011] [robot1.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787862126.810185050] [robot1.fragment_exec_node]: Setting up skill: PickSkill
+[INFO] [1787862126.811138106] [robot1.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787862126.812538145] [robot1.fragment_exec_node]: Setting up skill: PlaceSkill
+[INFO] [1787862126.813757099] [robot1.fragment_exec_node]: Setting up skill: LocalizeSkill
+[INFO] [1787862126.819699883] [robot1.fragment_exec_node]: Published robot registration: {'name': 'robot1', 'operational_state': 'idle', 'capabilities': ['pick', 'move_to', 'place', 'undock', 'localize'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787862154.240030711] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm3-4', 'mission': 'm3', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o2-3,shelf)', 'params': {'x': 3, 'y': 3, 'weight': 3}}, {'name': 'move_to', 'label': 'move_to(o2-3,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o2-3,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 3}}], 'arrive_timestamp': 1787862142, 'priority': 1, 'segment': 's2'}}
+[INFO] [1787862154.245576781] [robot1.fragment_exec_node]: Starting execution of fragment fm3-4...
+[INFO] [1787862154.247087102] [robot1.fragment_exec_node]: Executing task pick(o2-3,shelf). Params: {'x': 3, 'y': 3, 'weight': 3}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787862154.249072972] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: undock, Robot: robot1, Mission: m3, Segment: s2, Start: 1787862154.2481606
+[INFO] [1787862154.250216593] [robot1.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787862158.251887495] [robot1.fragment_exec_node]: Undock completed!
+[INFO] [1787862158.252763581] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: undock, Robot: robot1, Mission: m3, Segment: s2, End: 1787862158.2522657
+[INFO] [1787862158.253363795] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m3, Segment: s2, Start: 1787862158.2530391
+[INFO] [1787862158.253984248] [robot1.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (3, 3) (8.48528137423857 seconds)...
+[INFO] [1787862166.742660792] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862166.744971458] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m3, Segment: s2, End: 1787862166.7435436
+[INFO] [1787862166.746698027] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m3, Segment: s2, Start: 1787862166.7457414
+[INFO] [1787862166.748111706] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862171.752260792] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862171.755311851] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m3, Segment: s2, End: 1787862171.7533736
+[INFO] [1787862171.757558727] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m3, Segment: s2, Start: 1787862171.7561653
+[INFO] [1787862171.759263694] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862174.762772230] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862174.764570177] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m3, Segment: s2, End: 1787862174.763618
+[INFO] [1787862174.766379979] [robot1.fragment_exec_node]: Executing task move_to(o2-3,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 3, 'y': 3, 'z': 0.0}, 'docked': False}
+[INFO] [1787862174.767764769] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m3, Segment: s2, Start: 1787862174.7669861
+[INFO] [1787862174.768988607] [robot1.fragment_exec_node]: Simulating navigate skill from position (3, 3) to (5, 5) (5.656854249492381 seconds)...
+[INFO] [1787862180.428965458] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862180.430341468] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m3, Segment: s2, End: 1787862180.4297884
+[INFO] [1787862180.431631664] [robot1.fragment_exec_node]: Executing task place(o2-3,scan_area). Params: {'x': 5, 'y': 5, 'weight': 3}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862180.432561973] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m3, Segment: s2, Start: 1787862180.4320598
+[INFO] [1787862180.434057175] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862185.436964428] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862185.438393682] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m3, Segment: s2, End: 1787862185.437418
+[INFO] [1787862185.439963258] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m3, Segment: s2, Start: 1787862185.4390411
+[INFO] [1787862185.441878504] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862188.447420911] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862188.449494662] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m3, Segment: s2, End: 1787862188.4482963
+[INFO] [1787862188.451632431] [robot1.fragment_exec_node]: Execution of fragment fm3-4 completed!
+[INFO] [1787862189.230276529] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm5-1', 'mission': 'm5', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o1-5,shelf)', 'params': {'x': 1, 'y': 3, 'weight': 4}}, {'name': 'move_to', 'label': 'move_to(o1-5,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o1-5,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 4}}], 'arrive_timestamp': 1787862144, 'priority': 1, 'segment': 's1'}}
+[INFO] [1787862189.231450813] [robot1.fragment_exec_node]: Starting execution of fragment fm5-1...
+[INFO] [1787862189.233416419] [robot1.fragment_exec_node]: Executing task pick(o1-5,shelf). Params: {'x': 1, 'y': 3, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862189.234606958] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m5, Segment: s1, Start: 1787862189.23381
+[INFO] [1787862189.235539930] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (1, 3) (8.94427190999916 seconds)...
+[INFO] [1787862198.183871062] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862198.186690065] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m5, Segment: s1, End: 1787862198.1850312
+[INFO] [1787862198.188690317] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m5, Segment: s1, Start: 1787862198.1872575
+[INFO] [1787862198.190291174] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862203.192522183] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862203.193458544] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m5, Segment: s1, End: 1787862203.1928284
+[INFO] [1787862203.195346311] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m5, Segment: s1, Start: 1787862203.1937993
+[INFO] [1787862203.197049405] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862207.201544920] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862207.203719228] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m5, Segment: s1, End: 1787862207.202213
+[INFO] [1787862207.205316945] [robot1.fragment_exec_node]: Executing task move_to(o1-5,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 1, 'y': 3, 'z': 0.0}, 'docked': False}
+[INFO] [1787862207.207848317] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m5, Segment: s1, Start: 1787862207.2063234
+[INFO] [1787862207.210332206] [robot1.fragment_exec_node]: Simulating navigate skill from position (1, 3) to (5, 5) (11.313708498984761 seconds)...
+[INFO] [1787862218.528599915] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862218.531284474] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m5, Segment: s1, End: 1787862218.5294409
+[INFO] [1787862218.533383834] [robot1.fragment_exec_node]: Executing task place(o1-5,scan_area). Params: {'x': 5, 'y': 5, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862218.534733562] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m5, Segment: s1, Start: 1787862218.5338385
+[INFO] [1787862218.536085049] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862223.539947834] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862223.541803360] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m5, Segment: s1, End: 1787862223.5406199
+[INFO] [1787862223.543507524] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m5, Segment: s1, Start: 1787862223.5422418
+[INFO] [1787862223.545022157] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862227.548422491] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862227.549825354] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m5, Segment: s1, End: 1787862227.5490189
+[INFO] [1787862227.551602689] [robot1.fragment_exec_node]: Execution of fragment fm5-1 completed!
+[INFO] [1787862228.232124476] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm5-7', 'mission': 'm5', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o3-5,shelf)', 'params': {'x': 2, 'y': 2, 'weight': 5}}, {'name': 'move_to', 'label': 'move_to(o3-5,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o3-5,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 5}}], 'arrive_timestamp': 1787862144, 'priority': 1, 'segment': 's3'}}
+[INFO] [1787862228.233642352] [robot1.fragment_exec_node]: Starting execution of fragment fm5-7...
+[INFO] [1787862228.235342443] [robot1.fragment_exec_node]: Executing task pick(o3-5,shelf). Params: {'x': 2, 'y': 2, 'weight': 5}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862228.236816330] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m5, Segment: s3, Start: 1787862228.2361186
+[INFO] [1787862228.237863098] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (2, 2) (8.48528137423857 seconds)...
+[INFO] [1787862236.727420147] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862236.731705556] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m5, Segment: s3, End: 1787862236.7295415
+[INFO] [1787862236.733662789] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m5, Segment: s3, Start: 1787862236.7324936
+[INFO] [1787862236.735461117] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862241.738964042] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862241.740613828] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m5, Segment: s3, End: 1787862241.7395663
+[INFO] [1787862241.742619300] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m5, Segment: s3, Start: 1787862241.7412696
+[INFO] [1787862241.744707340] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862246.748428804] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862246.752164056] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m5, Segment: s3, End: 1787862246.7500303
+[INFO] [1787862246.754723697] [robot1.fragment_exec_node]: Executing task move_to(o3-5,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 2, 'y': 2, 'z': 0.0}, 'docked': False}
+[INFO] [1787862246.756578926] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m5, Segment: s3, Start: 1787862246.7553096
+[INFO] [1787862246.758360852] [robot1.fragment_exec_node]: Simulating navigate skill from position (2, 2) to (5, 5) (8.48528137423857 seconds)...
+[INFO] [1787862255.248994490] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862255.253432376] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m5, Segment: s3, End: 1787862255.251933
+[INFO] [1787862255.255669325] [robot1.fragment_exec_node]: Executing task place(o3-5,scan_area). Params: {'x': 5, 'y': 5, 'weight': 5}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862255.257380628] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m5, Segment: s3, Start: 1787862255.2563684
+[INFO] [1787862255.258704084] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862260.272608072] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862260.275878283] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m5, Segment: s3, End: 1787862260.274827
+[INFO] [1787862260.277089984] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m5, Segment: s3, Start: 1787862260.2764907
+[INFO] [1787862260.278069746] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862265.280396895] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862265.281922378] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m5, Segment: s3, End: 1787862265.2810175
+[INFO] [1787862265.283598940] [robot1.fragment_exec_node]: Execution of fragment fm5-7 completed!
+[INFO] [1787862266.255807374] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm5-10', 'mission': 'm5', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o4-5,shelf)', 'params': {'x': 1, 'y': 3, 'weight': 4}}, {'name': 'move_to', 'label': 'move_to(o4-5,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o4-5,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 4}}], 'arrive_timestamp': 1787862144, 'priority': 1, 'segment': 's4'}}
+[INFO] [1787862266.256968615] [robot1.fragment_exec_node]: Starting execution of fragment fm5-10...
+[INFO] [1787862266.257807716] [robot1.fragment_exec_node]: Executing task pick(o4-5,shelf). Params: {'x': 1, 'y': 3, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862266.258645601] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m5, Segment: s4, Start: 1787862266.2582142
+[INFO] [1787862266.259415640] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (1, 3) (8.94427190999916 seconds)...
+[INFO] [1787862275.207568712] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862275.211454026] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m5, Segment: s4, End: 1787862275.2093294
+[INFO] [1787862275.213915408] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m5, Segment: s4, Start: 1787862275.212415
+[INFO] [1787862275.215546123] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862280.219735684] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862280.222644581] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m5, Segment: s4, End: 1787862280.2215502
+[INFO] [1787862280.224346932] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m5, Segment: s4, Start: 1787862280.2232525
+[INFO] [1787862280.226011766] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862284.227491610] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862284.228549905] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m5, Segment: s4, End: 1787862284.2281864
+[INFO] [1787862284.229515750] [robot1.fragment_exec_node]: Executing task move_to(o4-5,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 1, 'y': 3, 'z': 0.0}, 'docked': False}
+[INFO] [1787862284.230241650] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m5, Segment: s4, Start: 1787862284.2298448
+[INFO] [1787862284.231101798] [robot1.fragment_exec_node]: Simulating navigate skill from position (1, 3) to (5, 5) (11.313708498984761 seconds)...
+[INFO] [1787862295.548204093] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862295.552679131] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m5, Segment: s4, End: 1787862295.5505383
+[INFO] [1787862295.556474270] [robot1.fragment_exec_node]: Executing task place(o4-5,scan_area). Params: {'x': 5, 'y': 5, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862295.558528012] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m5, Segment: s4, Start: 1787862295.5574057
+[INFO] [1787862295.560143281] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862300.603017580] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862300.628674824] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m5, Segment: s4, End: 1787862300.628217
+[INFO] [1787862300.629653466] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m5, Segment: s4, Start: 1787862300.6290119
+[INFO] [1787862300.630335806] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862304.632205802] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862304.635330796] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m5, Segment: s4, End: 1787862304.6340685
+[INFO] [1787862304.636898787] [robot1.fragment_exec_node]: Execution of fragment fm5-10 completed!
+[INFO] [1787862305.231849927] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm7-7', 'mission': 'm7', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o3-7,shelf)', 'params': {'x': 3, 'y': 6, 'weight': 3}}, {'name': 'move_to', 'label': 'move_to(o3-7,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o3-7,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 3}}], 'arrive_timestamp': 1787862245, 'priority': 1, 'segment': 's3'}}
+[INFO] [1787862305.232922056] [robot1.fragment_exec_node]: Starting execution of fragment fm7-7...
+[INFO] [1787862305.234521935] [robot1.fragment_exec_node]: Executing task pick(o3-7,shelf). Params: {'x': 3, 'y': 6, 'weight': 3}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862305.235730286] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m7, Segment: s3, Start: 1787862305.2348592
+[INFO] [1787862305.237000686] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (3, 6) (4.47213595499958 seconds)...
+[INFO] [1787862309.714037687] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862309.716451563] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m7, Segment: s3, End: 1787862309.7151291
+[INFO] [1787862309.718741607] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m7, Segment: s3, Start: 1787862309.7175474
+[INFO] [1787862309.720205082] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862314.725119436] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862314.727359082] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m7, Segment: s3, End: 1787862314.7258184
+[INFO] [1787862314.728918145] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m7, Segment: s3, Start: 1787862314.7280047
+[INFO] [1787862314.731221047] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862317.733666711] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862317.734668210] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m7, Segment: s3, End: 1787862317.7343059
+[INFO] [1787862317.735898338] [robot1.fragment_exec_node]: Executing task move_to(o3-7,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 3, 'y': 6, 'z': 0.0}, 'docked': False}
+[INFO] [1787862317.740990680] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m7, Segment: s3, Start: 1787862317.7362814
+[INFO] [1787862317.742632658] [robot1.fragment_exec_node]: Simulating navigate skill from position (3, 6) to (5, 5) (5.656854249492381 seconds)...
+[INFO] [1787862323.403323711] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862323.406549685] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m7, Segment: s3, End: 1787862323.4048753
+[INFO] [1787862323.408610337] [robot1.fragment_exec_node]: Executing task place(o3-7,scan_area). Params: {'x': 5, 'y': 5, 'weight': 3}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862323.410277398] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m7, Segment: s3, Start: 1787862323.4092538
+[INFO] [1787862323.411759060] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862328.415751993] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862328.418303579] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m7, Segment: s3, End: 1787862328.4168005
+[INFO] [1787862328.420420974] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m7, Segment: s3, Start: 1787862328.4190538
+[INFO] [1787862328.422369231] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862331.439094006] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862331.440385339] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m7, Segment: s3, End: 1787862331.439609
+[INFO] [1787862331.443939489] [robot1.fragment_exec_node]: Execution of fragment fm7-7 completed!
+[INFO] [1787862332.247076238] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm7-13', 'mission': 'm7', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o5-7,shelf)', 'params': {'x': 4, 'y': 1, 'weight': 5}}, {'name': 'move_to', 'label': 'move_to(o5-7,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o5-7,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 5}}], 'arrive_timestamp': 1787862245, 'priority': 1, 'segment': 's5'}}
+[INFO] [1787862332.248102688] [robot1.fragment_exec_node]: Starting execution of fragment fm7-13...
+[INFO] [1787862332.249480704] [robot1.fragment_exec_node]: Executing task pick(o5-7,shelf). Params: {'x': 4, 'y': 1, 'weight': 5}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862332.250147065] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m7, Segment: s5, Start: 1787862332.2498298
+[INFO] [1787862332.251373385] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (4, 1) (8.246211251235321 seconds)...
+[INFO] [1787862340.502695549] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862340.505305053] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m7, Segment: s5, End: 1787862340.503523
+[INFO] [1787862340.507254222] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m7, Segment: s5, Start: 1787862340.5059917
+[INFO] [1787862340.510687512] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862345.514225884] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862345.515696179] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m7, Segment: s5, End: 1787862345.5146453
+[INFO] [1787862345.517575532] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m7, Segment: s5, Start: 1787862345.516194
+[INFO] [1787862345.518573031] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862350.522043736] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862350.524187785] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m7, Segment: s5, End: 1787862350.5228174
+[INFO] [1787862350.526824247] [robot1.fragment_exec_node]: Executing task move_to(o5-7,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 4, 'y': 1, 'z': 0.0}, 'docked': False}
+[INFO] [1787862350.528393010] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m7, Segment: s5, Start: 1787862350.5274754
+[INFO] [1787862350.529690267] [robot1.fragment_exec_node]: Simulating navigate skill from position (4, 1) to (5, 5) (2.8284271247461903 seconds)...
+[INFO] [1787862353.361013527] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862353.363613324] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m7, Segment: s5, End: 1787862353.3623238
+[INFO] [1787862353.366070358] [robot1.fragment_exec_node]: Executing task place(o5-7,scan_area). Params: {'x': 5, 'y': 5, 'weight': 5}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862353.368767357] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m7, Segment: s5, Start: 1787862353.3667843
+[INFO] [1787862353.370709630] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862358.374851591] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862358.378121327] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m7, Segment: s5, End: 1787862358.376111
+[INFO] [1787862358.379954381] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m7, Segment: s5, Start: 1787862358.3788426
+[INFO] [1787862358.381690117] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862363.385584256] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862363.388478502] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m7, Segment: s5, End: 1787862363.3868752
+[INFO] [1787862363.391741076] [robot1.fragment_exec_node]: Execution of fragment fm7-13 completed!
+[INFO] [1787862364.227692761] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm2-1', 'mission': 'm2', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o1-2,shelf)', 'params': {'x': 1, 'y': 3, 'weight': 5}}, {'name': 'move_to', 'label': 'move_to(o1-2,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o1-2,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 5}}], 'arrive_timestamp': 1787862243, 'priority': 1, 'segment': 's1'}}
+[INFO] [1787862364.229549101] [robot1.fragment_exec_node]: Starting execution of fragment fm2-1...
+[INFO] [1787862364.231382755] [robot1.fragment_exec_node]: Executing task pick(o1-2,shelf). Params: {'x': 1, 'y': 3, 'weight': 5}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862364.232604263] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m2, Segment: s1, Start: 1787862364.2317507
+[INFO] [1787862364.233681013] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (1, 3) (8.94427190999916 seconds)...
+[INFO] [1787862373.183514569] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862373.185205137] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m2, Segment: s1, End: 1787862373.1840715
+[INFO] [1787862373.186774968] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m2, Segment: s1, Start: 1787862373.1856496
+[INFO] [1787862373.188319761] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862378.190562597] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862378.191706181] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m2, Segment: s1, End: 1787862378.1909213
+[INFO] [1787862378.192705109] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m2, Segment: s1, Start: 1787862378.1920102
+[INFO] [1787862378.193504154] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862383.196856362] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862383.199630053] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m2, Segment: s1, End: 1787862383.1976848
+[INFO] [1787862383.203720728] [robot1.fragment_exec_node]: Executing task move_to(o1-2,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 1, 'y': 3, 'z': 0.0}, 'docked': False}
+[INFO] [1787862383.205343148] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m2, Segment: s1, Start: 1787862383.2043757
+[INFO] [1787862383.206841629] [robot1.fragment_exec_node]: Simulating navigate skill from position (1, 3) to (5, 5) (11.313708498984761 seconds)...
+[INFO] [1787862394.523789875] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862394.526586532] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m2, Segment: s1, End: 1787862394.5247319
+[INFO] [1787862394.530075879] [robot1.fragment_exec_node]: Executing task place(o1-2,scan_area). Params: {'x': 5, 'y': 5, 'weight': 5}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862394.531604645] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m2, Segment: s1, Start: 1787862394.5306492
+[INFO] [1787862394.533125456] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862399.535242498] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862399.536169692] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m2, Segment: s1, End: 1787862399.5356014
+[INFO] [1787862399.537071983] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m2, Segment: s1, Start: 1787862399.5364745
+[INFO] [1787862399.537939345] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862404.541955243] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862404.543143373] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m2, Segment: s1, End: 1787862404.5423768
+[INFO] [1787862404.545381060] [robot1.fragment_exec_node]: Execution of fragment fm2-1 completed!
+[INFO] [1787862405.233613761] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm4-1', 'mission': 'm4', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o1-4,shelf)', 'params': {'x': 2, 'y': 5, 'weight': 4}}, {'name': 'move_to', 'label': 'move_to(o1-4,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o1-4,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 4}}], 'arrive_timestamp': 1787862333, 'priority': 1, 'segment': 's1'}}
+[INFO] [1787862405.238425145] [robot1.fragment_exec_node]: Starting execution of fragment fm4-1...
+[INFO] [1787862405.240038131] [robot1.fragment_exec_node]: Executing task pick(o1-4,shelf). Params: {'x': 2, 'y': 5, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862405.240973016] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m4, Segment: s1, Start: 1787862405.2403362
+[INFO] [1787862405.241812426] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (2, 5) (6.0 seconds)...
+[INFO] [1787862411.244907990] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862411.246952695] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m4, Segment: s1, End: 1787862411.2457795
+[INFO] [1787862411.248542189] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m4, Segment: s1, Start: 1787862411.247374
+[INFO] [1787862411.249937484] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862416.252207498] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862416.253211431] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m4, Segment: s1, End: 1787862416.25259
+[INFO] [1787862416.254010935] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m4, Segment: s1, Start: 1787862416.2534673
+[INFO] [1787862416.254897934] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862420.256707154] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862420.257558482] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m4, Segment: s1, End: 1787862420.2571795
+[INFO] [1787862420.258408952] [robot1.fragment_exec_node]: Executing task move_to(o1-4,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 2, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862420.258982513] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m4, Segment: s1, Start: 1787862420.2585807
+[INFO] [1787862420.259518081] [robot1.fragment_exec_node]: Simulating navigate skill from position (2, 5) to (5, 5) (8.48528137423857 seconds)...
+[INFO] [1787862428.746219890] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862428.747670344] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m4, Segment: s1, End: 1787862428.7468395
+[INFO] [1787862428.748878150] [robot1.fragment_exec_node]: Executing task place(o1-4,scan_area). Params: {'x': 5, 'y': 5, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862428.749868496] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m4, Segment: s1, Start: 1787862428.749214
+[INFO] [1787862428.750836815] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862433.753804499] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862433.755946362] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m4, Segment: s1, End: 1787862433.754489
+[INFO] [1787862433.758004011] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m4, Segment: s1, Start: 1787862433.7567635
+[INFO] [1787862433.759935536] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862437.763707880] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862437.766384867] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m4, Segment: s1, End: 1787862437.764807
+[INFO] [1787862437.769469801] [robot1.fragment_exec_node]: Execution of fragment fm4-1 completed!
+[INFO] [1787862438.229584565] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm2-6', 'mission': 'm2', 'state': 'assigned', 'wait': ['scan(o2-2)'], 'tasks': [{'name': 'pick', 'label': 'pick(o2-2,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 2}}, {'name': 'move_to', 'label': 'move_to(o2-2,pack_area)', 'params': {'x': 8, 'y': 8}}, {'name': 'place', 'label': 'place(o2-2,pack_area)', 'params': {'x': 8, 'y': 8, 'weight': 2}}], 'arrive_timestamp': 1787862243, 'priority': 1, 'segment': 's2'}}
+[INFO] [1787862438.245480706] [robot1.fragment_exec_node]: Starting execution of fragment fm2-6...
+[INFO] [1787862438.246672786] [robot1.fragment_exec_node]: Executing task pick(o2-2,scan_area). Params: {'x': 5, 'y': 5, 'weight': 2}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862438.248147564] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m2, Segment: s2, Start: 1787862438.2470071
+[INFO] [1787862438.249097012] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862443.252409030] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862443.255081095] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m2, Segment: s2, End: 1787862443.253493
+[INFO] [1787862443.257764074] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m2, Segment: s2, Start: 1787862443.2559812
+[INFO] [1787862443.259439366] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862445.269094575] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862445.269681974] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m2, Segment: s2, End: 1787862445.2693965
+[INFO] [1787862445.270432967] [robot1.fragment_exec_node]: Executing task move_to(o2-2,pack_area). Params: {'x': 8, 'y': 8}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862445.270903805] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m2, Segment: s2, Start: 1787862445.2706063
+[INFO] [1787862445.271403493] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (8, 8) (8.48528137423857 seconds)...
+[INFO] [1787862453.760177441] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862453.762473448] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m2, Segment: s2, End: 1787862453.7608323
+[INFO] [1787862453.764919945] [robot1.fragment_exec_node]: Executing task place(o2-2,pack_area). Params: {'x': 8, 'y': 8, 'weight': 2}, Virtual state: {'position': {'x': 8, 'y': 8, 'z': 0.0}, 'docked': False}
+[INFO] [1787862453.766347699] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m2, Segment: s2, Start: 1787862453.7656147
+[INFO] [1787862453.767496606] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862458.770596674] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862458.773144523] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m2, Segment: s2, End: 1787862458.7716742
+[INFO] [1787862458.774842050] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m2, Segment: s2, Start: 1787862458.773754
+[INFO] [1787862458.776536778] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862460.779444588] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862460.781071249] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m2, Segment: s2, End: 1787862460.7802594
+[INFO] [1787862460.783077900] [robot1.fragment_exec_node]: Execution of fragment fm2-6 completed!
+[INFO] [1787862461.241157900] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm6-4', 'mission': 'm6', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o2-6,shelf)', 'params': {'x': 1, 'y': 3, 'weight': 3}}, {'name': 'move_to', 'label': 'move_to(o2-6,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o2-6,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 3}}], 'arrive_timestamp': 1787862335, 'priority': 1, 'segment': 's2'}}
+[INFO] [1787862461.243069931] [robot1.fragment_exec_node]: Starting execution of fragment fm6-4...
+[INFO] [1787862461.244594365] [robot1.fragment_exec_node]: Executing task pick(o2-6,shelf). Params: {'x': 1, 'y': 3, 'weight': 3}, Virtual state: {'position': {'x': 8, 'y': 8, 'z': 0.0}, 'docked': False}
+[INFO] [1787862461.246224765] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m6, Segment: s2, Start: 1787862461.244927
+[INFO] [1787862461.247524213] [robot1.fragment_exec_node]: Simulating navigate skill from position (8, 8) to (1, 3) (17.204650534085253 seconds)...
+[INFO] [1787862478.455893207] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862478.457557965] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m6, Segment: s2, End: 1787862478.4566495
+[INFO] [1787862478.458827776] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s2, Start: 1787862478.4580152
+[INFO] [1787862478.459976594] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862483.462303504] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862483.463398159] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s2, End: 1787862483.4627953
+[INFO] [1787862483.464153628] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s2, Start: 1787862483.4636846
+[INFO] [1787862483.464877779] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862486.467178698] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862486.468461057] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s2, End: 1787862486.4676874
+[INFO] [1787862486.470452350] [robot1.fragment_exec_node]: Executing task move_to(o2-6,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 1, 'y': 3, 'z': 0.0}, 'docked': False}
+[INFO] [1787862486.472332345] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s2, Start: 1787862486.4711988
+[INFO] [1787862486.473809785] [robot1.fragment_exec_node]: Simulating navigate skill from position (1, 3) to (5, 5) (11.313708498984761 seconds)...
+[INFO] [1787862497.793058108] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862497.794287850] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s2, End: 1787862497.793628
+[INFO] [1787862497.795613451] [robot1.fragment_exec_node]: Executing task place(o2-6,scan_area). Params: {'x': 5, 'y': 5, 'weight': 3}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862497.796946512] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s2, Start: 1787862497.796174
+[INFO] [1787862497.798797674] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862502.802690893] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862502.805520560] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s2, End: 1787862502.8037758
+[INFO] [1787862502.807031763] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s2, Start: 1787862502.8061337
+[INFO] [1787862502.809242924] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862505.814487628] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862505.818538602] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s2, End: 1787862505.816856
+[INFO] [1787862505.820895596] [robot1.fragment_exec_node]: Execution of fragment fm6-4 completed!
+[INFO] [1787862506.231762810] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm6-10', 'mission': 'm6', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'pick', 'label': 'pick(o4-6,shelf)', 'params': {'x': 1, 'y': 1, 'weight': 4}}, {'name': 'move_to', 'label': 'move_to(o4-6,scan_area)', 'params': {'x': 5, 'y': 5}}, {'name': 'place', 'label': 'place(o4-6,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 4}}], 'arrive_timestamp': 1787862335, 'priority': 1, 'segment': 's4'}}
+[INFO] [1787862506.233335903] [robot1.fragment_exec_node]: Starting execution of fragment fm6-10...
+[INFO] [1787862506.235240936] [robot1.fragment_exec_node]: Executing task pick(o4-6,shelf). Params: {'x': 1, 'y': 1, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862506.236410144] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m6, Segment: s4, Start: 1787862506.2356997
+[INFO] [1787862506.237682395] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (1, 1) (11.313708498984761 seconds)...
+[INFO] [1787862517.553482043] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862517.555857160] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: move_to, Robot: robot1, Mission: m6, Segment: s4, End: 1787862517.5548425
+[INFO] [1787862517.556826175] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, Start: 1787862517.5563705
+[INFO] [1787862517.557588655] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862522.562886550] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862522.565481339] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, End: 1787862522.5640426
+[INFO] [1787862522.567425406] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s4, Start: 1787862522.5662646
+[INFO] [1787862522.569132377] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862526.573335318] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862526.576535519] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s4, End: 1787862526.574727
+[INFO] [1787862526.579725722] [robot1.fragment_exec_node]: Executing task move_to(o4-6,scan_area). Params: {'x': 5, 'y': 5}, Virtual state: {'position': {'x': 1, 'y': 1, 'z': 0.0}, 'docked': False}
+[INFO] [1787862526.581686712] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s4, Start: 1787862526.580466
+[INFO] [1787862526.583591003] [robot1.fragment_exec_node]: Simulating navigate skill from position (1, 1) to (5, 5) (11.313708498984761 seconds)...
+[INFO] [1787862537.899096292] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862537.899769825] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s4, End: 1787862537.899405
+[INFO] [1787862537.900406888] [robot1.fragment_exec_node]: Executing task place(o4-6,scan_area). Params: {'x': 5, 'y': 5, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862537.900997394] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, Start: 1787862537.9006574
+[INFO] [1787862537.901568413] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862542.904902539] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862542.908291284] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, End: 1787862542.9057744
+[INFO] [1787862542.910988841] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s4, Start: 1787862542.9099567
+[INFO] [1787862542.912932013] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862546.914338955] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862546.915188703] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s4, End: 1787862546.9148002
+[INFO] [1787862546.916232543] [robot1.fragment_exec_node]: Execution of fragment fm6-10 completed!
+[INFO] [1787862558.226877429] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm6-12', 'mission': 'm6', 'state': 'assigned', 'wait': ['scan(o4-6)'], 'tasks': [{'name': 'pick', 'label': 'pick(o4-6,scan_area)', 'params': {'x': 5, 'y': 5, 'weight': 4}}, {'name': 'move_to', 'label': 'move_to(o4-6,pack_area)', 'params': {'x': 8, 'y': 8}}, {'name': 'place', 'label': 'place(o4-6,pack_area)', 'params': {'x': 8, 'y': 8, 'weight': 4}}], 'arrive_timestamp': 1787862335, 'priority': 1, 'segment': 's4'}}
+[INFO] [1787862558.229270507] [robot1.fragment_exec_node]: Starting execution of fragment fm6-12...
+[INFO] [1787862558.230649431] [robot1.fragment_exec_node]: Executing task pick(o4-6,scan_area). Params: {'x': 5, 'y': 5, 'weight': 4}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862558.231850915] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, Start: 1787862558.2311263
+[INFO] [1787862558.233087426] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862563.236384684] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862563.239118548] [robot1.fragment_exec_node]: EventType: Control (Task: pick), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, End: 1787862563.2374938
+[INFO] [1787862563.240608859] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s4, Start: 1787862563.239741
+[INFO] [1787862563.242306303] [robot1.fragment_exec_node]: Simulating pick skill...
+[INFO] [1787862567.246155409] [robot1.fragment_exec_node]: Pick completed!
+[INFO] [1787862567.249181046] [robot1.fragment_exec_node]: EventType: Task, Activity: pick, Robot: robot1, Mission: m6, Segment: s4, End: 1787862567.247236
+[INFO] [1787862567.252829303] [robot1.fragment_exec_node]: Executing task move_to(o4-6,pack_area). Params: {'x': 8, 'y': 8}, Virtual state: {'position': {'x': 5, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787862567.254552255] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s4, Start: 1787862567.2533762
+[INFO] [1787862567.256603629] [robot1.fragment_exec_node]: Simulating navigate skill from position (5, 5) to (8, 8) (8.48528137423857 seconds)...
+[INFO] [1787862575.745231547] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787862575.748226245] [robot1.fragment_exec_node]: EventType: Task, Activity: move_to, Robot: robot1, Mission: m6, Segment: s4, End: 1787862575.7464023
+[INFO] [1787862575.750279405] [robot1.fragment_exec_node]: Executing task place(o4-6,pack_area). Params: {'x': 8, 'y': 8, 'weight': 4}, Virtual state: {'position': {'x': 8, 'y': 8, 'z': 0.0}, 'docked': False}
+[INFO] [1787862575.752070857] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, Start: 1787862575.750957
+[INFO] [1787862575.753677601] [robot1.fragment_exec_node]: Simulating localize skill...
+[INFO] [1787862580.757019107] [robot1.fragment_exec_node]: Localize completed!
+[INFO] [1787862580.759415327] [robot1.fragment_exec_node]: EventType: Control (Task: place), Activity: localize, Robot: robot1, Mission: m6, Segment: s4, End: 1787862580.7580554
+[INFO] [1787862580.761141692] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s4, Start: 1787862580.7600477
+[INFO] [1787862580.763391392] [robot1.fragment_exec_node]: Simulating place skill...
+[INFO] [1787862584.768183343] [robot1.fragment_exec_node]: Place completed!
+[INFO] [1787862584.770680582] [robot1.fragment_exec_node]: EventType: Task, Activity: place, Robot: robot1, Mission: m6, Segment: s4, End: 1787862584.7692237
+[INFO] [1787862584.773225167] [robot1.fragment_exec_node]: Execution of fragment fm6-12 completed!
 Traceback (most recent call last):
   File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
     sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
-  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 286, in main
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
     rclpy.shutdown()
   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
     _shutdown(context=context)
