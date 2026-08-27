@@ -5,7 +5,7 @@ WORKDIR /root/ros2_ws
 COPY ./multi3_coordinator ./src/multi3_coordinator
 COPY ./multi3_executor ./src/multi3_executor
 
-COPY ./example_missions ./example_missions
+COPY ./test_missions ./test_missions
 COPY run_multi3.sh .
 COPY send_mission.sh .
 COPY start_mission.sh .
@@ -13,7 +13,6 @@ COPY stop_mission.sh .
 COPY get_fragments.sh .
 COPY get_robots.sh .
 COPY ./tests ./tests
-COPY test_specs.txt .
 
 RUN apt update && apt install -y \
     python3-pip \

@@ -54,8 +54,9 @@ Run the container and mount the host `logs` directory into the container so test
 ```
 docker run --rm -it \
 	-v "$(pwd)/execution_logs":/root/ros2_ws/logs \
+	--entrypoint /bin/bash \
 	multi3-test \
-	bash -lc "source /opt/ros/humble/setup.bash && source /root/ros2_ws/install/setup.bash && python3 tests/run_tests.py test_specs.txt"
+	-lc "source /opt/ros/humble/setup.bash && source /root/ros2_ws/install/setup.bash && python3 tests/run_tests.py test/test_order_management_baseline.txt"
 ```
 
 Notes:

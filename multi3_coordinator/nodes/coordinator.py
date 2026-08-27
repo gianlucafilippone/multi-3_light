@@ -20,16 +20,19 @@ class CoordinatorNode(Node):
 
         self.capability_map = { # task -> [required capability]
             "pick": ["pick"],
+            "move_to": ["move_to"],
+            "pick": ["place"],
             "scan": ["scan"],
-            "transport": ["transport"],
-            "pack": ["pack"]
+            "pack": ["pack"],
+            "load_pack": ["load_pack"],
+            "unload_pack": ["unload_pack"]
         }
 
         # Internal data structures
         self.robot_inventory = {} # Element structure: 'robot_name': {name: 'name', 'operational_state': 'idle/working/offline/selected', 'current_assigned_fragment': fragment_id, 'capabilities': [cap1, cap2, ...], 'last_heartbeat': timestamp, 'state': {}}
         self.fragments_pool = {} # Element structure: 'fragment_id': {id: 'id', 'mission': 'mission_name','state': 'waiting/executable/assigned/completed', 'wait': [task1, ..., taskn], 'tasks': [task1, ..., taskn], 'arrive_timestamp': 1231231, 'priority': 1, 'segment': 'segment_id'}
 
-        self.received_coordination_messages = set() # Each element of this set is a string that has the following structure: "mission/segment/task"
+        self.received_coordination_messages = set()
 
         self.misligned_inventory = False
 
@@ -128,8 +131,6 @@ class CoordinatorNode(Node):
                 "arrive_timestamp": int(time.time()),
                 "priority": mission.get("priority", 0),
                 "segment": fragment.get("segment"),
-                "preconditions": fragment.get("preconditions", []),
-                "postconditions": fragment.get("postconditions", [])
             }
 
         self.get_logger().info(f'Received mission: {mission}')
@@ -150,7 +151,7 @@ class CoordinatorNode(Node):
             self.get_logger().warning(f"Received state update for unknown robot: {robot_name}")
             self.misligned_inventory = True
 
-        self.get_logger().info(f'Received robot state update: {robot_state}')
+        self.get_logger().info(f'Received robot state update from robot {robot_name}: {robot_state}')
 
     def receive_coordination_messages_callback(self, msg: String):
         try:
@@ -163,9 +164,6 @@ class CoordinatorNode(Node):
             self.update_fragments_executability()
         if "completed_fragment" in coordination_message:
             self.fragments_pool[coordination_message["completed_fragment"]]["state"] = "completed"
-        if "postconditions" in coordination_message:
-            robot_name = coordination_message["robot_name"]
-            self.robot_inventory[robot_name]["conditions"] = coordination_message["postconditions"]
         if "state" in coordination_message:
             robot_name = coordination_message["robot_name"]
             self.robot_inventory[robot_name]["state"] = coordination_message["state"]
@@ -201,35 +199,90 @@ class CoordinatorNode(Node):
     def assign_fragments(self):
         self.get_logger().debug("Running fragment assigment cycle")
         executable_fragments = self.get_executable_fragments()
-        ordered_fragments = sorted(executable_fragments, key=lambda fragment: (fragment.get("priority", 0), fragment.get("arrive_timestamp", 0)))
+        ordered_fragments = sorted(executable_fragments, key=lambda fragment: (fragment.get("priority", 0), int(fragment.get("arrive_timestamp", 0) // 60)))
 
-        for fragment in ordered_fragments:
-            eligible_robots = self.get_idle_eligibile_robots(fragment)
-            if not eligible_robots:
-                continue
+        if self.assignment_strategy == "closest":
 
-            if self.assignment_strategy == "closest":
-                # Greedy assignment (the closest)
-                selected_robot = self.get_closest(eligible_robots, fragment)
-            elif self.assignment_strategy == "capability-preserving":
-                # Greedy assignment (capability preserving)
-                selected_robot = min(eligible_robots,key=lambda robot_name: len(self.robot_inventory[robot_name].get("capabilities", [])))
-            else:
-                # Random assignemnt (baseline)
-                selected_robot = random.choice(eligible_robots)
+            available_robots = [robot_name for robot_name, robot_info in self.robot_inventory.items() if robot_info.get("operational_state") == "idle"]
 
-            fragment["state"] = "assigned"
-            self.robot_inventory[selected_robot]["operational_state"] = "selected"
-            self.robot_inventory[selected_robot]["current_assigned_fragment"] = fragment.get("id")
+            for robot_name in available_robots:
+                eligible_fragments = [fragment for fragment in ordered_fragments if fragment.get("state") == "executable" and robot_name in self.get_idle_eligibile_robots(fragment)]
 
-            assignment_message = {
-                "robot": selected_robot,
-                "fragment": fragment
-            }
-            self.fragment_assignment_publisher.publish(String(data=json.dumps(assignment_message)))
-            self.get_logger().info(f"Assigned fragment {fragment.get('id')} to robot {selected_robot}.")
+                if not eligible_fragments:
+                    continue
 
-    def get_closest(self, robots, fragment):
+                selected_fragment = self.get_closest_fragment(robot_name, eligible_fragments)
+
+                selected_fragment["state"] = "assigned"
+                self.robot_inventory[robot_name]["operational_state"] = "selected"
+                self.robot_inventory[robot_name]["current_assigned_fragment"] = selected_fragment.get("id")
+
+                assignment_message = {
+                    "robot": robot_name,
+                    "fragment": selected_fragment
+                }
+
+                self.fragment_assignment_publisher.publish(
+                    String(data=json.dumps(assignment_message))
+                )
+
+                self.get_logger().info(f"Assigned fragment {selected_fragment.get('id')} to robot {robot_name}.")
+        else:
+            for fragment in ordered_fragments:
+                eligible_robots = self.get_idle_eligibile_robots(fragment)
+                if not eligible_robots:
+                    continue
+
+                # if self.assignment_strategy == "closest":
+                #     # Greedy assignment (the closest)
+                #     selected_robot = self.get_closest_robot(eligible_robots, fragment)
+                if self.assignment_strategy == "capability-preserving":
+                    # Greedy assignment (capability preserving)
+                    selected_robot = min(eligible_robots,key=lambda robot_name: len(self.robot_inventory[robot_name].get("capabilities", [])))
+                else:
+                    # Random assignemnt (baseline)
+                    selected_robot = random.choice(eligible_robots)
+
+                fragment["state"] = "assigned"
+                self.robot_inventory[selected_robot]["operational_state"] = "selected"
+                self.robot_inventory[selected_robot]["current_assigned_fragment"] = fragment.get("id")
+
+                assignment_message = {
+                    "robot": selected_robot,
+                    "fragment": fragment
+                }
+                self.fragment_assignment_publisher.publish(String(data=json.dumps(assignment_message)))
+                self.get_logger().info(f"Assigned fragment {fragment.get('id')} to robot {selected_robot}.")
+
+    def get_closest_fragment(self, robot_name, fragments):
+        if not fragments:
+            return None
+
+        robot_info = self.robot_inventory.get(robot_name, {})
+        robot_state = robot_info.get("state", {})
+        robot_position = robot_state.get("position", {})
+
+        robot_x = robot_position.get("x", 0.0)
+        robot_y = robot_position.get("y", 0.0)
+        robot_z = robot_position.get("z", 0.0)
+
+        def distance_to_fragment(fragment):
+            tasks = fragment.get("tasks") or []
+
+            if not tasks:
+                return float("inf")
+
+            target_position = tasks[0].get("params", {})
+            target_x = target_position.get("x", 0.0)
+            target_y = target_position.get("y", 0.0)
+            target_z = target_position.get("z", 0.0)
+            return ((robot_x - target_x) ** 2 +
+                    (robot_y - target_y) ** 2 +
+                    (robot_z - target_z) ** 2) ** 0.5
+
+        return min(fragments, key=distance_to_fragment)
+
+    def get_closest_robot(self, robots, fragment):
         if not robots:
             return None
 
@@ -279,8 +332,16 @@ class CoordinatorNode(Node):
                 executable_fragments.append(fragment)
         return executable_fragments
 
+    def get_fragment_capabilities(self, fragment):
+        required_capabilities = set()
+        for task in fragment.get("tasks", []):
+            task_name = required_capabilities.add(task["name"])
+            task_capabilities = self.capability_map.get(task_name, [])
+            required_capabilities.update(task_capabilities)
+        return list(required_capabilities)
+
     def get_idle_eligibile_robots(self, fragment):
-        fragment_required_capabilities = fragment.get("capabilities", [])
+        fragment_required_capabilities = self.get_fragment_capabilities(fragment)
         eligible_robots = []
         for robot_name, robot_info in self.robot_inventory.items():
             if robot_info.get("operational_state") == "idle" and all(cap in robot_info.get("capabilities", []) for cap in fragment_required_capabilities) and all(precondition in robot_info.get("conditions") for precondition in fragment.get("preconditions", [])):

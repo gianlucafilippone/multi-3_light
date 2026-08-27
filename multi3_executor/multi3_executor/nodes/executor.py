@@ -6,12 +6,16 @@ from std_msgs.msg import String
 from rclpy.node import Node
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.callback_groups import ReentrantCallbackGroup
-from ..skills.pick import PickSkill
-from ..skills.scan import ScanSkill
-from ..skills.navigate import NavigateSkill
 from ..skills.dock import DockSkill
 from ..skills.undock import UndockSkill
+from ..skills.localize import LocalizeSkill
+from ..skills.navigate import NavigateSkill
+from ..skills.pick import PickSkill
+from ..skills.scan import ScanSkill
+from ..skills.place import PlaceSkill
 from ..skills.pack import PackSkill
+from ..skills.load_pack import LoadPackSkill
+from ..skills.unload_pack import UnloadPackSkill
 
 class ExecutorNode(Node):
     def __init__(self, robot_name: str = "robotx") -> None:
@@ -19,14 +23,15 @@ class ExecutorNode(Node):
 
         self.callback_group = ReentrantCallbackGroup()
 
-        # self.declare_parameter("skill_list", "-")
+        # Allow overriding robot_name and robot_capabilities via CLI args
+        parsed_caps = _parse_capabilities_from_args(sys.argv)
         self.declare_parameter("robot_name", robot_name)
-        # self.skill_list = self.get_parameter("skill_list").value
+        self.declare_parameter("robot_capabilities", parsed_caps if parsed_caps is not None else [])
+
         self.robot_name = self.get_parameter("robot_name").value
+        self.robot_capabilities = self.get_parameter("robot_capabilities").value or []
 
         self.heartbeat_period = 3 # 3 seconds
-
-        self.robot_capabilities = ["pick", "scan", "transport", "pack"] # Assuming all robots have the same capabilities for now
 
         self.virtual_state = {
             "position": {
@@ -35,18 +40,30 @@ class ExecutorNode(Node):
                 "z": .0
             },
             "docked": True,
-            "battery": 100.0,
-            "conditions": []
         }
 
         self.skills_map = {
-            "pick": PickSkill(self),
-            "scan": ScanSkill(self),
-            "transport": NavigateSkill(self),
-            "navigate": NavigateSkill(self),
             "dock": DockSkill(self),
             "undock": UndockSkill(self),
-            "pack": PackSkill(self)
+            "pick": PickSkill(self),
+            "scan": ScanSkill(self),
+            "move_to": NavigateSkill(self),
+            "place": PlaceSkill(self),
+            "pack": PackSkill(self),
+            "localize": LocalizeSkill(self),
+            "load_pack": LoadPackSkill(self),
+            "unload_pack": UnloadPackSkill(self),
+        }
+
+        # Control actions to be completed before executing the task
+        self.task_controls = {
+            "pick": ["undock", "move_to", "localize"],
+            "move_to": ["undock"],
+            "place": ["undock", "move_to", "localize"],
+            "scan": ["localize"], 
+            "pack": ["localize"],
+            "load_pack": ["undock", "move_to", "localize"],
+            "unload_pack": ["undock", "move_to", "localize"]
         }
 
         # Publish:
@@ -82,16 +99,15 @@ class ExecutorNode(Node):
             "robot_state": {
                 "operational_state": "working" if self.busy else "idle",
                 "current_assigned_fragment": self.current_fragment.get("id") if self.current_fragment else None,
-                "conditions": self.virtual_state["conditions"],
                 "state": self.virtual_state
             }
         }
         self.robot_state_update_publisher.publish(String(data=json.dumps(update_message)))
 
-    def send_coordination_message(self, task_name, mission_id, segment_id):
+    def send_coordination_message(self, task_label):
         coordination_message = {
             "robot_name": self.robot_name,
-            "completed_task": f"{mission_id}/{segment_id}/{task_name}"
+            "completed_task": f"{task_label}"
         }
         self.coordination_messages_publisher.publish(String(data=json.dumps(coordination_message)))
         self.get_logger().debug(f'Sent coordination message: {coordination_message}')
@@ -122,15 +138,15 @@ class ExecutorNode(Node):
             self.get_logger().error(f'Invalid JSON received on /coordination/fragment_assignment: {exc}')
             return
 
-        self.get_logger().info(f"Received fragment: {fragment_assignment}")
         # If the fragment has been assigned to the robot, then consider it, otherwise, discharge.
         assignee = fragment_assignment.get('robot', '')
         fragment = fragment_assignment.get('fragment', {})
         if assignee == self.robot_name:
+            self.get_logger().info(f"Received fragment assignment: {fragment_assignment}")
             if self.busy:
                 self.get_logger().info(f"Received fragment assignment while busy. Ignoring fragment {fragment['id']}.")
                 return
-            self.get_logger().info(f"Received fragment assignment: {fragment['id']}. Starting execution.")
+            self.get_logger().info(f"Starting execution of fragment {fragment['id']}...")
             self.current_fragment = fragment
 
             self.busy = True
@@ -149,7 +165,6 @@ class ExecutorNode(Node):
         message = {
             "robot_name": self.robot_name,
             "robot_state": "working" if self.busy else "idle",
-            "conditions": self.virtual_state["conditions"]
         }
         self.robot_heartbeat_publisher.publish(String(data=json.dumps(message)))
 
@@ -164,52 +179,57 @@ class ExecutorNode(Node):
             )
 
     def exec(self, fragment):
-        # {id: 'id', 'mission': 'mission_name','state': 'waiting/executable/assigned/completed', 'wait': [task1, ..., taskn], 'tasks': [task1, ..., taskn], 'arrive_timestamp': 1231231, 'priority': 1, 'segment': 'segment_id', 'preconditions': [precondition1,...,preconditionn], postconditions: [postcondition1,...,postconditionn]}
+        # {id: 'id', 'mission': 'mission_name','state': 'waiting/executable/assigned/completed', 'wait': [task1, ..., taskn], 'tasks': [task1, ..., taskn], 'arrive_timestamp': 1231231, 'priority': 1, 'segment': 'segment_id'}
         fragment_id = fragment.get("id")
         mission_name = fragment.get("mission")
         segment_name = fragment.get("segment")
         wait_list = fragment.get("wait")
         task_list = fragment.get("tasks") # A task has the following structure: {"name": "name", "params": {params...}}
-        preconditions = fragment.get("preconditions")
-        postconditions = fragment.get("postconditions")
 
-        # 1- Check if the robot has the precondition
-        while preconditions and not all(precondition in self.virtual_state["conditions"] for precondition in preconditions):
-            self.get_logger().info(f"Waiting for preconditions {preconditions} before executing fragment {fragment_id} (current state: {self.virtual_state['conditions']})")
-            time.sleep(2)
-
-        # 2- Check if the wait list is already complete (it is a double check)
+        # 1- Check if the wait list is already complete (it is a double check)
         while wait_list and not all(task in self.received_coordination_messages for task in wait_list):
             self.get_logger().info(f"Waiting for coordination messages before executing fragment {fragment_id}: {wait_list}")
             time.sleep(2)
 
-        # 2- Iterate over the task list, check the preconditinons (eg., undock, move, etc.), then execute the skill
+        # 3- Iterate over the task list, check the preconditinons (eg., undock, move, etc.), then execute the skill
         for task in task_list:
 
-            self.get_logger().info(f"Executing task {task['name']}. Params: {task.get('params')}, Virtual state: {self.virtual_state}")
-
-            if self.virtual_state["docked"]:
-                self.get_logger().info(f"EventType: Control (Task: {task['name']}), Activity: undock, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, Start: {time.perf_counter()}")
-                self.skills_map["undock"].exec({})
-                self.get_logger().info(f"EventType: Control (Task: {task['name']}), Activity: undock, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.perf_counter()}")
-
-            if not self._in_position(task.get("params")):
-                self.get_logger().info(f"EventType: Control (Task: {task['name']}), Activity: navigate, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, Start: {time.perf_counter()}")
-                self.skills_map["navigate"].exec(task.get("params"))
-                self.get_logger().info(f"EventType: Control (Task: {task['name']}), Activity: navigate, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.perf_counter()}")
-
             task_name = task.get("name")
+            task_label = task.get("label")
 
-            self.get_logger().info(f"EventType: Task, Activity: {task_name}, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, Start: {time.perf_counter()}")
+            if task_name not in self.robot_capabilities:
+                self.get_logger().error(f"Robot {self.robot_name} was assigned a fragment without required capabilities!")
+
+            self.get_logger().info(f"Executing task {task_label}. Params: {task.get('params')}, Virtual state: {self.virtual_state}")
+
+            task_controls = self.task_controls[task_name]
+
+            # First, execute control actions
+            for task_control in task_controls:
+
+                if task_control == "undock":
+                    if self.virtual_state["docked"]:
+                        self.get_logger().info(f"EventType: Control (Task: {task_name}), Activity: undock, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, Start: {time.time()}")
+                        self.skills_map["undock"].exec({})
+                        self.get_logger().info(f"EventType: Control (Task: {task_name}), Activity: undock, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.time()}")
+
+                elif task_control == "move_to":
+                    # Navigate has to be executed only if the robot is not in position already
+                    if not self._in_position(task.get("params")):
+                        self.get_logger().info(f"EventType: Control (Task: {task_name}), Activity: move_to, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, Start: {time.time()}")
+                        self.skills_map["move_to"].exec(task.get("params"))
+                        self.get_logger().info(f"EventType: Control (Task: {task_name}), Activity: move_to, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.time()}")
+
+                else:
+                    self.get_logger().info(f"EventType: Control (Task: {task_name}), Activity: {task_control}, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, Start: {time.time()}")
+                    self.skills_map[task_control].exec(task.get("params"))
+                    self.get_logger().info(f"EventType: Control (Task: {task_name}), Activity: {task_control}, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.time()}")
+
+            self.get_logger().info(f"EventType: Task, Activity: {task_name}, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, Start: {time.time()}")
             self.skills_map[task_name].exec(task.get("params"))
-            self.get_logger().info(f"EventType: Task, Activity: {task_name}, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.perf_counter()}")
+            self.get_logger().info(f"EventType: Task, Activity: {task_name}, Robot: {self.robot_name}, Mission: {mission_name}, Segment: {segment_name}, End: {time.time()}")
 
-            self.send_coordination_message(task_name, mission_name, segment_name)
-
-        if postconditions:
-            for postcondition in postconditions:
-                if postcondition is not None:
-                    self.virtual_state['conditions'].append(postcondition)
+            self.send_coordination_message(task_label)
 
         self.send_fragment_completion_message(fragment_id)
 
@@ -223,6 +243,36 @@ def _parse_robot_name_from_args(argv):
             if next_arg.startswith("robot_name:="):
                 return next_arg.split(":=", 1)[1]
     return "robotx"
+
+
+def _parse_capabilities_string(raw: str):
+    # Try JSON first (handles ["a","b"] or ['a','b'])
+    try:
+        caps = json.loads(raw)
+        if isinstance(caps, list):
+            return [str(c) for c in caps]
+    except Exception:
+        pass
+
+    # Fallback: strip brackets and split by comma
+    s = raw.strip()
+    if s.startswith("[") and s.endswith("]"):
+        s = s[1:-1]
+    parts = [p.strip().strip("'\"") for p in s.split(",") if p.strip()]
+    return parts if parts else None
+
+
+def _parse_capabilities_from_args(argv):
+    for idx, arg in enumerate(argv[1:], start=1):
+        if arg.startswith("capabilities:="):
+            raw = arg.split(":=", 1)[1]
+            return _parse_capabilities_string(raw)
+        if arg == "-p" and idx + 1 < len(argv):
+            next_arg = argv[idx + 1]
+            if next_arg.startswith("capabilities:="):
+                raw = next_arg.split(":=", 1)[1]
+                return _parse_capabilities_string(raw)
+    return None
 
 
 def main(args=None):
