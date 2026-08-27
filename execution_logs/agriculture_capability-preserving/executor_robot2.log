@@ -1,0 +1,33 @@
+[INFO] [1787849106.636977221] [robot2.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787849106.638650383] [robot2.fragment_exec_node]: Setting up skill: InspectSkill
+[INFO] [1787849106.639483709] [robot2.fragment_exec_node]: Setting up skill: InspectSkill
+[INFO] [1787849106.640279043] [robot2.fragment_exec_node]: Setting up skill: AlignCameraSkill
+[INFO] [1787849106.648336803] [robot2.fragment_exec_node]: Published robot registration: {'name': 'robot2', 'operational_state': 'idle', 'capabilities': ['inspect', 'move_to', 'align_camera'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787849128.731361367] [robot2.fragment_exec_node]: Received fragment assignment: {'robot': 'robot2', 'fragment': {'id': 'fm1-4', 'mission': 'm1', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'inspect', 'label': 'inspect(f2)', 'params': {'x': 0, 'y': 7.5, 'size': 6}}], 'arrive_timestamp': 1787849120, 'priority': 1, 'segment': 's2'}}
+[INFO] [1787849128.736274928] [robot2.fragment_exec_node]: Starting execution of fragment fm1-4...
+[INFO] [1787849128.737665557] [robot2.fragment_exec_node]: Executing task inspect(f2). Params: {'x': 0, 'y': 7.5, 'size': 6}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787849128.739294177] [robot2.fragment_exec_node]: EventType: Control (Task: inspect), Activity: move_to, Robot: robot2, Mission: m1, Segment: s2, Start: 1787849128.738156
+[INFO] [1787849128.741071028] [robot2.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (0, 7.5) (15.0 seconds)...
+[INFO] [1787849143.744714680] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787849143.749087011] [robot2.fragment_exec_node]: EventType: Control (Task: inspect), Activity: move_to, Robot: robot2, Mission: m1, Segment: s2, End: 1787849143.7467566
+[INFO] [1787849143.750922137] [robot2.fragment_exec_node]: EventType: Control (Task: inspect), Activity: align_camera, Robot: robot2, Mission: m1, Segment: s2, Start: 1787849143.7497919
+[INFO] [1787849143.752252880] [robot2.fragment_exec_node]: Simulating align_camera skill...
+[INFO] [1787849146.756044793] [robot2.fragment_exec_node]: Align camera completed!
+[INFO] [1787849146.758232204] [robot2.fragment_exec_node]: EventType: Control (Task: inspect), Activity: align_camera, Robot: robot2, Mission: m1, Segment: s2, End: 1787849146.7569783
+[INFO] [1787849146.760977568] [robot2.fragment_exec_node]: EventType: Task, Activity: inspect, Robot: robot2, Mission: m1, Segment: s2, Start: 1787849146.7588058
+[INFO] [1787849146.763418306] [robot2.fragment_exec_node]: Simulating inspect skill (12s to complete)...
+[INFO] [1787849158.764293440] [robot2.fragment_exec_node]: Inspect completed!
+[INFO] [1787849158.766035783] [robot2.fragment_exec_node]: EventType: Task, Activity: inspect, Robot: robot2, Mission: m1, Segment: s2, End: 1787849158.765516
+[INFO] [1787849158.767011700] [robot2.fragment_exec_node]: Execution of fragment fm1-4 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 300, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241

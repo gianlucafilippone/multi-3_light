@@ -1,0 +1,35 @@
+[INFO] [1787854520.195895849] [robot3.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787854520.197279321] [robot3.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787854520.198134544] [robot3.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787854520.199107303] [robot3.fragment_exec_node]: Setting up skill: VacuumSkill
+[INFO] [1787854520.200144148] [robot3.fragment_exec_node]: Setting up skill: DisinfectSkill
+[INFO] [1787854520.200836848] [robot3.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787854520.208881243] [robot3.fragment_exec_node]: Published robot registration: {'name': 'robot3', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'vacuum', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787854565.525869930] [robot3.fragment_exec_node]: Received fragment assignment: {'robot': 'robot3', 'fragment': {'id': 'fm1-2', 'mission': 'm1', 'state': 'assigned', 'wait': ['check_room(r1)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'arrive_timestamp': 1787854534, 'priority': 1, 'segment': 's1'}}
+[INFO] [1787854565.529011995] [robot3.fragment_exec_node]: Starting execution of fragment fm1-2...
+[INFO] [1787854565.533116560] [robot3.fragment_exec_node]: Executing task vacuum(r1). Params: {'x': 4, 'y': 2, 'size': 6}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787854565.534395028] [robot3.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: undock, Robot: robot3, Mission: m1, Segment: s1, Start: 1787854565.5335732
+[INFO] [1787854565.535417145] [robot3.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787854569.539419999] [robot3.fragment_exec_node]: Undock completed!
+[INFO] [1787854569.542490860] [robot3.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: undock, Robot: robot3, Mission: m1, Segment: s1, End: 1787854569.540523
+[INFO] [1787854569.544706917] [robot3.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot3, Mission: m1, Segment: s1, Start: 1787854569.5434391
+[INFO] [1787854569.546494952] [robot3.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (4, 2) (8.94427190999916 seconds)...
+[INFO] [1787854578.494418922] [robot3.fragment_exec_node]: Navigation completed!
+[INFO] [1787854578.496880251] [robot3.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot3, Mission: m1, Segment: s1, End: 1787854578.495148
+[INFO] [1787854578.499198966] [robot3.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot3, Mission: m1, Segment: s1, Start: 1787854578.4976187
+[INFO] [1787854578.500996281] [robot3.fragment_exec_node]: Simulating vacuum skill (21.0s to complete)...
+[INFO] [1787854599.504051270] [robot3.fragment_exec_node]: Vacuum completed!
+[INFO] [1787854599.506302707] [robot3.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot3, Mission: m1, Segment: s1, End: 1787854599.5051756
+[INFO] [1787854599.508731097] [robot3.fragment_exec_node]: Execution of fragment fm1-2 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241

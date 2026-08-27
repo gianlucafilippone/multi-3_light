@@ -5,6 +5,8 @@ import random
 from std_msgs.msg import String
 from std_srvs.srv import Trigger
 from rclpy.node import Node
+from rclpy.executors import MultiThreadedExecutor
+from rclpy.callback_groups import ReentrantCallbackGroup
 
 class CoordinatorNode(Node):
     def __init__(self):
@@ -18,6 +20,8 @@ class CoordinatorNode(Node):
             self.assignment_strategy = 'baseline'
         self.get_logger().info(f"Using assignment strategy: {self.assignment_strategy}")
 
+        self.callback_group = ReentrantCallbackGroup()
+
         self.capability_map = { # task -> [required capability]
             "pick": ["pick"],
             "move_to": ["move_to"],
@@ -25,7 +29,16 @@ class CoordinatorNode(Node):
             "scan": ["scan"],
             "pack": ["pack"],
             "load_pack": ["load_pack"],
-            "unload_pack": ["unload_pack"]
+            "unload_pack": ["unload_pack"],
+            "inspect": ["inspect"],
+            "irrigate": ["irrigate"],
+            "spray": ["spray"],
+            "final_inspection": ["inspect"],
+            "check_room": ["check_room"],
+            "vacuum": ["vacuum"],
+            "mop": ["mop"],
+            "disinfect": ["disinfect"],
+            "final_room_check": ["check_room"]
         }
 
         # Internal data structures
@@ -37,26 +50,26 @@ class CoordinatorNode(Node):
         self.misligned_inventory = False
 
         # Subscribers (only handled by the coordinator)
-        self.new_robot_subscription_callback = self.create_subscription(String, '/coordination/new_robot', self.new_robot_subscription_callback, 10)
-        self.receive_mission_subscription = self.create_subscription(String, '/coordination/new_missions', self.receive_mission_callback, 10)
-        self.robot_state_update_subscription = self.create_subscription(String, '/coordination/robot_state_update', self.robot_state_update_callback, 10)
+        self.new_robot_subscription_callback = self.create_subscription(String, '/coordination/new_robot', self.new_robot_subscription_callback, 10, callback_group=self.callback_group)
+        self.receive_mission_subscription = self.create_subscription(String, '/coordination/new_missions', self.receive_mission_callback, 10, callback_group=self.callback_group)
+        self.robot_state_update_subscription = self.create_subscription(String, '/coordination/robot_state_update', self.robot_state_update_callback, 10, callback_group=self.callback_group)
 
         # Subscribers (broadcasted to all robots+coordinator)
-        self.coordination_messages_subscription = self.create_subscription(String, '/coordination_messages', self.receive_coordination_messages_callback, 10)
-        self.hearthbeat_subscription = self.create_subscription(String, '/heartbeat', self.heartbeat_callback, 10)
+        self.coordination_messages_subscription = self.create_subscription(String, '/coordination_messages', self.receive_coordination_messages_callback, 10, callback_group=self.callback_group)
+        self.hearthbeat_subscription = self.create_subscription(String, '/heartbeat', self.heartbeat_callback, 10, callback_group=self.callback_group)
 
         # Publishers
         self.fragment_assignment_publisher = self.create_publisher(String, '/fragment_assignment', 10)
         self.coordination_messages_publisher = self.create_publisher(String, '/coordination_messages_batch_updater', 10)
 
         # Services for control
-        self.execution_start_subscription = self.create_service(Trigger, '/control/execution_start', self.execution_start_callback)
-        self.execution_stop_subscription = self.create_service(Trigger, '/control/execution_stop', self.execution_stop_callback)
+        self.execution_start_subscription = self.create_service(Trigger, '/control/execution_start', self.execution_start_callback, callback_group=self.callback_group)
+        self.execution_stop_subscription = self.create_service(Trigger, '/control/execution_stop', self.execution_stop_callback, callback_group=self.callback_group)
 
         # Services for getting status info
-        self.get_robot_inventory_service = self.create_service(Trigger, '/info/robot_inventory', self.get_robot_inventory_callback)
-        self.get_fragments_pool_service = self.create_service(Trigger, '/info/fragment_pool', self.get_fragments_pool_callback)
-        self.get_inventory_misalignment = self.create_service(Trigger, '/info/inventory_check', self.get_inventory_misalignment_callback)
+        self.get_robot_inventory_service = self.create_service(Trigger, '/info/robot_inventory', self.get_robot_inventory_callback, callback_group=self.callback_group)
+        self.get_fragments_pool_service = self.create_service(Trigger, '/info/fragment_pool', self.get_fragments_pool_callback, callback_group=self.callback_group)
+        self.get_inventory_misalignment = self.create_service(Trigger, '/info/inventory_check', self.get_inventory_misalignment_callback, callback_group=self.callback_group)
 
         # Timers
         self.coordination_messages_updater_timer = self.create_timer(2.0, self.publish_all_coordination_messages)
@@ -335,7 +348,7 @@ class CoordinatorNode(Node):
     def get_fragment_capabilities(self, fragment):
         required_capabilities = set()
         for task in fragment.get("tasks", []):
-            task_name = required_capabilities.add(task["name"])
+            task_name = task["name"]
             task_capabilities = self.capability_map.get(task_name, [])
             required_capabilities.update(task_capabilities)
         return list(required_capabilities)
@@ -351,13 +364,12 @@ class CoordinatorNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = CoordinatorNode()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+    executor = MultiThreadedExecutor()
+    executor.add_node(node)
+    executor.spin()
+    node.destroy_node()
+    rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()

@@ -1,0 +1,34 @@
+[INFO] [1787855409.031451937] [robot7.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787855409.032489137] [robot7.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787855409.033185072] [robot7.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787855409.033844841] [robot7.fragment_exec_node]: Setting up skill: MopSkill
+[INFO] [1787855409.034510420] [robot7.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787855409.043555582] [robot7.fragment_exec_node]: Published robot registration: {'name': 'robot7', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787855477.991574451] [robot7.fragment_exec_node]: Received fragment assignment: {'robot': 'robot7', 'fragment': {'id': 'fm1-13', 'mission': 'm1', 'state': 'assigned', 'wait': ['vacuum(r3)'], 'tasks': [{'name': 'mop', 'label': 'mop(r3)', 'params': {'x': 3, 'y': 6, 'size': 7}}], 'arrive_timestamp': 1787855414, 'priority': 1, 'segment': 's3'}}
+[INFO] [1787855477.994394962] [robot7.fragment_exec_node]: Starting execution of fragment fm1-13...
+[INFO] [1787855477.996763269] [robot7.fragment_exec_node]: Executing task mop(r3). Params: {'x': 3, 'y': 6, 'size': 7}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787855477.997979113] [robot7.fragment_exec_node]: EventType: Control (Task: mop), Activity: undock, Robot: robot7, Mission: m1, Segment: s3, Start: 1787855477.9973698
+[INFO] [1787855477.999060420] [robot7.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787855482.003009802] [robot7.fragment_exec_node]: Undock completed!
+[INFO] [1787855482.005736664] [robot7.fragment_exec_node]: EventType: Control (Task: mop), Activity: undock, Robot: robot7, Mission: m1, Segment: s3, End: 1787855482.004055
+[INFO] [1787855482.007272021] [robot7.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot7, Mission: m1, Segment: s3, Start: 1787855482.0063767
+[INFO] [1787855482.009193591] [robot7.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (3, 6) (13.416407864998739 seconds)...
+[INFO] [1787855495.431043080] [robot7.fragment_exec_node]: Navigation completed!
+[INFO] [1787855495.435045020] [robot7.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot7, Mission: m1, Segment: s3, End: 1787855495.4336584
+[INFO] [1787855495.437030844] [robot7.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot7, Mission: m1, Segment: s3, Start: 1787855495.4358037
+[INFO] [1787855495.438813665] [robot7.fragment_exec_node]: Simulating mop skill (38.5s to complete)...
+[INFO] [1787855533.940276727] [robot7.fragment_exec_node]: Mop completed!
+[INFO] [1787855533.942170391] [robot7.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot7, Mission: m1, Segment: s3, End: 1787855533.9417224
+[INFO] [1787855533.943837721] [robot7.fragment_exec_node]: Execution of fragment fm1-13 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241

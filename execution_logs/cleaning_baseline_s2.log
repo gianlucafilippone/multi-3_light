@@ -1,0 +1,986 @@
+=== Test: spec: robots=[(3, ['undock', 'check_room', 'move_to', 'vacuum', 'disinfect']), (2, ['undock', 'check_room', 'move_to', 'mop', 'disinfect']), (4, ['undock', 'check_room', 'move_to', 'mop'])], mission_arrivals=[(0, ['cleaning_2_size8'])], strategy=baseline
+
+
+--- coordinator.log ---
+[INFO] [1787853388.133103859] [multi3_coordinator_node]: Assignment strategy parameter: baseline
+[INFO] [1787853388.133872871] [multi3_coordinator_node]: Using assignment strategy: baseline
+[INFO] [1787853388.140065173] [multi3_coordinator_node]: Coordinator node started.
+[INFO] [1787853391.153168570] [multi3_coordinator_node]: Received new robot info: {'name': 'robot1', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'vacuum', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}, 'last_heartbeat': 1787853391}
+[INFO] [1787853393.489125001] [multi3_coordinator_node]: Received new robot info: {'name': 'robot2', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'vacuum', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}, 'last_heartbeat': 1787853393}
+[INFO] [1787853395.633291934] [multi3_coordinator_node]: Received new robot info: {'name': 'robot3', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'vacuum', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}, 'last_heartbeat': 1787853395}
+[INFO] [1787853397.141089341] [multi3_coordinator_node]: Received new robot info: {'name': 'robot4', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}, 'last_heartbeat': 1787853397}
+[INFO] [1787853399.535399367] [multi3_coordinator_node]: Received new robot info: {'name': 'robot5', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}, 'last_heartbeat': 1787853399}
+[INFO] [1787853401.545328901] [multi3_coordinator_node]: Received new robot info: {'name': 'robot6', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}, 'last_heartbeat': 1787853401}
+[INFO] [1787853403.504462182] [multi3_coordinator_node]: Received new robot info: {'name': 'robot7', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}, 'last_heartbeat': 1787853403}
+[INFO] [1787853405.538316299] [multi3_coordinator_node]: Received new robot info: {'name': 'robot8', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}, 'last_heartbeat': 1787853405}
+[INFO] [1787853407.541299394] [multi3_coordinator_node]: Received new robot info: {'name': 'robot9', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}, 'last_heartbeat': 1787853407}
+[INFO] [1787853409.178061980] [multi3_coordinator_node]: Received mission: {'mission': 'm2', 'priority': 1, 'fragments': [{'id': 'fm2-1', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'segment': 's1'}, {'id': 'fm2-2', 'wait': ['check_room(r1)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'segment': 's1'}, {'id': 'fm2-3', 'wait': ['vacuum(r1)'], 'tasks': [{'name': 'mop', 'label': 'mop(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'segment': 's1'}, {'id': 'fm2-4', 'wait': ['mop(r1)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'segment': 's1'}, {'id': 'fm2-5', 'wait': ['disinfect(r1)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'segment': 's1'}, {'id': 'fm2-6', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r2)', 'params': {'x': 10, 'y': 5, 'size': 3}}], 'segment': 's2'}, {'id': 'fm2-7', 'wait': ['check_room(r2)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r2)', 'params': {'x': 10, 'y': 5, 'size': 3}}], 'segment': 's2'}, {'id': 'fm2-8', 'wait': ['vacuum(r2)'], 'tasks': [{'name': 'mop', 'label': 'mop(r2)', 'params': {'x': 10, 'y': 5, 'size': 3}}], 'segment': 's2'}, {'id': 'fm2-9', 'wait': ['mop(r2)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r2)', 'params': {'x': 10, 'y': 5, 'size': 3}}], 'segment': 's2'}, {'id': 'fm2-10', 'wait': ['disinfect(r2)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r2)', 'params': {'x': 10, 'y': 5, 'size': 3}}], 'segment': 's2'}, {'id': 'fm2-11', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r3)', 'params': {'x': 3, 'y': 11, 'size': 7}}], 'segment': 's3'}, {'id': 'fm2-12', 'wait': ['check_room(r3)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r3)', 'params': {'x': 3, 'y': 11, 'size': 7}}], 'segment': 's3'}, {'id': 'fm2-13', 'wait': ['vacuum(r3)'], 'tasks': [{'name': 'mop', 'label': 'mop(r3)', 'params': {'x': 3, 'y': 11, 'size': 7}}], 'segment': 's3'}, {'id': 'fm2-14', 'wait': ['mop(r3)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r3)', 'params': {'x': 3, 'y': 11, 'size': 7}}], 'segment': 's3'}, {'id': 'fm2-15', 'wait': ['disinfect(r3)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r3)', 'params': {'x': 3, 'y': 11, 'size': 7}}], 'segment': 's3'}, {'id': 'fm2-16', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r4)', 'params': {'x': 8, 'y': 9, 'size': 4}}], 'segment': 's4'}, {'id': 'fm2-17', 'wait': ['check_room(r4)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r4)', 'params': {'x': 8, 'y': 9, 'size': 4}}], 'segment': 's4'}, {'id': 'fm2-18', 'wait': ['vacuum(r4)'], 'tasks': [{'name': 'mop', 'label': 'mop(r4)', 'params': {'x': 8, 'y': 9, 'size': 4}}], 'segment': 's4'}, {'id': 'fm2-19', 'wait': ['mop(r4)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r4)', 'params': {'x': 8, 'y': 9, 'size': 4}}], 'segment': 's4'}, {'id': 'fm2-20', 'wait': ['disinfect(r4)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r4)', 'params': {'x': 8, 'y': 9, 'size': 4}}], 'segment': 's4'}, {'id': 'fm2-21', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r5)', 'params': {'x': 12, 'y': 3, 'size': 5}}], 'segment': 's5'}, {'id': 'fm2-22', 'wait': ['check_room(r5)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r5)', 'params': {'x': 12, 'y': 3, 'size': 5}}], 'segment': 's5'}, {'id': 'fm2-23', 'wait': ['vacuum(r5)'], 'tasks': [{'name': 'mop', 'label': 'mop(r5)', 'params': {'x': 12, 'y': 3, 'size': 5}}], 'segment': 's5'}, {'id': 'fm2-24', 'wait': ['mop(r5)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r5)', 'params': {'x': 12, 'y': 3, 'size': 5}}], 'segment': 's5'}, {'id': 'fm2-25', 'wait': ['disinfect(r5)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r5)', 'params': {'x': 12, 'y': 3, 'size': 5}}], 'segment': 's5'}, {'id': 'fm2-26', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r6)', 'params': {'x': 6, 'y': 12, 'size': 6}}], 'segment': 's6'}, {'id': 'fm2-27', 'wait': ['check_room(r6)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r6)', 'params': {'x': 6, 'y': 12, 'size': 6}}], 'segment': 's6'}, {'id': 'fm2-28', 'wait': ['vacuum(r6)'], 'tasks': [{'name': 'mop', 'label': 'mop(r6)', 'params': {'x': 6, 'y': 12, 'size': 6}}], 'segment': 's6'}, {'id': 'fm2-29', 'wait': ['mop(r6)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r6)', 'params': {'x': 6, 'y': 12, 'size': 6}}], 'segment': 's6'}, {'id': 'fm2-30', 'wait': ['disinfect(r6)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r6)', 'params': {'x': 6, 'y': 12, 'size': 6}}], 'segment': 's6'}, {'id': 'fm2-31', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r7)', 'params': {'x': 9, 'y': 7, 'size': 3}}], 'segment': 's7'}, {'id': 'fm2-32', 'wait': ['check_room(r7)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r7)', 'params': {'x': 9, 'y': 7, 'size': 3}}], 'segment': 's7'}, {'id': 'fm2-33', 'wait': ['vacuum(r7)'], 'tasks': [{'name': 'mop', 'label': 'mop(r7)', 'params': {'x': 9, 'y': 7, 'size': 3}}], 'segment': 's7'}, {'id': 'fm2-34', 'wait': ['mop(r7)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r7)', 'params': {'x': 9, 'y': 7, 'size': 3}}], 'segment': 's7'}, {'id': 'fm2-35', 'wait': ['disinfect(r7)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r7)', 'params': {'x': 9, 'y': 7, 'size': 3}}], 'segment': 's7'}, {'id': 'fm2-36', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r8)', 'params': {'x': 2, 'y': 8, 'size': 7}}], 'segment': 's8'}, {'id': 'fm2-37', 'wait': ['check_room(r8)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r8)', 'params': {'x': 2, 'y': 8, 'size': 7}}], 'segment': 's8'}, {'id': 'fm2-38', 'wait': ['vacuum(r8)'], 'tasks': [{'name': 'mop', 'label': 'mop(r8)', 'params': {'x': 2, 'y': 8, 'size': 7}}], 'segment': 's8'}, {'id': 'fm2-39', 'wait': ['mop(r8)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r8)', 'params': {'x': 2, 'y': 8, 'size': 7}}], 'segment': 's8'}, {'id': 'fm2-40', 'wait': ['disinfect(r8)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r8)', 'params': {'x': 2, 'y': 8, 'size': 7}}], 'segment': 's8'}]}
+[INFO] [1787853409.179960361] [multi3_coordinator_node]: Fragment fm2-1 is now executable because all signal messages were received.
+[INFO] [1787853409.181549801] [multi3_coordinator_node]: Fragment fm2-6 is now executable because all signal messages were received.
+[INFO] [1787853409.182639229] [multi3_coordinator_node]: Fragment fm2-11 is now executable because all signal messages were received.
+[INFO] [1787853409.183628274] [multi3_coordinator_node]: Fragment fm2-16 is now executable because all signal messages were received.
+[INFO] [1787853409.184599725] [multi3_coordinator_node]: Fragment fm2-21 is now executable because all signal messages were received.
+[INFO] [1787853409.185674181] [multi3_coordinator_node]: Fragment fm2-26 is now executable because all signal messages were received.
+[INFO] [1787853409.186644388] [multi3_coordinator_node]: Fragment fm2-31 is now executable because all signal messages were received.
+[INFO] [1787853409.187634722] [multi3_coordinator_node]: Fragment fm2-36 is now executable because all signal messages were received.
+[INFO] [1787853416.496115169] [multi3_coordinator_node]: Execution start signal received. Starting fragment assignment.
+[INFO] [1787853417.503685895] [multi3_coordinator_node]: Assigned fragment fm2-1 to robot robot4.
+[INFO] [1787853417.513695668] [multi3_coordinator_node]: Assigned fragment fm2-6 to robot robot2.
+[INFO] [1787853417.517778127] [multi3_coordinator_node]: Assigned fragment fm2-11 to robot robot8.
+[INFO] [1787853417.527625932] [multi3_coordinator_node]: Assigned fragment fm2-16 to robot robot7.
+[INFO] [1787853417.533601955] [multi3_coordinator_node]: Assigned fragment fm2-21 to robot robot6.
+[INFO] [1787853417.536706187] [multi3_coordinator_node]: Assigned fragment fm2-26 to robot robot3.
+[INFO] [1787853417.537998444] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-6', 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.570220292] [multi3_coordinator_node]: Assigned fragment fm2-31 to robot robot9.
+[INFO] [1787853417.589193732] [multi3_coordinator_node]: Received robot state update from robot robot6: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-21', 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.590321071] [multi3_coordinator_node]: Received robot state update from robot robot7: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-16', 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.591960451] [multi3_coordinator_node]: Received robot state update from robot robot8: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-11', 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.594389496] [multi3_coordinator_node]: Received robot state update from robot robot4: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-1', 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.598444484] [multi3_coordinator_node]: Received robot state update from robot robot3: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-26', 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.599332088] [multi3_coordinator_node]: Assigned fragment fm2-36 to robot robot1.
+[INFO] [1787853417.600224924] [multi3_coordinator_node]: Received robot state update from robot robot9: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-31', 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.600643048] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-36', 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853439.525840225] [multi3_coordinator_node]: Fragment fm2-2 is now executable because all signal messages were received.
+[INFO] [1787853439.535321399] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot4', 'completed_task': 'check_room(r1)'}
+[INFO] [1787853439.540108675] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot4', 'completed_fragment': 'fm2-1', 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853439.544044612] [multi3_coordinator_node]: Received robot state update from robot robot4: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853448.434772493] [multi3_coordinator_node]: Fragment fm2-7 is now executable because all signal messages were received.
+[INFO] [1787853448.435491254] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853448.436317691] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_fragment': 'fm2-6', 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853448.437000954] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_task': 'check_room(r2)'}
+[INFO] [1787853448.549603504] [multi3_coordinator_node]: Assigned fragment fm2-2 to robot robot2.
+[INFO] [1787853448.565417336] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-2', 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853448.620127491] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'fm2-36', 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853448.621236546] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853448.622217929] [multi3_coordinator_node]: Fragment fm2-37 is now executable because all signal messages were received.
+[INFO] [1787853448.622813381] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'check_room(r8)'}
+[INFO] [1787853448.903355100] [multi3_coordinator_node]: Received robot state update from robot robot9: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853448.904537420] [multi3_coordinator_node]: Fragment fm2-32 is now executable because all signal messages were received.
+[INFO] [1787853448.905737569] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot9', 'completed_fragment': 'fm2-31', 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853448.906270735] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot9', 'completed_task': 'check_room(r7)'}
+[INFO] [1787853449.507536560] [multi3_coordinator_node]: Assigned fragment fm2-7 to robot robot1.
+[INFO] [1787853449.557089302] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-7', 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853451.659770172] [multi3_coordinator_node]: Received robot state update from robot robot7: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853451.661164527] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot7', 'completed_fragment': 'fm2-16', 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853451.661699190] [multi3_coordinator_node]: Fragment fm2-17 is now executable because all signal messages were received.
+[INFO] [1787853451.662698071] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot7', 'completed_task': 'check_room(r4)'}
+[INFO] [1787853453.838809265] [multi3_coordinator_node]: Fragment fm2-22 is now executable because all signal messages were received.
+[INFO] [1787853453.839974174] [multi3_coordinator_node]: Received robot state update from robot robot6: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853453.840744083] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot6', 'completed_fragment': 'fm2-21', 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853453.841409252] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot6', 'completed_task': 'check_room(r5)'}
+[INFO] [1787853454.885649988] [multi3_coordinator_node]: Received robot state update from robot robot8: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853454.887783957] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot8', 'completed_fragment': 'fm2-11', 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853454.888481076] [multi3_coordinator_node]: Fragment fm2-12 is now executable because all signal messages were received.
+[INFO] [1787853454.888982400] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot8', 'completed_task': 'check_room(r3)'}
+[INFO] [1787853457.467796206] [multi3_coordinator_node]: Fragment fm2-27 is now executable because all signal messages were received.
+[INFO] [1787853457.468521457] [multi3_coordinator_node]: Received robot state update from robot robot3: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853457.469491075] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot3', 'completed_fragment': 'fm2-26', 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853457.470059614] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot3', 'completed_task': 'check_room(r6)'}
+[INFO] [1787853457.530902170] [multi3_coordinator_node]: Assigned fragment fm2-12 to robot robot3.
+[INFO] [1787853457.542681030] [multi3_coordinator_node]: Received robot state update from robot robot3: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-12', 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853479.180690604] [multi3_coordinator_node]: Fragment fm2-8 is now executable because all signal messages were received.
+[INFO] [1787853479.181799427] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853479.206095289] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'fm2-7', 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853479.209057396] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'vacuum(r2)'}
+[INFO] [1787853479.508303616] [multi3_coordinator_node]: Assigned fragment fm2-8 to robot robot7.
+[INFO] [1787853479.512443308] [multi3_coordinator_node]: Assigned fragment fm2-17 to robot robot1.
+[INFO] [1787853479.536514298] [multi3_coordinator_node]: Received robot state update from robot robot7: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-8', 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853479.537541829] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-17', 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853489.630094235] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_fragment': 'fm2-2', 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853489.630729403] [multi3_coordinator_node]: Fragment fm2-3 is now executable because all signal messages were received.
+[INFO] [1787853489.631287357] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853489.632058483] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_task': 'vacuum(r1)'}
+[INFO] [1787853490.502067854] [multi3_coordinator_node]: Assigned fragment fm2-3 to robot robot8.
+[INFO] [1787853490.526108149] [multi3_coordinator_node]: Assigned fragment fm2-22 to robot robot2.
+[INFO] [1787853490.527938681] [multi3_coordinator_node]: Received robot state update from robot robot8: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-3', 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853490.529520479] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-22', 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853493.801116556] [multi3_coordinator_node]: Received robot state update from robot robot3: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853493.802054653] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot3', 'completed_fragment': 'fm2-12', 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853493.802501322] [multi3_coordinator_node]: Fragment fm2-13 is now executable because all signal messages were received.
+[INFO] [1787853493.803247992] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot3', 'completed_task': 'vacuum(r3)'}
+[INFO] [1787853494.505035540] [multi3_coordinator_node]: Assigned fragment fm2-13 to robot robot5.
+[INFO] [1787853494.509509421] [multi3_coordinator_node]: Assigned fragment fm2-27 to robot robot3.
+[INFO] [1787853494.533738427] [multi3_coordinator_node]: Received robot state update from robot robot3: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-27', 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853494.534631978] [multi3_coordinator_node]: Received robot state update from robot robot5: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-13', 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853498.066368926] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853498.067371881] [multi3_coordinator_node]: Fragment fm2-18 is now executable because all signal messages were received.
+[INFO] [1787853498.067795872] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'fm2-17', 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853498.068527917] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'vacuum(r4)'}
+[INFO] [1787853498.513957521] [multi3_coordinator_node]: Assigned fragment fm2-18 to robot robot9.
+[INFO] [1787853498.518586981] [multi3_coordinator_node]: Assigned fragment fm2-32 to robot robot1.
+[INFO] [1787853498.550762374] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-32', 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853498.551504701] [multi3_coordinator_node]: Received robot state update from robot robot9: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-18', 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853505.286639030] [multi3_coordinator_node]: Received robot state update from robot robot7: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853505.287926796] [multi3_coordinator_node]: Fragment fm2-9 is now executable because all signal messages were received.
+[INFO] [1787853505.289119374] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot7', 'completed_fragment': 'fm2-8', 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853505.290009706] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot7', 'completed_task': 'mop(r2)'}
+[INFO] [1787853505.520468602] [multi3_coordinator_node]: Assigned fragment fm2-9 to robot robot4.
+[INFO] [1787853505.545242227] [multi3_coordinator_node]: Received robot state update from robot robot4: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-9', 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853511.880750184] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853511.881235664] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'fm2-32', 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853511.882279007] [multi3_coordinator_node]: Fragment fm2-33 is now executable because all signal messages were received.
+[INFO] [1787853511.882965117] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'vacuum(r7)'}
+[INFO] [1787853512.505458036] [multi3_coordinator_node]: Assigned fragment fm2-33 to robot robot7.
+[INFO] [1787853512.509928408] [multi3_coordinator_node]: Assigned fragment fm2-37 to robot robot1.
+[INFO] [1787853512.543423719] [multi3_coordinator_node]: Received robot state update from robot robot7: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-33', 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853512.544499722] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-37', 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853522.565911567] [multi3_coordinator_node]: Received robot state update from robot robot9: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853522.566841379] [multi3_coordinator_node]: Fragment fm2-19 is now executable because all signal messages were received.
+[INFO] [1787853522.567925788] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot9', 'completed_fragment': 'fm2-18', 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853522.568421450] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot9', 'completed_task': 'mop(r4)'}
+[INFO] [1787853524.211163110] [multi3_coordinator_node]: Fragment fm2-23 is now executable because all signal messages were received.
+[INFO] [1787853524.214933613] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853524.215961202] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_fragment': 'fm2-22', 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853524.216408481] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_task': 'vacuum(r5)'}
+[INFO] [1787853524.507538552] [multi3_coordinator_node]: Assigned fragment fm2-19 to robot robot2.
+[INFO] [1787853524.514936628] [multi3_coordinator_node]: Assigned fragment fm2-23 to robot robot9.
+[INFO] [1787853524.535730510] [multi3_coordinator_node]: Received robot state update from robot robot9: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-23', 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853524.536854104] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-19', 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853525.812023657] [multi3_coordinator_node]: Fragment fm2-10 is now executable because all signal messages were received.
+[INFO] [1787853525.812588558] [multi3_coordinator_node]: Received robot state update from robot robot4: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853525.813620717] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot4', 'completed_fragment': 'fm2-9', 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853525.814395791] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot4', 'completed_task': 'disinfect(r2)'}
+[INFO] [1787853526.416293837] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot8', 'completed_fragment': 'fm2-3', 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853526.416726887] [multi3_coordinator_node]: Fragment fm2-4 is now executable because all signal messages were received.
+[INFO] [1787853526.417856531] [multi3_coordinator_node]: Received robot state update from robot robot8: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853526.418584728] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot8', 'completed_task': 'mop(r1)'}
+[INFO] [1787853526.507129647] [multi3_coordinator_node]: Assigned fragment fm2-4 to robot robot4.
+[INFO] [1787853526.514539526] [multi3_coordinator_node]: Assigned fragment fm2-10 to robot robot6.
+[INFO] [1787853526.532275516] [multi3_coordinator_node]: Received robot state update from robot robot4: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-4', 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853526.533067431] [multi3_coordinator_node]: Received robot state update from robot robot6: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-10', 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853534.595012535] [multi3_coordinator_node]: Fragment fm2-28 is now executable because all signal messages were received.
+[INFO] [1787853534.595756300] [multi3_coordinator_node]: Received robot state update from robot robot3: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853534.596861683] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot3', 'completed_fragment': 'fm2-27', 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853534.597492282] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot3', 'completed_task': 'vacuum(r6)'}
+[INFO] [1787853535.378416716] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot7', 'completed_fragment': 'fm2-33', 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853535.380308853] [multi3_coordinator_node]: Received robot state update from robot robot7: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853535.381407302] [multi3_coordinator_node]: Fragment fm2-34 is now executable because all signal messages were received.
+[INFO] [1787853535.382270904] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot7', 'completed_task': 'mop(r7)'}
+[INFO] [1787853535.521111563] [multi3_coordinator_node]: Assigned fragment fm2-28 to robot robot7.
+[INFO] [1787853535.525854148] [multi3_coordinator_node]: Assigned fragment fm2-34 to robot robot3.
+[INFO] [1787853535.556002895] [multi3_coordinator_node]: Received robot state update from robot robot3: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-34', 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853535.557083554] [multi3_coordinator_node]: Received robot state update from robot robot7: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-28', 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853542.571586583] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853542.572995450] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_fragment': 'fm2-19', 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853542.573820023] [multi3_coordinator_node]: Fragment fm2-20 is now executable because all signal messages were received.
+[INFO] [1787853542.574607106] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_task': 'disinfect(r4)'}
+[INFO] [1787853543.504807075] [multi3_coordinator_node]: Assigned fragment fm2-20 to robot robot2.
+[INFO] [1787853543.521614223] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-20', 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853545.640249854] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot6', 'completed_task': 'final_room_check(r2)'}
+[INFO] [1787853545.642071292] [multi3_coordinator_node]: Received robot state update from robot robot6: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853545.642979713] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot6', 'completed_fragment': 'fm2-10', 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853549.936030966] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot3', 'completed_fragment': 'fm2-34', 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853549.936743474] [multi3_coordinator_node]: Received robot state update from robot robot3: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853549.937836930] [multi3_coordinator_node]: Fragment fm2-35 is now executable because all signal messages were received.
+[INFO] [1787853549.938258829] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot3', 'completed_task': 'disinfect(r7)'}
+[INFO] [1787853550.505919141] [multi3_coordinator_node]: Assigned fragment fm2-35 to robot robot8.
+[INFO] [1787853550.526016850] [multi3_coordinator_node]: Received robot state update from robot robot8: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-35', 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853551.194142913] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853551.195158834] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'fm2-37', 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853551.196196852] [multi3_coordinator_node]: Fragment fm2-38 is now executable because all signal messages were received.
+[INFO] [1787853551.196909134] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'vacuum(r8)'}
+[INFO] [1787853551.509124499] [multi3_coordinator_node]: Assigned fragment fm2-38 to robot robot6.
+[INFO] [1787853551.567428561] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853551.569504924] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_task': 'final_room_check(r4)'}
+[INFO] [1787853551.569943629] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_fragment': 'fm2-20', 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853551.570241473] [multi3_coordinator_node]: Received robot state update from robot robot6: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-38', 'state': {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853559.904456282] [multi3_coordinator_node]: Fragment fm2-14 is now executable because all signal messages were received.
+[INFO] [1787853559.958377001] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot5', 'completed_fragment': 'fm2-13', 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853559.959620631] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot5', 'completed_task': 'mop(r3)'}
+[INFO] [1787853559.960365307] [multi3_coordinator_node]: Received robot state update from robot robot5: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853560.511315540] [multi3_coordinator_node]: Assigned fragment fm2-14 to robot robot1.
+[INFO] [1787853560.518339818] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-14', 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853560.592624489] [multi3_coordinator_node]: Received robot state update from robot robot4: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853560.593675363] [multi3_coordinator_node]: Fragment fm2-5 is now executable because all signal messages were received.
+[INFO] [1787853560.595311450] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot4', 'completed_fragment': 'fm2-4', 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853560.596214348] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot4', 'completed_task': 'disinfect(r1)'}
+[INFO] [1787853561.500640420] [multi3_coordinator_node]: Assigned fragment fm2-5 to robot robot2.
+[INFO] [1787853561.515871349] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-5', 'state': {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853566.751831720] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot8', 'completed_task': 'final_room_check(r7)'}
+[INFO] [1787853566.752318754] [multi3_coordinator_node]: Received robot state update from robot robot8: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853566.753048788] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot8', 'completed_fragment': 'fm2-35', 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853566.874139761] [multi3_coordinator_node]: Received robot state update from robot robot9: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853566.876025562] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot9', 'completed_fragment': 'fm2-23', 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853566.877007171] [multi3_coordinator_node]: Fragment fm2-24 is now executable because all signal messages were received.
+[INFO] [1787853566.877862330] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot9', 'completed_task': 'mop(r5)'}
+[INFO] [1787853567.507170123] [multi3_coordinator_node]: Assigned fragment fm2-24 to robot robot5.
+[INFO] [1787853567.550397883] [multi3_coordinator_node]: Received robot state update from robot robot5: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-24', 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853579.140352798] [multi3_coordinator_node]: Fragment fm2-29 is now executable because all signal messages were received.
+[INFO] [1787853579.143409510] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot7', 'completed_fragment': 'fm2-28', 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853579.144223043] [multi3_coordinator_node]: Received robot state update from robot robot7: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853579.144884031] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot7', 'completed_task': 'mop(r6)'}
+[INFO] [1787853579.511534417] [multi3_coordinator_node]: Assigned fragment fm2-29 to robot robot3.
+[INFO] [1787853579.536763009] [multi3_coordinator_node]: Received robot state update from robot robot3: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-29', 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853587.009900944] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853587.011426017] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_task': 'final_room_check(r1)'}
+[INFO] [1787853587.012106107] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_fragment': 'fm2-5', 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853592.676098583] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_fragment': 'fm2-14', 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853592.677625109] [multi3_coordinator_node]: Received robot state update from robot robot1: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853592.678834565] [multi3_coordinator_node]: Fragment fm2-15 is now executable because all signal messages were received.
+[INFO] [1787853592.679529166] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot1', 'completed_task': 'disinfect(r3)'}
+[INFO] [1787853593.504561534] [multi3_coordinator_node]: Assigned fragment fm2-15 to robot robot2.
+[INFO] [1787853593.521988707] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-15', 'state': {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853597.577498429] [multi3_coordinator_node]: Fragment fm2-25 is now executable because all signal messages were received.
+[INFO] [1787853597.579206493] [multi3_coordinator_node]: Received robot state update from robot robot5: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853597.579933534] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot5', 'completed_fragment': 'fm2-24', 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853597.580607217] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot5', 'completed_task': 'disinfect(r5)'}
+[INFO] [1787853598.514208980] [multi3_coordinator_node]: Assigned fragment fm2-25 to robot robot9.
+[INFO] [1787853598.537357245] [multi3_coordinator_node]: Received robot state update from robot robot9: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-25', 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853602.039942425] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot3', 'completed_fragment': 'fm2-29', 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853602.041007270] [multi3_coordinator_node]: Received robot state update from robot robot3: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853602.041714533] [multi3_coordinator_node]: Fragment fm2-30 is now executable because all signal messages were received.
+[INFO] [1787853602.042236225] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot3', 'completed_task': 'disinfect(r6)'}
+[INFO] [1787853602.508181917] [multi3_coordinator_node]: Assigned fragment fm2-30 to robot robot8.
+[INFO] [1787853602.551725597] [multi3_coordinator_node]: Received robot state update from robot robot8: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-30', 'state': {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853606.063003097] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot9', 'completed_fragment': 'fm2-25', 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853606.064245811] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot9', 'completed_task': 'final_room_check(r5)'}
+[INFO] [1787853606.064917202] [multi3_coordinator_node]: Received robot state update from robot robot9: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853608.601719835] [multi3_coordinator_node]: Received robot state update from robot robot6: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853608.602842637] [multi3_coordinator_node]: Fragment fm2-39 is now executable because all signal messages were received.
+[INFO] [1787853608.603267656] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot6', 'completed_fragment': 'fm2-38', 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853608.604271676] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot6', 'completed_task': 'mop(r8)'}
+[INFO] [1787853609.505987500] [multi3_coordinator_node]: Assigned fragment fm2-39 to robot robot5.
+[INFO] [1787853609.545993568] [multi3_coordinator_node]: Received robot state update from robot robot5: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-39', 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853620.037801095] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot8', 'completed_fragment': 'fm2-30', 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853620.039863441] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot8', 'completed_task': 'final_room_check(r6)'}
+[INFO] [1787853620.040807466] [multi3_coordinator_node]: Received robot state update from robot robot8: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853620.221732373] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_task': 'final_room_check(r3)'}
+[INFO] [1787853620.222943863] [multi3_coordinator_node]: Received robot state update from robot robot2: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853620.223812121] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot2', 'completed_fragment': 'fm2-15', 'state': {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853647.135106501] [multi3_coordinator_node]: Fragment fm2-40 is now executable because all signal messages were received.
+[INFO] [1787853647.136343408] [multi3_coordinator_node]: Received robot state update from robot robot5: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853647.136995357] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot5', 'completed_fragment': 'fm2-39', 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853647.137743130] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot5', 'completed_task': 'disinfect(r8)'}
+[INFO] [1787853647.506416483] [multi3_coordinator_node]: Assigned fragment fm2-40 to robot robot9.
+[INFO] [1787853647.518232481] [multi3_coordinator_node]: Received robot state update from robot robot9: {'operational_state': 'working', 'current_assigned_fragment': 'fm2-40', 'state': {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853681.630246536] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot9', 'completed_task': 'final_room_check(r8)'}
+[INFO] [1787853681.631880947] [multi3_coordinator_node]: Received coordination message: {'robot_name': 'robot9', 'completed_fragment': 'fm2-40', 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+[INFO] [1787853681.632743606] [multi3_coordinator_node]: Received robot state update from robot robot9: {'operational_state': 'idle', 'current_assigned_fragment': None, 'state': {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}}
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_coordinator/lib/multi3_coordinator/coordinator", line 33, in <module>
+    sys.exit(load_entry_point('multi3-coordinator==0.0.0', 'console_scripts', 'coordinator')())
+  File "/root/ros2_ws/install/multi3_coordinator/lib/python3.10/site-packages/nodes/coordinator.py", line 371, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+
+--- executor_robot1.log ---
+[INFO] [1787853391.140387757] [robot1.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787853391.141627677] [robot1.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787853391.142478121] [robot1.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853391.143568799] [robot1.fragment_exec_node]: Setting up skill: VacuumSkill
+[INFO] [1787853391.144530460] [robot1.fragment_exec_node]: Setting up skill: DisinfectSkill
+[INFO] [1787853391.145402769] [robot1.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853391.151209013] [robot1.fragment_exec_node]: Published robot registration: {'name': 'robot1', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'vacuum', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.574772299] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm2-36', 'mission': 'm2', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r8)', 'params': {'x': 2, 'y': 8, 'size': 7}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's8'}}
+[INFO] [1787853417.575585289] [robot1.fragment_exec_node]: Starting execution of fragment fm2-36...
+[INFO] [1787853417.576536889] [robot1.fragment_exec_node]: Executing task check_room(r8). Params: {'x': 2, 'y': 8, 'size': 7}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787853417.579021443] [robot1.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot1, Mission: m2, Segment: s8, Start: 1787853417.5767539
+[INFO] [1787853417.580445725] [robot1.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787853421.584541124] [robot1.fragment_exec_node]: Undock completed!
+[INFO] [1787853421.587591745] [robot1.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot1, Mission: m2, Segment: s8, End: 1787853421.5856779
+[INFO] [1787853421.590123288] [robot1.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot1, Mission: m2, Segment: s8, Start: 1787853421.5885794
+[INFO] [1787853421.591955988] [robot1.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (2, 8) (16.492422502470642 seconds)...
+[INFO] [1787853438.088510137] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787853438.091995303] [robot1.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot1, Mission: m2, Segment: s8, End: 1787853438.090252
+[INFO] [1787853438.093910309] [robot1.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot1, Mission: m2, Segment: s8, Start: 1787853438.093023
+[INFO] [1787853438.095622562] [robot1.fragment_exec_node]: Simulating check_room skill (10.5s to complete)...
+[INFO] [1787853448.588260405] [robot1.fragment_exec_node]: Check room completed!
+[INFO] [1787853448.590471899] [robot1.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot1, Mission: m2, Segment: s8, End: 1787853448.589391
+[INFO] [1787853448.592253950] [robot1.fragment_exec_node]: Execution of fragment fm2-36 completed!
+[INFO] [1787853449.509249408] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm2-7', 'mission': 'm2', 'state': 'assigned', 'wait': ['check_room(r2)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r2)', 'params': {'x': 10, 'y': 5, 'size': 3}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's2'}}
+[INFO] [1787853449.510872294] [robot1.fragment_exec_node]: Starting execution of fragment fm2-7...
+[INFO] [1787853449.512682710] [robot1.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-7: ['check_room(r2)']
+[INFO] [1787853451.517792439] [robot1.fragment_exec_node]: Executing task vacuum(r2). Params: {'x': 10, 'y': 5, 'size': 3}, Virtual state: {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}
+[INFO] [1787853451.519264385] [robot1.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot1, Mission: m2, Segment: s2, Start: 1787853451.5183823
+[INFO] [1787853451.521230523] [robot1.fragment_exec_node]: Simulating navigate skill from position (2, 8) to (10, 5) (17.08800749063506 seconds)...
+[INFO] [1787853468.613429377] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787853468.616067892] [robot1.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot1, Mission: m2, Segment: s2, End: 1787853468.614785
+[INFO] [1787853468.617971908] [robot1.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot1, Mission: m2, Segment: s2, Start: 1787853468.616871
+[INFO] [1787853468.619451459] [robot1.fragment_exec_node]: Simulating vacuum skill (10.5s to complete)...
+[INFO] [1787853479.133020040] [robot1.fragment_exec_node]: Vacuum completed!
+[INFO] [1787853479.135962398] [robot1.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot1, Mission: m2, Segment: s2, End: 1787853479.134242
+[INFO] [1787853479.138278054] [robot1.fragment_exec_node]: Execution of fragment fm2-7 completed!
+[INFO] [1787853479.522253200] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm2-17', 'mission': 'm2', 'state': 'assigned', 'wait': ['check_room(r4)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r4)', 'params': {'x': 8, 'y': 9, 'size': 4}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's4'}}
+[INFO] [1787853479.523760902] [robot1.fragment_exec_node]: Starting execution of fragment fm2-17...
+[INFO] [1787853479.525171484] [robot1.fragment_exec_node]: Executing task vacuum(r4). Params: {'x': 8, 'y': 9, 'size': 4}, Virtual state: {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787853479.526116328] [robot1.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot1, Mission: m2, Segment: s4, Start: 1787853479.5256028
+[INFO] [1787853479.526989743] [robot1.fragment_exec_node]: Simulating navigate skill from position (10, 5) to (8, 9) (4.47213595499958 seconds)...
+[INFO] [1787853484.002970143] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787853484.005848280] [robot1.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot1, Mission: m2, Segment: s4, End: 1787853484.004063
+[INFO] [1787853484.007629954] [robot1.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot1, Mission: m2, Segment: s4, Start: 1787853484.0065103
+[INFO] [1787853484.009679806] [robot1.fragment_exec_node]: Simulating vacuum skill (14.0s to complete)...
+[INFO] [1787853498.013844931] [robot1.fragment_exec_node]: Vacuum completed!
+[INFO] [1787853498.016605041] [robot1.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot1, Mission: m2, Segment: s4, End: 1787853498.0151381
+[INFO] [1787853498.019181472] [robot1.fragment_exec_node]: Execution of fragment fm2-17 completed!
+[INFO] [1787853498.524541800] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm2-32', 'mission': 'm2', 'state': 'assigned', 'wait': ['check_room(r7)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r7)', 'params': {'x': 9, 'y': 7, 'size': 3}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's7'}}
+[INFO] [1787853498.525282749] [robot1.fragment_exec_node]: Starting execution of fragment fm2-32...
+[INFO] [1787853498.526654233] [robot1.fragment_exec_node]: Executing task vacuum(r7). Params: {'x': 9, 'y': 7, 'size': 3}, Virtual state: {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}
+[INFO] [1787853498.527547015] [robot1.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot1, Mission: m2, Segment: s7, Start: 1787853498.5271087
+[INFO] [1787853498.528294355] [robot1.fragment_exec_node]: Simulating navigate skill from position (8, 9) to (9, 7) (2.8284271247461903 seconds)...
+[INFO] [1787853501.360271648] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787853501.362841932] [robot1.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot1, Mission: m2, Segment: s7, End: 1787853501.3613727
+[INFO] [1787853501.365153636] [robot1.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot1, Mission: m2, Segment: s7, Start: 1787853501.3641276
+[INFO] [1787853501.366870615] [robot1.fragment_exec_node]: Simulating vacuum skill (10.5s to complete)...
+[INFO] [1787853511.869387550] [robot1.fragment_exec_node]: Vacuum completed!
+[INFO] [1787853511.870031001] [robot1.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot1, Mission: m2, Segment: s7, End: 1787853511.8697052
+[INFO] [1787853511.870940159] [robot1.fragment_exec_node]: Execution of fragment fm2-32 completed!
+[INFO] [1787853512.515027111] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm2-37', 'mission': 'm2', 'state': 'assigned', 'wait': ['check_room(r8)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r8)', 'params': {'x': 2, 'y': 8, 'size': 7}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's8'}}
+[INFO] [1787853512.516278730] [robot1.fragment_exec_node]: Starting execution of fragment fm2-37...
+[INFO] [1787853512.517956927] [robot1.fragment_exec_node]: Executing task vacuum(r8). Params: {'x': 2, 'y': 8, 'size': 7}, Virtual state: {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}
+[INFO] [1787853512.518994872] [robot1.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot1, Mission: m2, Segment: s8, Start: 1787853512.5182595
+[INFO] [1787853512.520037623] [robot1.fragment_exec_node]: Simulating navigate skill from position (9, 7) to (2, 8) (14.142135623730951 seconds)...
+[INFO] [1787853526.666251999] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787853526.668197660] [robot1.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot1, Mission: m2, Segment: s8, End: 1787853526.6669834
+[INFO] [1787853526.669515096] [robot1.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot1, Mission: m2, Segment: s8, Start: 1787853526.668626
+[INFO] [1787853526.671073021] [robot1.fragment_exec_node]: Simulating vacuum skill (24.5s to complete)...
+[INFO] [1787853551.174117029] [robot1.fragment_exec_node]: Vacuum completed!
+[INFO] [1787853551.175547872] [robot1.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot1, Mission: m2, Segment: s8, End: 1787853551.1750064
+[INFO] [1787853551.176799670] [robot1.fragment_exec_node]: Execution of fragment fm2-37 completed!
+[INFO] [1787853560.510594170] [robot1.fragment_exec_node]: Received fragment assignment: {'robot': 'robot1', 'fragment': {'id': 'fm2-14', 'mission': 'm2', 'state': 'assigned', 'wait': ['mop(r3)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r3)', 'params': {'x': 3, 'y': 11, 'size': 7}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's3'}}
+[INFO] [1787853560.512807633] [robot1.fragment_exec_node]: Starting execution of fragment fm2-14...
+[INFO] [1787853560.515331377] [robot1.fragment_exec_node]: Executing task disinfect(r3). Params: {'x': 3, 'y': 11, 'size': 7}, Virtual state: {'position': {'x': 2, 'y': 8, 'z': 0.0}, 'docked': False}
+[INFO] [1787853560.516701897] [robot1.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot1, Mission: m2, Segment: s3, Start: 1787853560.5158436
+[INFO] [1787853560.518118419] [robot1.fragment_exec_node]: Simulating navigate skill from position (2, 8) to (3, 11) (18.110770276274835 seconds)...
+[INFO] [1787853578.633157722] [robot1.fragment_exec_node]: Navigation completed!
+[INFO] [1787853578.636652142] [robot1.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot1, Mission: m2, Segment: s3, End: 1787853578.6351683
+[INFO] [1787853578.638306717] [robot1.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot1, Mission: m2, Segment: s3, Start: 1787853578.6374078
+[INFO] [1787853578.640007865] [robot1.fragment_exec_node]: Simulating disinfect skill (14s to complete)...
+[INFO] [1787853592.644195274] [robot1.fragment_exec_node]: Disinfect completed!
+[INFO] [1787853592.648277451] [robot1.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot1, Mission: m2, Segment: s3, End: 1787853592.6469622
+[INFO] [1787853592.650511272] [robot1.fragment_exec_node]: Execution of fragment fm2-14 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+
+--- executor_robot2.log ---
+[INFO] [1787853393.473877830] [robot2.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787853393.474688926] [robot2.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787853393.475452357] [robot2.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853393.476327707] [robot2.fragment_exec_node]: Setting up skill: VacuumSkill
+[INFO] [1787853393.476964807] [robot2.fragment_exec_node]: Setting up skill: DisinfectSkill
+[INFO] [1787853393.477502028] [robot2.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853393.483673508] [robot2.fragment_exec_node]: Published robot registration: {'name': 'robot2', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'vacuum', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.509648994] [robot2.fragment_exec_node]: Received fragment assignment: {'robot': 'robot2', 'fragment': {'id': 'fm2-6', 'mission': 'm2', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r2)', 'params': {'x': 10, 'y': 5, 'size': 3}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's2'}}
+[INFO] [1787853417.518728688] [robot2.fragment_exec_node]: Starting execution of fragment fm2-6...
+[INFO] [1787853417.524322511] [robot2.fragment_exec_node]: Executing task check_room(r2). Params: {'x': 10, 'y': 5, 'size': 3}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787853417.526726561] [robot2.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot2, Mission: m2, Segment: s2, Start: 1787853417.5247812
+[INFO] [1787853417.527705403] [robot2.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787853421.529525802] [robot2.fragment_exec_node]: Undock completed!
+[INFO] [1787853421.530258962] [robot2.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot2, Mission: m2, Segment: s2, End: 1787853421.5298927
+[INFO] [1787853421.530690819] [robot2.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot2, Mission: m2, Segment: s2, Start: 1787853421.5304034
+[INFO] [1787853421.531118899] [robot2.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (10, 5) (22.360679774997898 seconds)...
+[INFO] [1787853443.883815896] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787853443.885834667] [robot2.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot2, Mission: m2, Segment: s2, End: 1787853443.8846426
+[INFO] [1787853443.887199529] [robot2.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot2, Mission: m2, Segment: s2, Start: 1787853443.8863144
+[INFO] [1787853443.888425801] [robot2.fragment_exec_node]: Simulating check_room skill (4.5s to complete)...
+[INFO] [1787853448.390656974] [robot2.fragment_exec_node]: Check room completed!
+[INFO] [1787853448.391952456] [robot2.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot2, Mission: m2, Segment: s2, End: 1787853448.391166
+[INFO] [1787853448.393643929] [robot2.fragment_exec_node]: Execution of fragment fm2-6 completed!
+[INFO] [1787853448.555984222] [robot2.fragment_exec_node]: Received fragment assignment: {'robot': 'robot2', 'fragment': {'id': 'fm2-2', 'mission': 'm2', 'state': 'assigned', 'wait': ['check_room(r1)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's1'}}
+[INFO] [1787853448.556728438] [robot2.fragment_exec_node]: Starting execution of fragment fm2-2...
+[INFO] [1787853448.557642598] [robot2.fragment_exec_node]: Executing task vacuum(r1). Params: {'x': 4, 'y': 2, 'size': 6}, Virtual state: {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787853448.558312105] [robot2.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot2, Mission: m2, Segment: s1, Start: 1787853448.557964
+[INFO] [1787853448.558862163] [robot2.fragment_exec_node]: Simulating navigate skill from position (10, 5) to (4, 2) (20.0 seconds)...
+[INFO] [1787853468.561950854] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787853468.564060601] [robot2.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot2, Mission: m2, Segment: s1, End: 1787853468.562848
+[INFO] [1787853468.565699085] [robot2.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot2, Mission: m2, Segment: s1, Start: 1787853468.5646005
+[INFO] [1787853468.567404804] [robot2.fragment_exec_node]: Simulating vacuum skill (21.0s to complete)...
+[INFO] [1787853489.580716845] [robot2.fragment_exec_node]: Vacuum completed!
+[INFO] [1787853489.583580535] [robot2.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot2, Mission: m2, Segment: s1, End: 1787853489.5819638
+[INFO] [1787853489.586158596] [robot2.fragment_exec_node]: Execution of fragment fm2-2 completed!
+[INFO] [1787853490.512809159] [robot2.fragment_exec_node]: Received fragment assignment: {'robot': 'robot2', 'fragment': {'id': 'fm2-22', 'mission': 'm2', 'state': 'assigned', 'wait': ['check_room(r5)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r5)', 'params': {'x': 12, 'y': 3, 'size': 5}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's5'}}
+[INFO] [1787853490.514040753] [robot2.fragment_exec_node]: Starting execution of fragment fm2-22...
+[INFO] [1787853490.515732874] [robot2.fragment_exec_node]: Executing task vacuum(r5). Params: {'x': 12, 'y': 3, 'size': 5}, Virtual state: {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}
+[INFO] [1787853490.516931296] [robot2.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot2, Mission: m2, Segment: s5, Start: 1787853490.5163968
+[INFO] [1787853490.518279710] [robot2.fragment_exec_node]: Simulating navigate skill from position (4, 2) to (12, 3) (16.1245154965971 seconds)...
+[INFO] [1787853506.645357633] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787853506.646264410] [robot2.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot2, Mission: m2, Segment: s5, End: 1787853506.6457546
+[INFO] [1787853506.647023799] [robot2.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot2, Mission: m2, Segment: s5, Start: 1787853506.6465063
+[INFO] [1787853506.647702661] [robot2.fragment_exec_node]: Simulating vacuum skill (17.5s to complete)...
+[INFO] [1787853524.155855024] [robot2.fragment_exec_node]: Vacuum completed!
+[INFO] [1787853524.157533280] [robot2.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot2, Mission: m2, Segment: s5, End: 1787853524.1566224
+[INFO] [1787853524.159673981] [robot2.fragment_exec_node]: Execution of fragment fm2-22 completed!
+[INFO] [1787853524.521189699] [robot2.fragment_exec_node]: Received fragment assignment: {'robot': 'robot2', 'fragment': {'id': 'fm2-19', 'mission': 'm2', 'state': 'assigned', 'wait': ['mop(r4)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r4)', 'params': {'x': 8, 'y': 9, 'size': 4}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's4'}}
+[INFO] [1787853524.522299286] [robot2.fragment_exec_node]: Starting execution of fragment fm2-19...
+[INFO] [1787853524.524239270] [robot2.fragment_exec_node]: Executing task disinfect(r4). Params: {'x': 8, 'y': 9, 'size': 4}, Virtual state: {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}
+[INFO] [1787853524.525317177] [robot2.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot2, Mission: m2, Segment: s4, Start: 1787853524.524656
+[INFO] [1787853524.526219558] [robot2.fragment_exec_node]: Simulating navigate skill from position (12, 3) to (8, 9) (10.0 seconds)...
+[INFO] [1787853534.527976809] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787853534.529257021] [robot2.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot2, Mission: m2, Segment: s4, End: 1787853534.528518
+[INFO] [1787853534.530332626] [robot2.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot2, Mission: m2, Segment: s4, Start: 1787853534.529673
+[INFO] [1787853534.531926041] [robot2.fragment_exec_node]: Simulating disinfect skill (8s to complete)...
+[INFO] [1787853542.533244642] [robot2.fragment_exec_node]: Disinfect completed!
+[INFO] [1787853542.534035797] [robot2.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot2, Mission: m2, Segment: s4, End: 1787853542.5335512
+[INFO] [1787853542.534966595] [robot2.fragment_exec_node]: Execution of fragment fm2-19 completed!
+[INFO] [1787853543.518098856] [robot2.fragment_exec_node]: Received fragment assignment: {'robot': 'robot2', 'fragment': {'id': 'fm2-20', 'mission': 'm2', 'state': 'assigned', 'wait': ['disinfect(r4)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r4)', 'params': {'x': 8, 'y': 9, 'size': 4}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's4'}}
+[INFO] [1787853543.519152271] [robot2.fragment_exec_node]: Starting execution of fragment fm2-20...
+[INFO] [1787853543.520035392] [robot2.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-20: ['disinfect(r4)']
+[ERROR] [1787853545.524268749] [robot2.fragment_exec_node]: Robot robot2 was assigned a fragment without required capabilities!
+[INFO] [1787853545.525544897] [robot2.fragment_exec_node]: Executing task final_room_check(r4). Params: {'x': 8, 'y': 9, 'size': 4}, Virtual state: {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}
+[INFO] [1787853545.526595293] [robot2.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot2, Mission: m2, Segment: s4, Start: 1787853545.5259738
+[INFO] [1787853545.527402862] [robot2.fragment_exec_node]: Simulating check_room skill (6.0s to complete)...
+[INFO] [1787853551.528544182] [robot2.fragment_exec_node]: Check room completed!
+[INFO] [1787853551.529801334] [robot2.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot2, Mission: m2, Segment: s4, End: 1787853551.5291338
+[INFO] [1787853551.531439745] [robot2.fragment_exec_node]: Execution of fragment fm2-20 completed!
+[INFO] [1787853561.510176992] [robot2.fragment_exec_node]: Received fragment assignment: {'robot': 'robot2', 'fragment': {'id': 'fm2-5', 'mission': 'm2', 'state': 'assigned', 'wait': ['disinfect(r1)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's1'}}
+[INFO] [1787853561.511230800] [robot2.fragment_exec_node]: Starting execution of fragment fm2-5...
+[INFO] [1787853561.512430793] [robot2.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-5: ['disinfect(r1)']
+[ERROR] [1787853563.517202337] [robot2.fragment_exec_node]: Robot robot2 was assigned a fragment without required capabilities!
+[INFO] [1787853563.521199312] [robot2.fragment_exec_node]: Executing task final_room_check(r1). Params: {'x': 4, 'y': 2, 'size': 6}, Virtual state: {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}
+[INFO] [1787853563.523062553] [robot2.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot2, Mission: m2, Segment: s1, Start: 1787853563.5219114
+[INFO] [1787853563.525161703] [robot2.fragment_exec_node]: Simulating navigate skill from position (8, 9) to (4, 2) (14.422205101855956 seconds)...
+[INFO] [1787853577.949631416] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787853577.951811588] [robot2.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot2, Mission: m2, Segment: s1, End: 1787853577.9508882
+[INFO] [1787853577.953149321] [robot2.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot2, Mission: m2, Segment: s1, Start: 1787853577.9524217
+[INFO] [1787853577.954395028] [robot2.fragment_exec_node]: Simulating check_room skill (9.0s to complete)...
+[INFO] [1787853586.960260797] [robot2.fragment_exec_node]: Check room completed!
+[INFO] [1787853586.962717684] [robot2.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot2, Mission: m2, Segment: s1, End: 1787853586.9615538
+[INFO] [1787853586.966021451] [robot2.fragment_exec_node]: Execution of fragment fm2-5 completed!
+[INFO] [1787853593.508752078] [robot2.fragment_exec_node]: Received fragment assignment: {'robot': 'robot2', 'fragment': {'id': 'fm2-15', 'mission': 'm2', 'state': 'assigned', 'wait': ['disinfect(r3)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r3)', 'params': {'x': 3, 'y': 11, 'size': 7}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's3'}}
+[INFO] [1787853593.513423153] [robot2.fragment_exec_node]: Starting execution of fragment fm2-15...
+[INFO] [1787853593.515429804] [robot2.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-15: ['disinfect(r3)']
+[ERROR] [1787853595.519381495] [robot2.fragment_exec_node]: Robot robot2 was assigned a fragment without required capabilities!
+[INFO] [1787853595.520454730] [robot2.fragment_exec_node]: Executing task final_room_check(r3). Params: {'x': 3, 'y': 11, 'size': 7}, Virtual state: {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}
+[INFO] [1787853595.521327063] [robot2.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot2, Mission: m2, Segment: s3, Start: 1787853595.5208488
+[INFO] [1787853595.522117217] [robot2.fragment_exec_node]: Simulating navigate skill from position (4, 2) to (3, 11) (14.142135623730951 seconds)...
+[INFO] [1787853609.668163563] [robot2.fragment_exec_node]: Navigation completed!
+[INFO] [1787853609.673036469] [robot2.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot2, Mission: m2, Segment: s3, End: 1787853609.6708477
+[INFO] [1787853609.674759791] [robot2.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot2, Mission: m2, Segment: s3, Start: 1787853609.673695
+[INFO] [1787853609.676432750] [robot2.fragment_exec_node]: Simulating check_room skill (10.5s to complete)...
+[INFO] [1787853620.178203514] [robot2.fragment_exec_node]: Check room completed!
+[INFO] [1787853620.179597851] [robot2.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot2, Mission: m2, Segment: s3, End: 1787853620.1790917
+[INFO] [1787853620.180582765] [robot2.fragment_exec_node]: Execution of fragment fm2-15 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+
+--- executor_robot3.log ---
+[INFO] [1787853395.595817286] [robot3.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787853395.596724075] [robot3.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787853395.597619945] [robot3.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853395.598656096] [robot3.fragment_exec_node]: Setting up skill: VacuumSkill
+[INFO] [1787853395.599556738] [robot3.fragment_exec_node]: Setting up skill: DisinfectSkill
+[INFO] [1787853395.600127965] [robot3.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853395.607360616] [robot3.fragment_exec_node]: Published robot registration: {'name': 'robot3', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'vacuum', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.538291548] [robot3.fragment_exec_node]: Received fragment assignment: {'robot': 'robot3', 'fragment': {'id': 'fm2-26', 'mission': 'm2', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r6)', 'params': {'x': 6, 'y': 12, 'size': 6}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's6'}}
+[INFO] [1787853417.542501021] [robot3.fragment_exec_node]: Starting execution of fragment fm2-26...
+[INFO] [1787853417.543483777] [robot3.fragment_exec_node]: Executing task check_room(r6). Params: {'x': 6, 'y': 12, 'size': 6}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787853417.544188086] [robot3.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot3, Mission: m2, Segment: s6, Start: 1787853417.5437217
+[INFO] [1787853417.545322157] [robot3.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787853421.546740799] [robot3.fragment_exec_node]: Undock completed!
+[INFO] [1787853421.547412747] [robot3.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot3, Mission: m2, Segment: s6, End: 1787853421.5470374
+[INFO] [1787853421.548232221] [robot3.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot3, Mission: m2, Segment: s6, Start: 1787853421.5477414
+[INFO] [1787853421.548785963] [robot3.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (6, 12) (26.832815729997478 seconds)...
+[INFO] [1787853448.374930326] [robot3.fragment_exec_node]: Navigation completed!
+[INFO] [1787853448.377685204] [robot3.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot3, Mission: m2, Segment: s6, End: 1787853448.3762004
+[INFO] [1787853448.379406105] [robot3.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot3, Mission: m2, Segment: s6, Start: 1787853448.3783345
+[INFO] [1787853448.381192639] [robot3.fragment_exec_node]: Simulating check_room skill (9.0s to complete)...
+[INFO] [1787853457.385142559] [robot3.fragment_exec_node]: Check room completed!
+[INFO] [1787853457.388143312] [robot3.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot3, Mission: m2, Segment: s6, End: 1787853457.3862476
+[INFO] [1787853457.390488721] [robot3.fragment_exec_node]: Execution of fragment fm2-26 completed!
+[INFO] [1787853457.532810978] [robot3.fragment_exec_node]: Received fragment assignment: {'robot': 'robot3', 'fragment': {'id': 'fm2-12', 'mission': 'm2', 'state': 'assigned', 'wait': ['check_room(r3)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r3)', 'params': {'x': 3, 'y': 11, 'size': 7}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's3'}}
+[INFO] [1787853457.533663825] [robot3.fragment_exec_node]: Starting execution of fragment fm2-12...
+[INFO] [1787853457.534527369] [robot3.fragment_exec_node]: Executing task vacuum(r3). Params: {'x': 3, 'y': 11, 'size': 7}, Virtual state: {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}
+[INFO] [1787853457.535315074] [robot3.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot3, Mission: m2, Segment: s3, Start: 1787853457.5349476
+[INFO] [1787853457.535919358] [robot3.fragment_exec_node]: Simulating navigate skill from position (6, 12) to (3, 11) (11.661903789690601 seconds)...
+[INFO] [1787853469.202016325] [robot3.fragment_exec_node]: Navigation completed!
+[INFO] [1787853469.205078112] [robot3.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot3, Mission: m2, Segment: s3, End: 1787853469.2032888
+[INFO] [1787853469.206788368] [robot3.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot3, Mission: m2, Segment: s3, Start: 1787853469.205709
+[INFO] [1787853469.208424204] [robot3.fragment_exec_node]: Simulating vacuum skill (24.5s to complete)...
+[INFO] [1787853493.720864747] [robot3.fragment_exec_node]: Vacuum completed!
+[INFO] [1787853493.722779132] [robot3.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot3, Mission: m2, Segment: s3, End: 1787853493.7216558
+[INFO] [1787853493.725119106] [robot3.fragment_exec_node]: Execution of fragment fm2-12 completed!
+[INFO] [1787853494.510854064] [robot3.fragment_exec_node]: Received fragment assignment: {'robot': 'robot3', 'fragment': {'id': 'fm2-27', 'mission': 'm2', 'state': 'assigned', 'wait': ['check_room(r6)'], 'tasks': [{'name': 'vacuum', 'label': 'vacuum(r6)', 'params': {'x': 6, 'y': 12, 'size': 6}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's6'}}
+[INFO] [1787853494.515099559] [robot3.fragment_exec_node]: Starting execution of fragment fm2-27...
+[INFO] [1787853494.528478594] [robot3.fragment_exec_node]: Executing task vacuum(r6). Params: {'x': 6, 'y': 12, 'size': 6}, Virtual state: {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}
+[INFO] [1787853494.529786518] [robot3.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot3, Mission: m2, Segment: s6, Start: 1787853494.528932
+[INFO] [1787853494.530706089] [robot3.fragment_exec_node]: Simulating navigate skill from position (3, 11) to (6, 12) (18.973665961010276 seconds)...
+[INFO] [1787853513.506449809] [robot3.fragment_exec_node]: Navigation completed!
+[INFO] [1787853513.507467999] [robot3.fragment_exec_node]: EventType: Control (Task: vacuum), Activity: move_to, Robot: robot3, Mission: m2, Segment: s6, End: 1787853513.506927
+[INFO] [1787853513.508350721] [robot3.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot3, Mission: m2, Segment: s6, Start: 1787853513.5078309
+[INFO] [1787853513.509226685] [robot3.fragment_exec_node]: Simulating vacuum skill (21.0s to complete)...
+[INFO] [1787853534.513541015] [robot3.fragment_exec_node]: Vacuum completed!
+[INFO] [1787853534.516165614] [robot3.fragment_exec_node]: EventType: Task, Activity: vacuum, Robot: robot3, Mission: m2, Segment: s6, End: 1787853534.5147598
+[INFO] [1787853534.518674376] [robot3.fragment_exec_node]: Execution of fragment fm2-27 completed!
+[INFO] [1787853535.526265975] [robot3.fragment_exec_node]: Received fragment assignment: {'robot': 'robot3', 'fragment': {'id': 'fm2-34', 'mission': 'm2', 'state': 'assigned', 'wait': ['mop(r7)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r7)', 'params': {'x': 9, 'y': 7, 'size': 3}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's7'}}
+[INFO] [1787853535.542111530] [robot3.fragment_exec_node]: Starting execution of fragment fm2-34...
+[INFO] [1787853535.543014356] [robot3.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-34: ['mop(r7)']
+[INFO] [1787853537.547501831] [robot3.fragment_exec_node]: Executing task disinfect(r7). Params: {'x': 9, 'y': 7, 'size': 3}, Virtual state: {'position': {'x': 6, 'y': 12, 'z': 0.0}, 'docked': False}
+[INFO] [1787853537.549069910] [robot3.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot3, Mission: m2, Segment: s7, Start: 1787853537.5481703
+[INFO] [1787853537.550403359] [robot3.fragment_exec_node]: Simulating navigate skill from position (6, 12) to (9, 7) (6.324555320336759 seconds)...
+[INFO] [1787853543.878481773] [robot3.fragment_exec_node]: Navigation completed!
+[INFO] [1787853543.884776194] [robot3.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot3, Mission: m2, Segment: s7, End: 1787853543.8825748
+[INFO] [1787853543.888425118] [robot3.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot3, Mission: m2, Segment: s7, Start: 1787853543.8865817
+[INFO] [1787853543.890161409] [robot3.fragment_exec_node]: Simulating disinfect skill (6s to complete)...
+[INFO] [1787853549.894166295] [robot3.fragment_exec_node]: Disinfect completed!
+[INFO] [1787853549.897215841] [robot3.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot3, Mission: m2, Segment: s7, End: 1787853549.8956442
+[INFO] [1787853549.900609021] [robot3.fragment_exec_node]: Execution of fragment fm2-34 completed!
+[INFO] [1787853579.515127196] [robot3.fragment_exec_node]: Received fragment assignment: {'robot': 'robot3', 'fragment': {'id': 'fm2-29', 'mission': 'm2', 'state': 'assigned', 'wait': ['mop(r6)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r6)', 'params': {'x': 6, 'y': 12, 'size': 6}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's6'}}
+[INFO] [1787853579.518255373] [robot3.fragment_exec_node]: Starting execution of fragment fm2-29...
+[INFO] [1787853579.519694097] [robot3.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-29: ['mop(r6)']
+[INFO] [1787853581.525811702] [robot3.fragment_exec_node]: Executing task disinfect(r6). Params: {'x': 6, 'y': 12, 'size': 6}, Virtual state: {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}
+[INFO] [1787853581.527747634] [robot3.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot3, Mission: m2, Segment: s6, Start: 1787853581.526596
+[INFO] [1787853581.529318013] [robot3.fragment_exec_node]: Simulating navigate skill from position (9, 7) to (6, 12) (8.48528137423857 seconds)...
+[INFO] [1787853590.018959829] [robot3.fragment_exec_node]: Navigation completed!
+[INFO] [1787853590.021856241] [robot3.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot3, Mission: m2, Segment: s6, End: 1787853590.0201328
+[INFO] [1787853590.023444870] [robot3.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot3, Mission: m2, Segment: s6, Start: 1787853590.0225406
+[INFO] [1787853590.025105658] [robot3.fragment_exec_node]: Simulating disinfect skill (12s to complete)...
+[INFO] [1787853602.027191545] [robot3.fragment_exec_node]: Disinfect completed!
+[INFO] [1787853602.028132000] [robot3.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot3, Mission: m2, Segment: s6, End: 1787853602.027828
+[INFO] [1787853602.029065758] [robot3.fragment_exec_node]: Execution of fragment fm2-29 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+
+--- executor_robot4.log ---
+[INFO] [1787853397.126733385] [robot4.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787853397.127583344] [robot4.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787853397.128264378] [robot4.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853397.128825504] [robot4.fragment_exec_node]: Setting up skill: MopSkill
+[INFO] [1787853397.129477203] [robot4.fragment_exec_node]: Setting up skill: DisinfectSkill
+[INFO] [1787853397.130013565] [robot4.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853397.138633595] [robot4.fragment_exec_node]: Published robot registration: {'name': 'robot4', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.517647661] [robot4.fragment_exec_node]: Received fragment assignment: {'robot': 'robot4', 'fragment': {'id': 'fm2-1', 'mission': 'm2', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's1'}}
+[INFO] [1787853417.525215195] [robot4.fragment_exec_node]: Starting execution of fragment fm2-1...
+[INFO] [1787853417.526671857] [robot4.fragment_exec_node]: Executing task check_room(r1). Params: {'x': 4, 'y': 2, 'size': 6}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787853417.527634634] [robot4.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot4, Mission: m2, Segment: s1, Start: 1787853417.527045
+[INFO] [1787853417.528633749] [robot4.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787853421.530245010] [robot4.fragment_exec_node]: Undock completed!
+[INFO] [1787853421.530684199] [robot4.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot4, Mission: m2, Segment: s1, End: 1787853421.5303924
+[INFO] [1787853421.531189703] [robot4.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot4, Mission: m2, Segment: s1, Start: 1787853421.5308924
+[INFO] [1787853421.531568460] [robot4.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (4, 2) (8.94427190999916 seconds)...
+[INFO] [1787853430.479117200] [robot4.fragment_exec_node]: Navigation completed!
+[INFO] [1787853430.480844046] [robot4.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot4, Mission: m2, Segment: s1, End: 1787853430.479665
+[INFO] [1787853430.482299733] [robot4.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot4, Mission: m2, Segment: s1, Start: 1787853430.4812298
+[INFO] [1787853430.483855405] [robot4.fragment_exec_node]: Simulating check_room skill (9.0s to complete)...
+[INFO] [1787853439.500246146] [robot4.fragment_exec_node]: Check room completed!
+[INFO] [1787853439.504708979] [robot4.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot4, Mission: m2, Segment: s1, End: 1787853439.5037432
+[INFO] [1787853439.513677376] [robot4.fragment_exec_node]: Execution of fragment fm2-1 completed!
+[INFO] [1787853505.534859689] [robot4.fragment_exec_node]: Received fragment assignment: {'robot': 'robot4', 'fragment': {'id': 'fm2-9', 'mission': 'm2', 'state': 'assigned', 'wait': ['mop(r2)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r2)', 'params': {'x': 10, 'y': 5, 'size': 3}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's2'}}
+[INFO] [1787853505.535961740] [robot4.fragment_exec_node]: Starting execution of fragment fm2-9...
+[INFO] [1787853505.536808942] [robot4.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-9: ['mop(r2)']
+[INFO] [1787853507.538111523] [robot4.fragment_exec_node]: Executing task disinfect(r2). Params: {'x': 10, 'y': 5, 'size': 3}, Virtual state: {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}
+[INFO] [1787853507.538882552] [robot4.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot4, Mission: m2, Segment: s2, Start: 1787853507.5384178
+[INFO] [1787853507.539821109] [robot4.fragment_exec_node]: Simulating navigate skill from position (4, 2) to (10, 5) (12.165525060596439 seconds)...
+[INFO] [1787853519.709402157] [robot4.fragment_exec_node]: Navigation completed!
+[INFO] [1787853519.712391573] [robot4.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot4, Mission: m2, Segment: s2, End: 1787853519.7109094
+[INFO] [1787853519.714172223] [robot4.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot4, Mission: m2, Segment: s2, Start: 1787853519.7130058
+[INFO] [1787853519.715940010] [robot4.fragment_exec_node]: Simulating disinfect skill (6s to complete)...
+[INFO] [1787853525.720210382] [robot4.fragment_exec_node]: Disinfect completed!
+[INFO] [1787853525.723187213] [robot4.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot4, Mission: m2, Segment: s2, End: 1787853525.7213151
+[INFO] [1787853525.725489595] [robot4.fragment_exec_node]: Execution of fragment fm2-9 completed!
+[INFO] [1787853526.514786238] [robot4.fragment_exec_node]: Received fragment assignment: {'robot': 'robot4', 'fragment': {'id': 'fm2-4', 'mission': 'm2', 'state': 'assigned', 'wait': ['mop(r1)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's1'}}
+[INFO] [1787853526.521081920] [robot4.fragment_exec_node]: Starting execution of fragment fm2-4...
+[INFO] [1787853526.522691741] [robot4.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-4: ['mop(r1)']
+[INFO] [1787853528.528940391] [robot4.fragment_exec_node]: Executing task disinfect(r1). Params: {'x': 4, 'y': 2, 'size': 6}, Virtual state: {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787853528.531447928] [robot4.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot4, Mission: m2, Segment: s1, Start: 1787853528.5303426
+[INFO] [1787853528.533093391] [robot4.fragment_exec_node]: Simulating navigate skill from position (10, 5) to (4, 2) (20.0 seconds)...
+[INFO] [1787853548.535920498] [robot4.fragment_exec_node]: Navigation completed!
+[INFO] [1787853548.538513307] [robot4.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot4, Mission: m2, Segment: s1, End: 1787853548.5375779
+[INFO] [1787853548.539916011] [robot4.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot4, Mission: m2, Segment: s1, Start: 1787853548.5390718
+[INFO] [1787853548.541262776] [robot4.fragment_exec_node]: Simulating disinfect skill (12s to complete)...
+[INFO] [1787853560.543373132] [robot4.fragment_exec_node]: Disinfect completed!
+[INFO] [1787853560.544166107] [robot4.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot4, Mission: m2, Segment: s1, End: 1787853560.5437968
+[INFO] [1787853560.545119929] [robot4.fragment_exec_node]: Execution of fragment fm2-4 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+
+--- executor_robot5.log ---
+[INFO] [1787853399.522106400] [robot5.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787853399.523069071] [robot5.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787853399.523757614] [robot5.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853399.524483229] [robot5.fragment_exec_node]: Setting up skill: MopSkill
+[INFO] [1787853399.525052127] [robot5.fragment_exec_node]: Setting up skill: DisinfectSkill
+[INFO] [1787853399.525606659] [robot5.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853399.534465114] [robot5.fragment_exec_node]: Published robot registration: {'name': 'robot5', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853494.514732502] [robot5.fragment_exec_node]: Received fragment assignment: {'robot': 'robot5', 'fragment': {'id': 'fm2-13', 'mission': 'm2', 'state': 'assigned', 'wait': ['vacuum(r3)'], 'tasks': [{'name': 'mop', 'label': 'mop(r3)', 'params': {'x': 3, 'y': 11, 'size': 7}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's3'}}
+[INFO] [1787853494.528530346] [robot5.fragment_exec_node]: Starting execution of fragment fm2-13...
+[INFO] [1787853494.529727560] [robot5.fragment_exec_node]: Executing task mop(r3). Params: {'x': 3, 'y': 11, 'size': 7}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787853494.530665312] [robot5.fragment_exec_node]: EventType: Control (Task: mop), Activity: undock, Robot: robot5, Mission: m2, Segment: s3, Start: 1787853494.53011
+[INFO] [1787853494.531571517] [robot5.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787853498.532785972] [robot5.fragment_exec_node]: Undock completed!
+[INFO] [1787853498.533435815] [robot5.fragment_exec_node]: EventType: Control (Task: mop), Activity: undock, Robot: robot5, Mission: m2, Segment: s3, End: 1787853498.533036
+[INFO] [1787853498.534117200] [robot5.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot5, Mission: m2, Segment: s3, Start: 1787853498.5338092
+[INFO] [1787853498.536158753] [robot5.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (3, 11) (22.80350850198276 seconds)...
+[INFO] [1787853521.341412230] [robot5.fragment_exec_node]: Navigation completed!
+[INFO] [1787853521.342682907] [robot5.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot5, Mission: m2, Segment: s3, End: 1787853521.341969
+[INFO] [1787853521.343369846] [robot5.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot5, Mission: m2, Segment: s3, Start: 1787853521.3429778
+[INFO] [1787853521.344000393] [robot5.fragment_exec_node]: Simulating mop skill (38.5s to complete)...
+[INFO] [1787853559.848109630] [robot5.fragment_exec_node]: Mop completed!
+[INFO] [1787853559.870390921] [robot5.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot5, Mission: m2, Segment: s3, End: 1787853559.8682787
+[INFO] [1787853559.893355330] [robot5.fragment_exec_node]: Execution of fragment fm2-13 completed!
+[INFO] [1787853567.509234259] [robot5.fragment_exec_node]: Received fragment assignment: {'robot': 'robot5', 'fragment': {'id': 'fm2-24', 'mission': 'm2', 'state': 'assigned', 'wait': ['mop(r5)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r5)', 'params': {'x': 12, 'y': 3, 'size': 5}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's5'}}
+[INFO] [1787853567.511237109] [robot5.fragment_exec_node]: Starting execution of fragment fm2-24...
+[INFO] [1787853567.512729214] [robot5.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-24: ['mop(r5)']
+[INFO] [1787853569.518554794] [robot5.fragment_exec_node]: Executing task disinfect(r5). Params: {'x': 12, 'y': 3, 'size': 5}, Virtual state: {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}
+[INFO] [1787853569.521262629] [robot5.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot5, Mission: m2, Segment: s5, Start: 1787853569.5197952
+[INFO] [1787853569.523722291] [robot5.fragment_exec_node]: Simulating navigate skill from position (3, 11) to (12, 3) (18.0 seconds)...
+[INFO] [1787853587.528024488] [robot5.fragment_exec_node]: Navigation completed!
+[INFO] [1787853587.530964936] [robot5.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot5, Mission: m2, Segment: s5, End: 1787853587.5297732
+[INFO] [1787853587.532628736] [robot5.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot5, Mission: m2, Segment: s5, Start: 1787853587.5315728
+[INFO] [1787853587.534035498] [robot5.fragment_exec_node]: Simulating disinfect skill (10s to complete)...
+[INFO] [1787853597.538004446] [robot5.fragment_exec_node]: Disinfect completed!
+[INFO] [1787853597.539421698] [robot5.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot5, Mission: m2, Segment: s5, End: 1787853597.5386903
+[INFO] [1787853597.541427619] [robot5.fragment_exec_node]: Execution of fragment fm2-24 completed!
+[INFO] [1787853609.507829558] [robot5.fragment_exec_node]: Received fragment assignment: {'robot': 'robot5', 'fragment': {'id': 'fm2-39', 'mission': 'm2', 'state': 'assigned', 'wait': ['mop(r8)'], 'tasks': [{'name': 'disinfect', 'label': 'disinfect(r8)', 'params': {'x': 2, 'y': 8, 'size': 7}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's8'}}
+[INFO] [1787853609.509952310] [robot5.fragment_exec_node]: Starting execution of fragment fm2-39...
+[INFO] [1787853609.511199433] [robot5.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-39: ['mop(r8)']
+[INFO] [1787853611.517176442] [robot5.fragment_exec_node]: Executing task disinfect(r8). Params: {'x': 2, 'y': 8, 'size': 7}, Virtual state: {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}
+[INFO] [1787853611.519982118] [robot5.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot5, Mission: m2, Segment: s8, Start: 1787853611.518038
+[INFO] [1787853611.523052092] [robot5.fragment_exec_node]: Simulating navigate skill from position (12, 3) to (2, 8) (21.540659228538015 seconds)...
+[INFO] [1787853633.067096736] [robot5.fragment_exec_node]: Navigation completed!
+[INFO] [1787853633.072214167] [robot5.fragment_exec_node]: EventType: Control (Task: disinfect), Activity: move_to, Robot: robot5, Mission: m2, Segment: s8, End: 1787853633.0701532
+[INFO] [1787853633.074276036] [robot5.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot5, Mission: m2, Segment: s8, Start: 1787853633.0732362
+[INFO] [1787853633.076141614] [robot5.fragment_exec_node]: Simulating disinfect skill (14s to complete)...
+[INFO] [1787853647.080123950] [robot5.fragment_exec_node]: Disinfect completed!
+[INFO] [1787853647.082985455] [robot5.fragment_exec_node]: EventType: Task, Activity: disinfect, Robot: robot5, Mission: m2, Segment: s8, End: 1787853647.0814612
+[INFO] [1787853647.085337182] [robot5.fragment_exec_node]: Execution of fragment fm2-39 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+
+--- executor_robot6.log ---
+[INFO] [1787853401.509797261] [robot6.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787853401.510794442] [robot6.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787853401.511544048] [robot6.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853401.512246023] [robot6.fragment_exec_node]: Setting up skill: MopSkill
+[INFO] [1787853401.512855499] [robot6.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853401.521555439] [robot6.fragment_exec_node]: Published robot registration: {'name': 'robot6', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.532236771] [robot6.fragment_exec_node]: Received fragment assignment: {'robot': 'robot6', 'fragment': {'id': 'fm2-21', 'mission': 'm2', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r5)', 'params': {'x': 12, 'y': 3, 'size': 5}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's5'}}
+[INFO] [1787853417.533660248] [robot6.fragment_exec_node]: Starting execution of fragment fm2-21...
+[INFO] [1787853417.535252509] [robot6.fragment_exec_node]: Executing task check_room(r5). Params: {'x': 12, 'y': 3, 'size': 5}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787853417.536735097] [robot6.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot6, Mission: m2, Segment: s5, Start: 1787853417.5360765
+[INFO] [1787853417.539439407] [robot6.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787853421.541506223] [robot6.fragment_exec_node]: Undock completed!
+[INFO] [1787853421.542294702] [robot6.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot6, Mission: m2, Segment: s5, End: 1787853421.5418956
+[INFO] [1787853421.543059609] [robot6.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot6, Mission: m2, Segment: s5, Start: 1787853421.542593
+[INFO] [1787853421.543776980] [robot6.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (12, 3) (24.73863375370596 seconds)...
+[INFO] [1787853446.276054242] [robot6.fragment_exec_node]: Navigation completed!
+[INFO] [1787853446.278898532] [robot6.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot6, Mission: m2, Segment: s5, End: 1787853446.2773407
+[INFO] [1787853446.280419172] [robot6.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot6, Mission: m2, Segment: s5, Start: 1787853446.2795384
+[INFO] [1787853446.282350324] [robot6.fragment_exec_node]: Simulating check_room skill (7.5s to complete)...
+[INFO] [1787853453.786010204] [robot6.fragment_exec_node]: Check room completed!
+[INFO] [1787853453.788969905] [robot6.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot6, Mission: m2, Segment: s5, End: 1787853453.7870493
+[INFO] [1787853453.792132181] [robot6.fragment_exec_node]: Execution of fragment fm2-21 completed!
+[INFO] [1787853526.524318062] [robot6.fragment_exec_node]: Received fragment assignment: {'robot': 'robot6', 'fragment': {'id': 'fm2-10', 'mission': 'm2', 'state': 'assigned', 'wait': ['disinfect(r2)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r2)', 'params': {'x': 10, 'y': 5, 'size': 3}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's2'}}
+[INFO] [1787853526.525503297] [robot6.fragment_exec_node]: Starting execution of fragment fm2-10...
+[ERROR] [1787853526.526458541] [robot6.fragment_exec_node]: Robot robot6 was assigned a fragment without required capabilities!
+[INFO] [1787853526.527278889] [robot6.fragment_exec_node]: Executing task final_room_check(r2). Params: {'x': 10, 'y': 5, 'size': 3}, Virtual state: {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}
+[INFO] [1787853526.528012507] [robot6.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot6, Mission: m2, Segment: s2, Start: 1787853526.5275645
+[INFO] [1787853526.529055345] [robot6.fragment_exec_node]: Simulating navigate skill from position (12, 3) to (10, 5) (14.560219778561036 seconds)...
+[INFO] [1787853541.093277437] [robot6.fragment_exec_node]: Navigation completed!
+[INFO] [1787853541.096336260] [robot6.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot6, Mission: m2, Segment: s2, End: 1787853541.0945559
+[INFO] [1787853541.098005751] [robot6.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot6, Mission: m2, Segment: s2, Start: 1787853541.096995
+[INFO] [1787853541.099705038] [robot6.fragment_exec_node]: Simulating check_room skill (4.5s to complete)...
+[INFO] [1787853545.601319734] [robot6.fragment_exec_node]: Check room completed!
+[INFO] [1787853545.604561775] [robot6.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot6, Mission: m2, Segment: s2, End: 1787853545.6040683
+[INFO] [1787853545.605513906] [robot6.fragment_exec_node]: Execution of fragment fm2-10 completed!
+[INFO] [1787853551.540280388] [robot6.fragment_exec_node]: Received fragment assignment: {'robot': 'robot6', 'fragment': {'id': 'fm2-38', 'mission': 'm2', 'state': 'assigned', 'wait': ['vacuum(r8)'], 'tasks': [{'name': 'mop', 'label': 'mop(r8)', 'params': {'x': 2, 'y': 8, 'size': 7}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's8'}}
+[INFO] [1787853551.541403994] [robot6.fragment_exec_node]: Starting execution of fragment fm2-38...
+[INFO] [1787853551.542280487] [robot6.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-38: ['vacuum(r8)']
+[INFO] [1787853553.547363661] [robot6.fragment_exec_node]: Executing task mop(r8). Params: {'x': 2, 'y': 8, 'size': 7}, Virtual state: {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787853553.550325722] [robot6.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot6, Mission: m2, Segment: s8, Start: 1787853553.5484674
+[INFO] [1787853553.551912125] [robot6.fragment_exec_node]: Simulating navigate skill from position (10, 5) to (2, 8) (16.492422502470642 seconds)...
+[INFO] [1787853570.047992831] [robot6.fragment_exec_node]: Navigation completed!
+[INFO] [1787853570.052426629] [robot6.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot6, Mission: m2, Segment: s8, End: 1787853570.0506773
+[INFO] [1787853570.054266714] [robot6.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot6, Mission: m2, Segment: s8, Start: 1787853570.0531652
+[INFO] [1787853570.056181009] [robot6.fragment_exec_node]: Simulating mop skill (38.5s to complete)...
+[INFO] [1787853608.560428331] [robot6.fragment_exec_node]: Mop completed!
+[INFO] [1787853608.563875318] [robot6.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot6, Mission: m2, Segment: s8, End: 1787853608.5624878
+[INFO] [1787853608.566353635] [robot6.fragment_exec_node]: Execution of fragment fm2-38 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+
+--- executor_robot7.log ---
+[INFO] [1787853403.481962672] [robot7.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787853403.482823954] [robot7.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787853403.483593772] [robot7.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853403.484333208] [robot7.fragment_exec_node]: Setting up skill: MopSkill
+[INFO] [1787853403.484880761] [robot7.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853403.493957677] [robot7.fragment_exec_node]: Published robot registration: {'name': 'robot7', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.522763893] [robot7.fragment_exec_node]: Received fragment assignment: {'robot': 'robot7', 'fragment': {'id': 'fm2-16', 'mission': 'm2', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r4)', 'params': {'x': 8, 'y': 9, 'size': 4}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's4'}}
+[INFO] [1787853417.524754666] [robot7.fragment_exec_node]: Starting execution of fragment fm2-16...
+[INFO] [1787853417.526350093] [robot7.fragment_exec_node]: Executing task check_room(r4). Params: {'x': 8, 'y': 9, 'size': 4}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787853417.527681385] [robot7.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot7, Mission: m2, Segment: s4, Start: 1787853417.5267687
+[INFO] [1787853417.528787047] [robot7.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787853421.533460168] [robot7.fragment_exec_node]: Undock completed!
+[INFO] [1787853421.534123845] [robot7.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot7, Mission: m2, Segment: s4, End: 1787853421.5336866
+[INFO] [1787853421.534556475] [robot7.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot7, Mission: m2, Segment: s4, Start: 1787853421.5342686
+[INFO] [1787853421.535068912] [robot7.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (8, 9) (24.08318915758459 seconds)...
+[INFO] [1787853445.611068677] [robot7.fragment_exec_node]: Navigation completed!
+[INFO] [1787853445.614378276] [robot7.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot7, Mission: m2, Segment: s4, End: 1787853445.612344
+[INFO] [1787853445.616383697] [robot7.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot7, Mission: m2, Segment: s4, Start: 1787853445.6152997
+[INFO] [1787853445.618140653] [robot7.fragment_exec_node]: Simulating check_room skill (6.0s to complete)...
+[INFO] [1787853451.622021285] [robot7.fragment_exec_node]: Check room completed!
+[INFO] [1787853451.624804021] [robot7.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot7, Mission: m2, Segment: s4, End: 1787853451.6231837
+[INFO] [1787853451.627746680] [robot7.fragment_exec_node]: Execution of fragment fm2-16 completed!
+[INFO] [1787853479.517131533] [robot7.fragment_exec_node]: Received fragment assignment: {'robot': 'robot7', 'fragment': {'id': 'fm2-8', 'mission': 'm2', 'state': 'assigned', 'wait': ['vacuum(r2)'], 'tasks': [{'name': 'mop', 'label': 'mop(r2)', 'params': {'x': 10, 'y': 5, 'size': 3}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's2'}}
+[INFO] [1787853479.521018438] [robot7.fragment_exec_node]: Starting execution of fragment fm2-8...
+[INFO] [1787853479.523067990] [robot7.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-8: ['vacuum(r2)']
+[INFO] [1787853481.527597494] [robot7.fragment_exec_node]: Executing task mop(r2). Params: {'x': 10, 'y': 5, 'size': 3}, Virtual state: {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}
+[INFO] [1787853481.528529290] [robot7.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot7, Mission: m2, Segment: s2, Start: 1787853481.5279274
+[INFO] [1787853481.529531020] [robot7.fragment_exec_node]: Simulating navigate skill from position (8, 9) to (10, 5) (7.211102550927978 seconds)...
+[INFO] [1787853488.744990269] [robot7.fragment_exec_node]: Navigation completed!
+[INFO] [1787853488.747975539] [robot7.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot7, Mission: m2, Segment: s2, End: 1787853488.7460568
+[INFO] [1787853488.750109056] [robot7.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot7, Mission: m2, Segment: s2, Start: 1787853488.7488916
+[INFO] [1787853488.751911690] [robot7.fragment_exec_node]: Simulating mop skill (16.5s to complete)...
+[INFO] [1787853505.256499345] [robot7.fragment_exec_node]: Mop completed!
+[INFO] [1787853505.259251079] [robot7.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot7, Mission: m2, Segment: s2, End: 1787853505.258026
+[INFO] [1787853505.261769557] [robot7.fragment_exec_node]: Execution of fragment fm2-8 completed!
+[INFO] [1787853512.511564901] [robot7.fragment_exec_node]: Received fragment assignment: {'robot': 'robot7', 'fragment': {'id': 'fm2-33', 'mission': 'm2', 'state': 'assigned', 'wait': ['vacuum(r7)'], 'tasks': [{'name': 'mop', 'label': 'mop(r7)', 'params': {'x': 9, 'y': 7, 'size': 3}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's7'}}
+[INFO] [1787853512.514636895] [robot7.fragment_exec_node]: Starting execution of fragment fm2-33...
+[INFO] [1787853512.516175582] [robot7.fragment_exec_node]: Executing task mop(r7). Params: {'x': 9, 'y': 7, 'size': 3}, Virtual state: {'position': {'x': 10, 'y': 5, 'z': 0.0}, 'docked': False}
+[INFO] [1787853512.517454217] [robot7.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot7, Mission: m2, Segment: s7, Start: 1787853512.516628
+[INFO] [1787853512.519047518] [robot7.fragment_exec_node]: Simulating navigate skill from position (10, 5) to (9, 7) (6.324555320336759 seconds)...
+[INFO] [1787853518.846609856] [robot7.fragment_exec_node]: Navigation completed!
+[INFO] [1787853518.848742852] [robot7.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot7, Mission: m2, Segment: s7, End: 1787853518.8472915
+[INFO] [1787853518.850346428] [robot7.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot7, Mission: m2, Segment: s7, Start: 1787853518.8494282
+[INFO] [1787853518.851587444] [robot7.fragment_exec_node]: Simulating mop skill (16.5s to complete)...
+[INFO] [1787853535.355489523] [robot7.fragment_exec_node]: Mop completed!
+[INFO] [1787853535.358449333] [robot7.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot7, Mission: m2, Segment: s7, End: 1787853535.3567584
+[INFO] [1787853535.360737277] [robot7.fragment_exec_node]: Execution of fragment fm2-33 completed!
+[INFO] [1787853535.525073847] [robot7.fragment_exec_node]: Received fragment assignment: {'robot': 'robot7', 'fragment': {'id': 'fm2-28', 'mission': 'm2', 'state': 'assigned', 'wait': ['vacuum(r6)'], 'tasks': [{'name': 'mop', 'label': 'mop(r6)', 'params': {'x': 6, 'y': 12, 'size': 6}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's6'}}
+[INFO] [1787853535.542830355] [robot7.fragment_exec_node]: Starting execution of fragment fm2-28...
+[INFO] [1787853535.544862995] [robot7.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-28: ['vacuum(r6)']
+[INFO] [1787853537.549073564] [robot7.fragment_exec_node]: Executing task mop(r6). Params: {'x': 6, 'y': 12, 'size': 6}, Virtual state: {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}
+[INFO] [1787853537.550534027] [robot7.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot7, Mission: m2, Segment: s6, Start: 1787853537.5496368
+[INFO] [1787853537.551638132] [robot7.fragment_exec_node]: Simulating navigate skill from position (9, 7) to (6, 12) (8.48528137423857 seconds)...
+[INFO] [1787853546.053538938] [robot7.fragment_exec_node]: Navigation completed!
+[INFO] [1787853546.064645974] [robot7.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot7, Mission: m2, Segment: s6, End: 1787853546.0613754
+[INFO] [1787853546.074305305] [robot7.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot7, Mission: m2, Segment: s6, Start: 1787853546.06998
+[INFO] [1787853546.078214557] [robot7.fragment_exec_node]: Simulating mop skill (33.0s to complete)...
+[INFO] [1787853579.082911174] [robot7.fragment_exec_node]: Mop completed!
+[INFO] [1787853579.087798977] [robot7.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot7, Mission: m2, Segment: s6, End: 1787853579.085866
+[INFO] [1787853579.090146599] [robot7.fragment_exec_node]: Execution of fragment fm2-28 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+
+--- executor_robot8.log ---
+[INFO] [1787853405.510479625] [robot8.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787853405.511794480] [robot8.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787853405.512788773] [robot8.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853405.513743604] [robot8.fragment_exec_node]: Setting up skill: MopSkill
+[INFO] [1787853405.514646109] [robot8.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853405.525373346] [robot8.fragment_exec_node]: Published robot registration: {'name': 'robot8', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.520175297] [robot8.fragment_exec_node]: Received fragment assignment: {'robot': 'robot8', 'fragment': {'id': 'fm2-11', 'mission': 'm2', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r3)', 'params': {'x': 3, 'y': 11, 'size': 7}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's3'}}
+[INFO] [1787853417.523260169] [robot8.fragment_exec_node]: Starting execution of fragment fm2-11...
+[INFO] [1787853417.533943921] [robot8.fragment_exec_node]: Executing task check_room(r3). Params: {'x': 3, 'y': 11, 'size': 7}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787853417.534931291] [robot8.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot8, Mission: m2, Segment: s3, Start: 1787853417.5342035
+[INFO] [1787853417.538266399] [robot8.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787853421.541477987] [robot8.fragment_exec_node]: Undock completed!
+[INFO] [1787853421.542335554] [robot8.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot8, Mission: m2, Segment: s3, End: 1787853421.5419075
+[INFO] [1787853421.543098814] [robot8.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot8, Mission: m2, Segment: s3, Start: 1787853421.542588
+[INFO] [1787853421.543770569] [robot8.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (3, 11) (22.80350850198276 seconds)...
+[INFO] [1787853444.338685591] [robot8.fragment_exec_node]: Navigation completed!
+[INFO] [1787853444.340060264] [robot8.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot8, Mission: m2, Segment: s3, End: 1787853444.3392665
+[INFO] [1787853444.341100825] [robot8.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot8, Mission: m2, Segment: s3, Start: 1787853444.340506
+[INFO] [1787853444.342022592] [robot8.fragment_exec_node]: Simulating check_room skill (10.5s to complete)...
+[INFO] [1787853454.846076472] [robot8.fragment_exec_node]: Check room completed!
+[INFO] [1787853454.849365408] [robot8.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot8, Mission: m2, Segment: s3, End: 1787853454.8473146
+[INFO] [1787853454.851970695] [robot8.fragment_exec_node]: Execution of fragment fm2-11 completed!
+[INFO] [1787853490.507961642] [robot8.fragment_exec_node]: Received fragment assignment: {'robot': 'robot8', 'fragment': {'id': 'fm2-3', 'mission': 'm2', 'state': 'assigned', 'wait': ['vacuum(r1)'], 'tasks': [{'name': 'mop', 'label': 'mop(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's1'}}
+[INFO] [1787853490.512889247] [robot8.fragment_exec_node]: Starting execution of fragment fm2-3...
+[INFO] [1787853490.514798648] [robot8.fragment_exec_node]: Executing task mop(r1). Params: {'x': 4, 'y': 2, 'size': 6}, Virtual state: {'position': {'x': 3, 'y': 11, 'z': 0.0}, 'docked': False}
+[INFO] [1787853490.516038256] [robot8.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot8, Mission: m2, Segment: s1, Start: 1787853490.5153122
+[INFO] [1787853490.517613882] [robot8.fragment_exec_node]: Simulating navigate skill from position (3, 11) to (4, 2) (2.8284271247461903 seconds)...
+[INFO] [1787853493.349866185] [robot8.fragment_exec_node]: Navigation completed!
+[INFO] [1787853493.353605298] [robot8.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot8, Mission: m2, Segment: s1, End: 1787853493.35181
+[INFO] [1787853493.355364648] [robot8.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot8, Mission: m2, Segment: s1, Start: 1787853493.3542132
+[INFO] [1787853493.357081128] [robot8.fragment_exec_node]: Simulating mop skill (33.0s to complete)...
+[INFO] [1787853526.361178111] [robot8.fragment_exec_node]: Mop completed!
+[INFO] [1787853526.363190493] [robot8.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot8, Mission: m2, Segment: s1, End: 1787853526.362019
+[INFO] [1787853526.365501981] [robot8.fragment_exec_node]: Execution of fragment fm2-3 completed!
+[INFO] [1787853550.507063729] [robot8.fragment_exec_node]: Received fragment assignment: {'robot': 'robot8', 'fragment': {'id': 'fm2-35', 'mission': 'm2', 'state': 'assigned', 'wait': ['disinfect(r7)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r7)', 'params': {'x': 9, 'y': 7, 'size': 3}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's7'}}
+[INFO] [1787853550.509799320] [robot8.fragment_exec_node]: Starting execution of fragment fm2-35...
+[ERROR] [1787853550.511731515] [robot8.fragment_exec_node]: Robot robot8 was assigned a fragment without required capabilities!
+[INFO] [1787853550.513430195] [robot8.fragment_exec_node]: Executing task final_room_check(r7). Params: {'x': 9, 'y': 7, 'size': 3}, Virtual state: {'position': {'x': 4, 'y': 2, 'z': 0.0}, 'docked': False}
+[INFO] [1787853550.515114015] [robot8.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot8, Mission: m2, Segment: s7, Start: 1787853550.5139616
+[INFO] [1787853550.516449712] [robot8.fragment_exec_node]: Simulating navigate skill from position (4, 2) to (9, 7) (11.661903789690601 seconds)...
+[INFO] [1787853562.179845337] [robot8.fragment_exec_node]: Navigation completed!
+[INFO] [1787853562.180651789] [robot8.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot8, Mission: m2, Segment: s7, End: 1787853562.180195
+[INFO] [1787853562.181225467] [robot8.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot8, Mission: m2, Segment: s7, Start: 1787853562.1808758
+[INFO] [1787853562.181781654] [robot8.fragment_exec_node]: Simulating check_room skill (4.5s to complete)...
+[INFO] [1787853566.685145448] [robot8.fragment_exec_node]: Check room completed!
+[INFO] [1787853566.689437567] [robot8.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot8, Mission: m2, Segment: s7, End: 1787853566.6877089
+[INFO] [1787853566.692108460] [robot8.fragment_exec_node]: Execution of fragment fm2-35 completed!
+[INFO] [1787853602.508213849] [robot8.fragment_exec_node]: Received fragment assignment: {'robot': 'robot8', 'fragment': {'id': 'fm2-30', 'mission': 'm2', 'state': 'assigned', 'wait': ['disinfect(r6)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r6)', 'params': {'x': 6, 'y': 12, 'size': 6}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's6'}}
+[INFO] [1787853602.510913535] [robot8.fragment_exec_node]: Starting execution of fragment fm2-30...
+[ERROR] [1787853602.513307372] [robot8.fragment_exec_node]: Robot robot8 was assigned a fragment without required capabilities!
+[INFO] [1787853602.515134029] [robot8.fragment_exec_node]: Executing task final_room_check(r6). Params: {'x': 6, 'y': 12, 'size': 6}, Virtual state: {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}
+[INFO] [1787853602.516482963] [robot8.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot8, Mission: m2, Segment: s6, Start: 1787853602.5155442
+[INFO] [1787853602.518009851] [robot8.fragment_exec_node]: Simulating navigate skill from position (9, 7) to (6, 12) (8.48528137423857 seconds)...
+[INFO] [1787853611.007133261] [robot8.fragment_exec_node]: Navigation completed!
+[INFO] [1787853611.012296711] [robot8.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot8, Mission: m2, Segment: s6, End: 1787853611.0108502
+[INFO] [1787853611.014057719] [robot8.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot8, Mission: m2, Segment: s6, Start: 1787853611.0129385
+[INFO] [1787853611.015786400] [robot8.fragment_exec_node]: Simulating check_room skill (9.0s to complete)...
+[INFO] [1787853620.018775895] [robot8.fragment_exec_node]: Check room completed!
+[INFO] [1787853620.020302098] [robot8.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot8, Mission: m2, Segment: s6, End: 1787853620.019666
+[INFO] [1787853620.021860762] [robot8.fragment_exec_node]: Execution of fragment fm2-30 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+
+--- executor_robot9.log ---
+[INFO] [1787853407.525983480] [robot9.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787853407.527087468] [robot9.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787853407.527829381] [robot9.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853407.528573349] [robot9.fragment_exec_node]: Setting up skill: MopSkill
+[INFO] [1787853407.529335382] [robot9.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787853407.540060340] [robot9.fragment_exec_node]: Published robot registration: {'name': 'robot9', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787853417.541396308] [robot9.fragment_exec_node]: Received fragment assignment: {'robot': 'robot9', 'fragment': {'id': 'fm2-31', 'mission': 'm2', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'check_room', 'label': 'check_room(r7)', 'params': {'x': 9, 'y': 7, 'size': 3}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's7'}}
+[INFO] [1787853417.542287683] [robot9.fragment_exec_node]: Starting execution of fragment fm2-31...
+[INFO] [1787853417.543349137] [robot9.fragment_exec_node]: Executing task check_room(r7). Params: {'x': 9, 'y': 7, 'size': 3}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787853417.544183420] [robot9.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot9, Mission: m2, Segment: s7, Start: 1787853417.5435517
+[INFO] [1787853417.545044012] [robot9.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787853421.546743473] [robot9.fragment_exec_node]: Undock completed!
+[INFO] [1787853421.547400270] [robot9.fragment_exec_node]: EventType: Control (Task: check_room), Activity: undock, Robot: robot9, Mission: m2, Segment: s7, End: 1787853421.5470393
+[INFO] [1787853421.548204956] [robot9.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot9, Mission: m2, Segment: s7, Start: 1787853421.547676
+[INFO] [1787853421.548782633] [robot9.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (9, 7) (22.80350850198276 seconds)...
+[INFO] [1787853444.343091586] [robot9.fragment_exec_node]: Navigation completed!
+[INFO] [1787853444.344071096] [robot9.fragment_exec_node]: EventType: Control (Task: check_room), Activity: move_to, Robot: robot9, Mission: m2, Segment: s7, End: 1787853444.3435183
+[INFO] [1787853444.344938924] [robot9.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot9, Mission: m2, Segment: s7, Start: 1787853444.3444343
+[INFO] [1787853444.345898712] [robot9.fragment_exec_node]: Simulating check_room skill (4.5s to complete)...
+[INFO] [1787853448.849506973] [robot9.fragment_exec_node]: Check room completed!
+[INFO] [1787853448.852425375] [robot9.fragment_exec_node]: EventType: Task, Activity: check_room, Robot: robot9, Mission: m2, Segment: s7, End: 1787853448.8505898
+[INFO] [1787853448.855232183] [robot9.fragment_exec_node]: Execution of fragment fm2-31 completed!
+[INFO] [1787853498.531636650] [robot9.fragment_exec_node]: Received fragment assignment: {'robot': 'robot9', 'fragment': {'id': 'fm2-18', 'mission': 'm2', 'state': 'assigned', 'wait': ['vacuum(r4)'], 'tasks': [{'name': 'mop', 'label': 'mop(r4)', 'params': {'x': 8, 'y': 9, 'size': 4}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's4'}}
+[INFO] [1787853498.532490733] [robot9.fragment_exec_node]: Starting execution of fragment fm2-18...
+[INFO] [1787853498.533127632] [robot9.fragment_exec_node]: Executing task mop(r4). Params: {'x': 8, 'y': 9, 'size': 4}, Virtual state: {'position': {'x': 9, 'y': 7, 'z': 0.0}, 'docked': False}
+[INFO] [1787853498.533637811] [robot9.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot9, Mission: m2, Segment: s4, Start: 1787853498.5333524
+[INFO] [1787853498.534160695] [robot9.fragment_exec_node]: Simulating navigate skill from position (9, 7) to (8, 9) (2.0 seconds)...
+[INFO] [1787853500.535890242] [robot9.fragment_exec_node]: Navigation completed!
+[INFO] [1787853500.536924766] [robot9.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot9, Mission: m2, Segment: s4, End: 1787853500.5364919
+[INFO] [1787853500.537660512] [robot9.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot9, Mission: m2, Segment: s4, Start: 1787853500.5371423
+[INFO] [1787853500.538302369] [robot9.fragment_exec_node]: Simulating mop skill (22.0s to complete)...
+[INFO] [1787853522.540061177] [robot9.fragment_exec_node]: Mop completed!
+[INFO] [1787853522.540880464] [robot9.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot9, Mission: m2, Segment: s4, End: 1787853522.5404088
+[INFO] [1787853522.541871750] [robot9.fragment_exec_node]: Execution of fragment fm2-18 completed!
+[INFO] [1787853524.520256067] [robot9.fragment_exec_node]: Received fragment assignment: {'robot': 'robot9', 'fragment': {'id': 'fm2-23', 'mission': 'm2', 'state': 'assigned', 'wait': ['vacuum(r5)'], 'tasks': [{'name': 'mop', 'label': 'mop(r5)', 'params': {'x': 12, 'y': 3, 'size': 5}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's5'}}
+[INFO] [1787853524.521304796] [robot9.fragment_exec_node]: Starting execution of fragment fm2-23...
+[INFO] [1787853524.522585549] [robot9.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-23: ['vacuum(r5)']
+[INFO] [1787853526.524720164] [robot9.fragment_exec_node]: Executing task mop(r5). Params: {'x': 12, 'y': 3, 'size': 5}, Virtual state: {'position': {'x': 8, 'y': 9, 'z': 0.0}, 'docked': False}
+[INFO] [1787853526.525662700] [robot9.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot9, Mission: m2, Segment: s5, Start: 1787853526.5251305
+[INFO] [1787853526.526477179] [robot9.fragment_exec_node]: Simulating navigate skill from position (8, 9) to (12, 3) (12.806248474865697 seconds)...
+[INFO] [1787853539.336468582] [robot9.fragment_exec_node]: Navigation completed!
+[INFO] [1787853539.338769869] [robot9.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot9, Mission: m2, Segment: s5, End: 1787853539.337429
+[INFO] [1787853539.340576632] [robot9.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot9, Mission: m2, Segment: s5, Start: 1787853539.3394492
+[INFO] [1787853539.342313245] [robot9.fragment_exec_node]: Simulating mop skill (27.5s to complete)...
+[INFO] [1787853566.845995501] [robot9.fragment_exec_node]: Mop completed!
+[INFO] [1787853566.850895883] [robot9.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot9, Mission: m2, Segment: s5, End: 1787853566.8488405
+[INFO] [1787853566.854886657] [robot9.fragment_exec_node]: Execution of fragment fm2-23 completed!
+[INFO] [1787853598.515947791] [robot9.fragment_exec_node]: Received fragment assignment: {'robot': 'robot9', 'fragment': {'id': 'fm2-25', 'mission': 'm2', 'state': 'assigned', 'wait': ['disinfect(r5)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r5)', 'params': {'x': 12, 'y': 3, 'size': 5}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's5'}}
+[INFO] [1787853598.517731637] [robot9.fragment_exec_node]: Starting execution of fragment fm2-25...
+[ERROR] [1787853598.519131104] [robot9.fragment_exec_node]: Robot robot9 was assigned a fragment without required capabilities!
+[INFO] [1787853598.520172380] [robot9.fragment_exec_node]: Executing task final_room_check(r5). Params: {'x': 12, 'y': 3, 'size': 5}, Virtual state: {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}
+[INFO] [1787853598.521111070] [robot9.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot9, Mission: m2, Segment: s5, Start: 1787853598.520584
+[INFO] [1787853598.522036215] [robot9.fragment_exec_node]: Simulating check_room skill (7.5s to complete)...
+[INFO] [1787853606.026071844] [robot9.fragment_exec_node]: Check room completed!
+[INFO] [1787853606.029010676] [robot9.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot9, Mission: m2, Segment: s5, End: 1787853606.0279574
+[INFO] [1787853606.032224893] [robot9.fragment_exec_node]: Execution of fragment fm2-25 completed!
+[INFO] [1787853647.506239917] [robot9.fragment_exec_node]: Received fragment assignment: {'robot': 'robot9', 'fragment': {'id': 'fm2-40', 'mission': 'm2', 'state': 'assigned', 'wait': ['disinfect(r8)'], 'tasks': [{'name': 'final_room_check', 'label': 'final_room_check(r8)', 'params': {'x': 2, 'y': 8, 'size': 7}}], 'arrive_timestamp': 1787853409, 'priority': 1, 'segment': 's8'}}
+[INFO] [1787853647.511908279] [robot9.fragment_exec_node]: Starting execution of fragment fm2-40...
+[INFO] [1787853647.513872904] [robot9.fragment_exec_node]: Waiting for coordination messages before executing fragment fm2-40: ['disinfect(r8)']
+[ERROR] [1787853649.520323516] [robot9.fragment_exec_node]: Robot robot9 was assigned a fragment without required capabilities!
+[INFO] [1787853649.522636753] [robot9.fragment_exec_node]: Executing task final_room_check(r8). Params: {'x': 2, 'y': 8, 'size': 7}, Virtual state: {'position': {'x': 12, 'y': 3, 'z': 0.0}, 'docked': False}
+[INFO] [1787853649.524352579] [robot9.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot9, Mission: m2, Segment: s8, Start: 1787853649.5232546
+[INFO] [1787853649.526246226] [robot9.fragment_exec_node]: Simulating navigate skill from position (12, 3) to (2, 8) (21.540659228538015 seconds)...
+[INFO] [1787853671.071757494] [robot9.fragment_exec_node]: Navigation completed!
+[INFO] [1787853671.075623975] [robot9.fragment_exec_node]: EventType: Control (Task: final_room_check), Activity: move_to, Robot: robot9, Mission: m2, Segment: s8, End: 1787853671.073568
+[INFO] [1787853671.078800400] [robot9.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot9, Mission: m2, Segment: s8, Start: 1787853671.0766666
+[INFO] [1787853671.081578705] [robot9.fragment_exec_node]: Simulating check_room skill (10.5s to complete)...
+[INFO] [1787853681.583688620] [robot9.fragment_exec_node]: Check room completed!
+[INFO] [1787853681.584789501] [robot9.fragment_exec_node]: EventType: Task, Activity: final_room_check, Robot: robot9, Mission: m2, Segment: s8, End: 1787853681.584446
+[INFO] [1787853681.585639414] [robot9.fragment_exec_node]: Execution of fragment fm2-40 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241

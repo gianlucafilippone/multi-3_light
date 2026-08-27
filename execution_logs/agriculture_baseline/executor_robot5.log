@@ -1,0 +1,42 @@
+[INFO] [1787847629.123122324] [robot5.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787847629.124151910] [robot5.fragment_exec_node]: Setting up skill: InspectSkill
+[INFO] [1787847629.124905734] [robot5.fragment_exec_node]: Setting up skill: IrrigateSkill
+[INFO] [1787847629.125690071] [robot5.fragment_exec_node]: Setting up skill: InspectSkill
+[INFO] [1787847629.126570892] [robot5.fragment_exec_node]: Setting up skill: AlignCameraSkill
+[INFO] [1787847629.135167430] [robot5.fragment_exec_node]: Published robot registration: {'name': 'robot5', 'operational_state': 'idle', 'capabilities': ['irrigate', 'move_to', 'inspect', 'align_camera'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787847645.118215719] [robot5.fragment_exec_node]: Received fragment assignment: {'robot': 'robot5', 'fragment': {'id': 'fm1-4', 'mission': 'm1', 'state': 'assigned', 'wait': [], 'tasks': [{'name': 'inspect', 'label': 'inspect(f2)', 'params': {'x': 0, 'y': 7.5, 'size': 6}}], 'arrive_timestamp': 1787847636, 'priority': 1, 'segment': 's2'}}
+[INFO] [1787847645.121988116] [robot5.fragment_exec_node]: Starting execution of fragment fm1-4...
+[INFO] [1787847645.123391683] [robot5.fragment_exec_node]: Executing task inspect(f2). Params: {'x': 0, 'y': 7.5, 'size': 6}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787847645.127254917] [robot5.fragment_exec_node]: EventType: Control (Task: inspect), Activity: move_to, Robot: robot5, Mission: m1, Segment: s2, Start: 1787847645.1237237
+[INFO] [1787847645.129241174] [robot5.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (0, 7.5) (15.0 seconds)...
+[INFO] [1787847660.132273775] [robot5.fragment_exec_node]: Navigation completed!
+[INFO] [1787847660.136576403] [robot5.fragment_exec_node]: EventType: Control (Task: inspect), Activity: move_to, Robot: robot5, Mission: m1, Segment: s2, End: 1787847660.1341379
+[INFO] [1787847660.138201510] [robot5.fragment_exec_node]: EventType: Control (Task: inspect), Activity: align_camera, Robot: robot5, Mission: m1, Segment: s2, Start: 1787847660.1372788
+[INFO] [1787847660.139383272] [robot5.fragment_exec_node]: Simulating align_camera skill...
+[INFO] [1787847663.144193120] [robot5.fragment_exec_node]: Align camera completed!
+[INFO] [1787847663.146280375] [robot5.fragment_exec_node]: EventType: Control (Task: inspect), Activity: align_camera, Robot: robot5, Mission: m1, Segment: s2, End: 1787847663.1451006
+[INFO] [1787847663.148521546] [robot5.fragment_exec_node]: EventType: Task, Activity: inspect, Robot: robot5, Mission: m1, Segment: s2, Start: 1787847663.1471684
+[INFO] [1787847663.149991812] [robot5.fragment_exec_node]: Simulating inspect skill (12s to complete)...
+[INFO] [1787847675.148656534] [robot5.fragment_exec_node]: Inspect completed!
+[INFO] [1787847675.151770255] [robot5.fragment_exec_node]: EventType: Task, Activity: inspect, Robot: robot5, Mission: m1, Segment: s2, End: 1787847675.149871
+[INFO] [1787847675.153988171] [robot5.fragment_exec_node]: Execution of fragment fm1-4 completed!
+[INFO] [1787847676.099325836] [robot5.fragment_exec_node]: Received fragment assignment: {'robot': 'robot5', 'fragment': {'id': 'fm1-5', 'mission': 'm1', 'state': 'assigned', 'wait': ['inspect(f2)'], 'tasks': [{'name': 'irrigate', 'label': 'irrigate(f2)', 'params': {'x': 0, 'y': 7.5, 'size': 6}}], 'arrive_timestamp': 1787847636, 'priority': 1, 'segment': 's2'}}
+[INFO] [1787847676.100299399] [robot5.fragment_exec_node]: Starting execution of fragment fm1-5...
+[INFO] [1787847676.101285374] [robot5.fragment_exec_node]: Executing task irrigate(f2). Params: {'x': 0, 'y': 7.5, 'size': 6}, Virtual state: {'position': {'x': 0, 'y': 7.5, 'z': 0.0}, 'docked': True}
+[INFO] [1787847676.101931309] [robot5.fragment_exec_node]: EventType: Task, Activity: irrigate, Robot: robot5, Mission: m1, Segment: s2, Start: 1787847676.1015885
+[INFO] [1787847676.102625619] [robot5.fragment_exec_node]: Simulating irrigate skill (24s to complete)...
+[INFO] [1787847700.106685438] [robot5.fragment_exec_node]: Irrigate completed!
+[INFO] [1787847700.110690941] [robot5.fragment_exec_node]: EventType: Task, Activity: irrigate, Robot: robot5, Mission: m1, Segment: s2, End: 1787847700.1087577
+[INFO] [1787847700.113609177] [robot5.fragment_exec_node]: Execution of fragment fm1-5 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 300, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241

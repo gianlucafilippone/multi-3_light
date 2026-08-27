@@ -259,22 +259,7 @@ def run_test(
                 text = fname.read_text(encoding='utf-8')
                 publish_mission_text(node, text)
                 print('Published mission', fname.name)
-
-                inventory_status = call_inventory_check(node)
-                print(
-                    'Inventory check after publishing',
-                    fname.name,
-                    '->',
-                    inventory_status,
-                )
-                if inventory_status.lower() == 'misaligned':
-                    print(
-                        f'Inventory misaligned during attempt {attempt}; '
-                        'restarting test from scratch.'
-                    )
-                    restart_test = True
-                    return False
-
+                time.sleep(1)
                 return True
 
             # 1) Publish all init missions BEFORE signaling execution_start.
@@ -284,6 +269,20 @@ def run_test(
                         break
                 if result_code != 0 or restart_test:
                     break
+
+            time.sleep(6)
+            inventory_status = call_inventory_check(node)
+            print(
+                'Inventory check after publishing',
+                '->',
+                inventory_status,
+            )
+            if inventory_status.lower() == 'misaligned':
+                print(
+                    f'Inventory misaligned during attempt {attempt}; '
+                    'restarting test from scratch.'
+                )
+                restart_test = True
 
             if result_code == 0 and not restart_test:
                 # 2) Signal start only after every init mission was published.

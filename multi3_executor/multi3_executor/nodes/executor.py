@@ -16,6 +16,14 @@ from ..skills.place import PlaceSkill
 from ..skills.pack import PackSkill
 from ..skills.load_pack import LoadPackSkill
 from ..skills.unload_pack import UnloadPackSkill
+from ..skills.inspect import InspectSkill
+from ..skills.irrigate import IrrigateSkill
+from ..skills.spray import SpraySkill
+from ..skills.align_camera import AlignCameraSkill
+from ..skills.check_room import CheckRoomSkill
+from ..skills.vacuum import VacuumSkill
+from ..skills.mop import MopSkill
+from ..skills.disinfect import DisinfectSkill
 
 class ExecutorNode(Node):
     def __init__(self, robot_name: str = "robotx") -> None:
@@ -43,16 +51,26 @@ class ExecutorNode(Node):
         }
 
         self.skills_map = {
-            "dock": DockSkill(self),
-            "undock": UndockSkill(self),
-            "pick": PickSkill(self),
-            "scan": ScanSkill(self),
-            "move_to": NavigateSkill(self),
-            "place": PlaceSkill(self),
-            "pack": PackSkill(self),
-            "localize": LocalizeSkill(self),
-            "load_pack": LoadPackSkill(self),
-            "unload_pack": UnloadPackSkill(self),
+            "dock": DockSkill(self) if "dock" in self.robot_capabilities else None,
+            "undock": UndockSkill(self) if "undock" in self.robot_capabilities else None,
+            "pick": PickSkill(self) if "pick" in self.robot_capabilities else None,
+            "scan": ScanSkill(self) if "scan" in self.robot_capabilities else None,
+            "move_to": NavigateSkill(self) if "move_to" in self.robot_capabilities else None,
+            "place": PlaceSkill(self) if "place" in self.robot_capabilities else None,
+            "pack": PackSkill(self) if "pack" in self.robot_capabilities else None,
+            "localize": LocalizeSkill(self) if "localize" in self.robot_capabilities else None,
+            "load_pack": LoadPackSkill(self) if "load_pack" in self.robot_capabilities else None,
+            "unload_pack": UnloadPackSkill(self) if "unload_pack" in self.robot_capabilities else None,
+            "inspect": InspectSkill(self) if "inspect" in self.robot_capabilities else None,
+            "irrigate": IrrigateSkill(self) if "irrigate" in self.robot_capabilities else None,
+            "spray": SpraySkill (self) if "spray" in self.robot_capabilities else None,
+            "final_inspection": InspectSkill(self) if "inspect" in self.robot_capabilities else None,
+            "align_camera": AlignCameraSkill(self) if "align_camera" in self.robot_capabilities else None,
+            "check_room": CheckRoomSkill(self) if "check_room" in self.robot_capabilities else None,
+            "vacuum": VacuumSkill (self) if "vacuum" in self.robot_capabilities else None,
+            "mop": MopSkill(self) if "mop" in self.robot_capabilities else None,
+            "disinfect": DisinfectSkill(self) if "disinfect" in self.robot_capabilities else None,
+            "final_room_check": CheckRoomSkill(self) if "check_room" in self.robot_capabilities else None
         }
 
         # Control actions to be completed before executing the task
@@ -63,7 +81,16 @@ class ExecutorNode(Node):
             "scan": ["localize"], 
             "pack": ["localize"],
             "load_pack": ["undock", "move_to", "localize"],
-            "unload_pack": ["undock", "move_to", "localize"]
+            "unload_pack": ["undock", "move_to", "localize"],
+            "inspect": ["move_to", "align_camera"],
+            "irrigate": ["move_to"],
+            "spray": ["move_to"],
+            "final_inspection": ["move_to", "align_camera"],
+            "check_room": ["undock", "move_to"],
+            "vacuum": ["undock", "move_to"],
+            "mop": ["undock", "move_to"],
+            "disinfect": ["undock", "move_to"],
+            "final_room_check": ["undock", "move_to"]
         }
 
         # Publish:

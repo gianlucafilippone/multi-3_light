@@ -12,7 +12,7 @@ if [[ $# -lt 1 ]]; then
   usage
 fi
 
-mission_file="$(pwd)/example_missions/$1.json"
+mission_file="$(pwd)/test_missions/$1.json"
 if [[ ! -f "$mission_file" ]]; then
   echo "Error: mission file not found: $mission_file" >&2
   exit 1

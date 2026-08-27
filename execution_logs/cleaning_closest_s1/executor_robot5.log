@@ -1,0 +1,35 @@
+[INFO] [1787855405.094060093] [robot5.fragment_exec_node]: Setting up skill: UndockSkill
+[INFO] [1787855405.094790398] [robot5.fragment_exec_node]: Setting up skill: NavigateSkill
+[INFO] [1787855405.095284630] [robot5.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787855405.095864410] [robot5.fragment_exec_node]: Setting up skill: MopSkill
+[INFO] [1787855405.096445412] [robot5.fragment_exec_node]: Setting up skill: DisinfectSkill
+[INFO] [1787855405.096838946] [robot5.fragment_exec_node]: Setting up skill: CheckRoomSkill
+[INFO] [1787855405.104891101] [robot5.fragment_exec_node]: Published robot registration: {'name': 'robot5', 'operational_state': 'idle', 'capabilities': ['undock', 'check_room', 'move_to', 'mop', 'disinfect'], 'state': {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}}
+[INFO] [1787855468.012869660] [robot5.fragment_exec_node]: Received fragment assignment: {'robot': 'robot5', 'fragment': {'id': 'fm1-3', 'mission': 'm1', 'state': 'assigned', 'wait': ['vacuum(r1)'], 'tasks': [{'name': 'mop', 'label': 'mop(r1)', 'params': {'x': 4, 'y': 2, 'size': 6}}], 'arrive_timestamp': 1787855414, 'priority': 1, 'segment': 's1'}}
+[INFO] [1787855468.013963803] [robot5.fragment_exec_node]: Starting execution of fragment fm1-3...
+[INFO] [1787855468.014843864] [robot5.fragment_exec_node]: Executing task mop(r1). Params: {'x': 4, 'y': 2, 'size': 6}, Virtual state: {'position': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'docked': True}
+[INFO] [1787855468.015775201] [robot5.fragment_exec_node]: EventType: Control (Task: mop), Activity: undock, Robot: robot5, Mission: m1, Segment: s1, Start: 1787855468.015124
+[INFO] [1787855468.016767220] [robot5.fragment_exec_node]: Simulating undock skill...
+[INFO] [1787855472.018082247] [robot5.fragment_exec_node]: Undock completed!
+[INFO] [1787855472.019203596] [robot5.fragment_exec_node]: EventType: Control (Task: mop), Activity: undock, Robot: robot5, Mission: m1, Segment: s1, End: 1787855472.0185964
+[INFO] [1787855472.020282785] [robot5.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot5, Mission: m1, Segment: s1, Start: 1787855472.0196805
+[INFO] [1787855472.021575338] [robot5.fragment_exec_node]: Simulating navigate skill from position (0.0, 0.0) to (4, 2) (8.94427190999916 seconds)...
+[INFO] [1787855480.969863836] [robot5.fragment_exec_node]: Navigation completed!
+[INFO] [1787855480.974611375] [robot5.fragment_exec_node]: EventType: Control (Task: mop), Activity: move_to, Robot: robot5, Mission: m1, Segment: s1, End: 1787855480.9725761
+[INFO] [1787855480.977473694] [robot5.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot5, Mission: m1, Segment: s1, Start: 1787855480.975657
+[INFO] [1787855480.979326861] [robot5.fragment_exec_node]: Simulating mop skill (33.0s to complete)...
+[INFO] [1787855513.980114686] [robot5.fragment_exec_node]: Mop completed!
+[INFO] [1787855513.981826929] [robot5.fragment_exec_node]: EventType: Task, Activity: mop, Robot: robot5, Mission: m1, Segment: s1, End: 1787855513.9811969
+[INFO] [1787855513.983071526] [robot5.fragment_exec_node]: Execution of fragment fm1-3 completed!
+Traceback (most recent call last):
+  File "/root/ros2_ws/install/multi3_executor/lib/multi3_executor/executor", line 33, in <module>
+    sys.exit(load_entry_point('multi3-executor==0.0.0', 'console_scripts', 'executor')())
+  File "/root/ros2_ws/install/multi3_executor/lib/python3.10/site-packages/multi3_executor/nodes/executor.py", line 313, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
