@@ -128,6 +128,8 @@ class CoordinatorNode(Node):
             self.get_logger().error(f'Invalid JSON received on /coordination/receive_mission: {exc}')
             return
 
+        self.get_logger().info(f'Received mission: {mission}')
+
         # Mission is: {"mission": "mission", "priority": 23132, fragments: {"id": "id", "segment": "segment", "wait": ["...."], "tasks": [{...}]}}
         fragments = mission.get("fragments", [])
         for fragment in fragments:
@@ -135,18 +137,19 @@ class CoordinatorNode(Node):
             if not fragment_id:
                 continue
 
-            self.fragments_pool[fragment_id] = {
-                "id": fragment_id,
-                "mission": mission.get("mission"),
-                "state": "waiting",
-                "wait": fragment.get("wait", []),
-                "tasks": fragment.get("tasks", []),
-                "arrive_timestamp": int(time.time()),
-                "priority": mission.get("priority", 0),
-                "segment": fragment.get("segment"),
-            }
-
-        self.get_logger().info(f'Received mission: {mission}')
+            if fragment_id in self.fragments_pool:
+                self.get_logger().warning(f"A fragment with id {fragment_id} already exists in the pool! Skipping the new one...")
+            else:
+                self.fragments_pool[fragment_id] = {
+                    "id": fragment_id,
+                    "mission": mission.get("mission"),
+                    "state": "waiting",
+                    "wait": fragment.get("wait", []),
+                    "tasks": fragment.get("tasks", []),
+                    "arrive_timestamp": int(time.time()),
+                    "priority": mission.get("priority", 0),
+                    "segment": fragment.get("segment"),
+                }
         self.update_fragments_executability()
 
     def robot_state_update_callback(self, msg: String):

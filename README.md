@@ -10,7 +10,7 @@ Build and run the Docker container:
 docker build -t multi3-test .
 ```
 
-Creat a directory to collect logs (e.g., `execution_logs` folder in repo root):
+Create a directory to collect logs (e.g., `execution_logs` folder in repo root):
 ```
 mkdir -p $(pwd)/execution_logs
 ```
